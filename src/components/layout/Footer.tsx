@@ -11,10 +11,8 @@ export const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             {/* Brand */}
             <div>
-              <a href="#hero" className="flex items-center gap-2 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-pink-500 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-lg">A</span>
-                </div>
+              <a href="#hero" className="flex items-center gap-3 mb-4">
+                <img src="/logo.png" alt="AsperroStudio" className="w-10 h-10" />
                 <span className="text-xl font-bold font-display">
                   Asperro<span className="text-cyan-400">Studio</span>
                 </span>

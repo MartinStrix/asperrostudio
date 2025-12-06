@@ -31,10 +31,8 @@ export const Header = () => {
         <Container>
           <nav className="flex items-center justify-between py-4">
             {/* Logo */}
-            <a href="#hero" className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-pink-500 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">A</span>
-              </div>
+            <a href="#hero" className="flex items-center gap-3">
+              <img src="/logo.png" alt="AsperroStudio" className="w-10 h-10" />
               <span className="text-xl font-bold font-display">
                 Asperro<span className="text-cyan-400">Studio</span>
               </span>
