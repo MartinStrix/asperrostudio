@@ -32,8 +32,8 @@ export const Header = () => {
           <nav className="flex items-center justify-between py-4">
             {/* Logo */}
             <a href="#hero" className="flex items-center gap-3">
-              <img src="/logo.png" alt="AsperroStudio" className="w-10 h-10" />
-              <span className="text-xl font-bold font-display">
+              <img src="/logo.png" alt="AsperroStudio" className="w-12 h-12 md:w-14 md:h-14" />
+              <span className="text-xl md:text-2xl font-bold font-display">
                 Asperro<span className="text-cyan-400">Studio</span>
               </span>
             </a>

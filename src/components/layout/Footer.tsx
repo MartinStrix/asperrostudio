@@ -12,8 +12,8 @@ export const Footer = () => {
             {/* Brand */}
             <div>
               <a href="#hero" className="flex items-center gap-3 mb-4">
-                <img src="/logo.png" alt="AsperroStudio" className="w-10 h-10" />
-                <span className="text-xl font-bold font-display">
+                <img src="/logo.png" alt="AsperroStudio" className="w-14 h-14" />
+                <span className="text-2xl font-bold font-display">
                   Asperro<span className="text-cyan-400">Studio</span>
                 </span>
               </a>
