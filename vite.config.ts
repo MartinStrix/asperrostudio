@@ -4,5 +4,5 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/Strixuv_web/', // GitHub repo name - změň pokud použiješ jiný název
+  base: '/', // Custom domain - nepotřebuje prefix
 })
