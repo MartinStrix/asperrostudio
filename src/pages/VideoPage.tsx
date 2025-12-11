@@ -11,6 +11,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
 import { Footer } from '../components/layout/Footer';
+import { VideoEmbed } from '../components/common/VideoEmbed';
 
 const services = [
   {
@@ -134,6 +135,61 @@ export const VideoPage = () => {
                 <p className="text-gray-400 text-sm">{service.description}</p>
               </div>
             ))}
+          </motion.div>
+        </Container>
+      </section>
+
+      {/* Portfolio Section */}
+      <section className="relative z-10 py-16">
+        <Container>
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold font-display mb-4">
+              Ukázka naší práce
+            </h2>
+            <p className="text-gray-400 max-w-2xl mx-auto">
+              Podívejte se, jak vypadá profesionální video produkce od AsperroStudio
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            <VideoEmbed
+              url="https://www.youtube.com/watch?v=uTmfflJWOvM"
+              title="Ukázka naší práce"
+            />
+
+            <motion.div
+              className="text-center mt-8"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <p className="text-gray-400 mb-4">
+                Chcete vidět více? Navštivte náš YouTube kanál.
+              </p>
+              <a
+                href="https://youtube.com/@asperrostudio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors font-medium"
+              >
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+                Navštívit YouTube
+              </a>
+            </motion.div>
           </motion.div>
         </Container>
       </section>
