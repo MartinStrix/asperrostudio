@@ -45,6 +45,16 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // SPA redirect handling for GitHub Pages
+      (function() {
+        var redirect = sessionStorage.getItem('redirect');
+        if (redirect) {
+          sessionStorage.removeItem('redirect');
+          window.history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

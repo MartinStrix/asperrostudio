@@ -1,24 +1,21 @@
-import { Header } from './components/layout/Header';
-import { Footer } from './components/layout/Footer';
-import { Hero } from './components/sections/Hero';
-import { Videotvorba } from './components/sections/Videotvorba';
-import { Portfolio } from './components/sections/Portfolio';
-import { About } from './components/sections/About';
-import { Contact } from './components/sections/Contact';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Home } from './pages/Home';
+import { VideoPage } from './pages/VideoPage';
+import { GrafikaPage } from './pages/GrafikaPage';
+import { SocialPage } from './pages/SocialPage';
+import { KontaktPage } from './pages/KontaktPage';
 
 function App() {
   return (
-    <div className="min-h-screen bg-dark text-white">
-      <Header />
-      <main>
-        <Hero />
-        <Videotvorba />
-        <Portfolio />
-        <About />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/video" element={<VideoPage />} />
+        <Route path="/grafika" element={<GrafikaPage />} />
+        <Route path="/social" element={<SocialPage />} />
+        <Route path="/kontakt" element={<KontaktPage />} />
+      </Routes>
+    </Router>
   );
 }
 

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Link, useLocation } from 'react-router-dom';
+import { Bars3Icon, XMarkIcon, ArrowLeftIcon } from '@heroicons/react/24/outline';
 import { Container } from '../common/Container';
 import { NAV_LINKS } from '../../utils/constants';
 import { MobileMenu } from './MobileMenu';
@@ -8,6 +9,8 @@ import { MobileMenu } from './MobileMenu';
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isSubPage = location.pathname !== '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,13 +33,24 @@ export const Header = () => {
       >
         <Container>
           <nav className="flex items-center justify-between py-4">
-            {/* Logo */}
-            <a href="#hero" className="flex items-center gap-3">
-              <img src="/logo.png" alt="AsperroStudio" className="w-12 h-12 md:w-14 md:h-14" />
-              <span className="text-xl md:text-2xl font-bold font-display">
-                Asperro<span className="text-cyan-400">Studio</span>
-              </span>
-            </a>
+            {/* Back button on subpages or Logo on home */}
+            <div className="flex items-center gap-4">
+              {isSubPage && (
+                <Link
+                  to="/"
+                  className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
+                >
+                  <ArrowLeftIcon className="w-5 h-5" />
+                  <span className="hidden sm:inline">Zpět</span>
+                </Link>
+              )}
+              <Link to={isSubPage ? '/video' : '#hero'} className="flex items-center gap-3">
+                <img src="/logo.png" alt="AsperroStudio" className="w-12 h-12 md:w-14 md:h-14" />
+                <span className="text-xl md:text-2xl font-bold font-display">
+                  Asperro<span className="text-cyan-400">Studio</span>
+                </span>
+              </Link>
+            </div>
 
             {/* Desktop Navigation */}
             <ul className="hidden lg:flex items-center gap-8">
