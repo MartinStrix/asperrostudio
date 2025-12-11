@@ -1,28 +1,12 @@
-import { useState, FormEvent } from 'react';
 import { motion } from 'framer-motion';
-import { EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline';
+import { EnvelopeIcon, PhoneIcon, CheckCircleIcon, ExclamationCircleIcon } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
 import { Button } from '../components/common/Button';
 import { CONTACT_INFO, SOCIAL_LINKS } from '../utils/constants';
+import { useContactForm } from '../hooks/useContactForm';
 
 export const KontaktPage = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-  });
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    alert('Děkujeme za vaši zprávu! Brzy se vám ozveme.');
-    setFormData({ name: '', email: '', phone: '', message: '' });
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const { formData, formState, handleChange, handleSubmit } = useContactForm();
 
   return (
     <div className="min-h-screen bg-dark text-white">
@@ -56,6 +40,32 @@ export const KontaktPage = () => {
           >
             {/* Contact Form */}
             <div className="p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10">
+              {/* Success Message */}
+              {formState.isSuccess && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-6 p-4 rounded-xl bg-green-500/10 border border-green-500/20 flex items-center gap-3"
+                >
+                  <CheckCircleIcon className="w-6 h-6 text-green-400 flex-shrink-0" />
+                  <p className="text-green-400">
+                    Děkujeme za vaši zprávu! Brzy se vám ozveme.
+                  </p>
+                </motion.div>
+              )}
+
+              {/* Error Message */}
+              {formState.isError && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center gap-3"
+                >
+                  <ExclamationCircleIcon className="w-6 h-6 text-red-400 flex-shrink-0" />
+                  <p className="text-red-400">{formState.errorMessage}</p>
+                </motion.div>
+              )}
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
@@ -120,7 +130,14 @@ export const KontaktPage = () => {
                   />
                 </div>
 
-                <Button className="w-full">Odeslat zprávu</Button>
+                <Button
+                  type="submit"
+                  className="w-full"
+                  isLoading={formState.isLoading}
+                  disabled={formState.isLoading}
+                >
+                  Odeslat zprávu
+                </Button>
               </form>
             </div>
 
