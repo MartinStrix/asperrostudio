@@ -1,20 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Container } from '../common/Container';
 
 const NAV_ITEMS = [
-  { label: 'Domů', href: '/', color: 'white' },
-  { label: 'Videotvorba', href: '/video', color: 'cyan' },
-  { label: 'Grafika', href: '/grafika', color: 'pink' },
-  { label: 'Sociální sítě', href: '/social', color: 'purple' },
-  { label: 'Kontakt', href: '/kontakt', color: 'white' },
+  { label: 'Domů', href: '/', color: 'white', gradient: 'from-white/20 to-white/10' },
+  { label: 'Videotvorba', href: '/video', color: 'cyan', gradient: 'from-cyan-400/20 to-cyan-600/10' },
+  { label: 'Grafika', href: '/grafika', color: 'pink', gradient: 'from-pink-400/20 to-pink-600/10' },
+  { label: 'Sociální sítě', href: '/social', color: 'purple', gradient: 'from-purple-400/20 to-purple-600/10' },
+  { label: 'Kontakt', href: '/kontakt', color: 'white', gradient: 'from-white/20 to-white/10' },
 ];
 
 export const PageHeader = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeIndicator, setActiveIndicator] = useState({ left: 0, width: 0 });
+  const navRef = useRef<HTMLUListElement>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -30,7 +32,34 @@ export const PageHeader = () => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
+  // Update active indicator position
+  useEffect(() => {
+    const updateIndicator = () => {
+      if (navRef.current) {
+        const activeIndex = NAV_ITEMS.findIndex(item => item.href === location.pathname);
+        const activeLink = navRef.current.children[activeIndex]?.querySelector('a');
+        if (activeLink) {
+          const navRect = navRef.current.getBoundingClientRect();
+          const linkRect = activeLink.getBoundingClientRect();
+          setActiveIndicator({
+            left: linkRect.left - navRect.left,
+            width: linkRect.width,
+          });
+        }
+      }
+    };
+
+    // Small delay to ensure DOM is ready
+    const timer = setTimeout(updateIndicator, 50);
+    window.addEventListener('resize', updateIndicator);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', updateIndicator);
+    };
+  }, [location.pathname]);
+
   const isActive = (href: string) => location.pathname === href;
+  const activeItem = NAV_ITEMS.find(item => item.href === location.pathname);
 
   return (
     <>
@@ -53,21 +82,45 @@ export const PageHeader = () => {
             </Link>
 
             {/* Desktop Navigation */}
-            <ul className="hidden md:flex items-center gap-1">
+            <ul ref={navRef} className="hidden md:flex items-center gap-1 relative">
+              {/* Animated sliding indicator */}
+              <motion.div
+                className={`absolute h-9 rounded-lg bg-gradient-to-r ${activeItem?.gradient || 'from-white/10 to-white/5'} pointer-events-none`}
+                initial={false}
+                animate={{
+                  left: activeIndicator.left,
+                  width: activeIndicator.width,
+                  opacity: activeIndicator.width > 0 ? 1 : 0,
+                }}
+                transition={{
+                  type: 'spring',
+                  stiffness: 400,
+                  damping: 30,
+                }}
+                style={{ top: '50%', transform: 'translateY(-50%)' }}
+              />
               {NAV_ITEMS.map((item) => (
                 <li key={item.href}>
                   <Link
                     to={item.href}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                    className={`relative z-10 px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
                       isActive(item.href)
-                        ? item.color === 'cyan' ? 'bg-cyan-400/10 text-cyan-400' :
-                          item.color === 'pink' ? 'bg-pink-400/10 text-pink-400' :
-                          item.color === 'purple' ? 'bg-purple-400/10 text-purple-400' :
-                          'bg-white/10 text-white'
-                        : 'text-gray-400 hover:text-white hover:bg-white/5'
+                        ? item.color === 'cyan' ? 'text-cyan-400' :
+                          item.color === 'pink' ? 'text-pink-400' :
+                          item.color === 'purple' ? 'text-purple-400' :
+                          'text-white'
+                        : 'text-gray-400 hover:text-white'
                     }`}
                   >
-                    {item.label}
+                    <motion.span
+                      initial={false}
+                      animate={{
+                        scale: isActive(item.href) ? 1.05 : 1,
+                      }}
+                      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                    >
+                      {item.label}
+                    </motion.span>
                   </Link>
                 </li>
               ))}
@@ -112,22 +165,30 @@ export const PageHeader = () => {
               exit={{ opacity: 0, y: -20 }}
             >
               <ul className="space-y-2">
-                {NAV_ITEMS.map((item) => (
-                  <li key={item.href}>
+                {NAV_ITEMS.map((item, index) => (
+                  <motion.li
+                    key={item.href}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ delay: index * 0.05 }}
+                  >
                     <Link
                       to={item.href}
                       className={`block px-4 py-3 rounded-xl text-lg font-medium transition-all ${
                         isActive(item.href)
-                          ? item.color === 'cyan' ? 'bg-cyan-400/10 text-cyan-400' :
-                            item.color === 'pink' ? 'bg-pink-400/10 text-pink-400' :
-                            item.color === 'purple' ? 'bg-purple-400/10 text-purple-400' :
-                            'bg-white/10 text-white'
+                          ? `bg-gradient-to-r ${item.gradient} ${
+                              item.color === 'cyan' ? 'text-cyan-400' :
+                              item.color === 'pink' ? 'text-pink-400' :
+                              item.color === 'purple' ? 'text-purple-400' :
+                              'text-white'
+                            }`
                           : 'text-gray-300 hover:bg-white/5'
                       }`}
                     >
                       {item.label}
                     </Link>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
             </motion.nav>
