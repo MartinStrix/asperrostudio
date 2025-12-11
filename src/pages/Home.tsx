@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { VideoCameraIcon, PaintBrushIcon, DevicePhoneMobileIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
-import { PageHeader } from '../components/layout/PageHeader';
 
 export const Home = () => {
   return (
@@ -15,8 +14,6 @@ export const Home = () => {
 
       {/* Main content */}
       <div className="relative z-10 min-h-screen flex flex-col">
-        {/* Header */}
-        <PageHeader />
 
         {/* Hero Section */}
         <section className="flex-1 flex items-center justify-center py-8 md:py-16">

@@ -37,7 +37,9 @@ export const PageHeader = () => {
     const updateIndicator = () => {
       if (navRef.current) {
         const activeIndex = NAV_ITEMS.findIndex(item => item.href === location.pathname);
-        const activeLink = navRef.current.children[activeIndex]?.querySelector('a');
+        // +1 offset because first child is the indicator div itself
+        const activeLi = navRef.current.children[activeIndex + 1] as HTMLElement;
+        const activeLink = activeLi?.querySelector('a');
         if (activeLink) {
           const navRect = navRef.current.getBoundingClientRect();
           const linkRect = activeLink.getBoundingClientRect();

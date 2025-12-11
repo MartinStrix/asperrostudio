@@ -5,6 +5,7 @@ import { VideoPage } from './pages/VideoPage';
 import { GrafikaPage } from './pages/GrafikaPage';
 import { SocialPage } from './pages/SocialPage';
 import { KontaktPage } from './pages/KontaktPage';
+import { PageHeader } from './components/layout/PageHeader';
 
 const pageVariants = {
   initial: {
@@ -44,15 +45,20 @@ const AnimatedRoutes = () => {
   const location = useLocation();
 
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
-        <Route path="/video" element={<PageWrapper><VideoPage /></PageWrapper>} />
-        <Route path="/grafika" element={<PageWrapper><GrafikaPage /></PageWrapper>} />
-        <Route path="/social" element={<PageWrapper><SocialPage /></PageWrapper>} />
-        <Route path="/kontakt" element={<PageWrapper><KontaktPage /></PageWrapper>} />
-      </Routes>
-    </AnimatePresence>
+    <>
+      {/* Persistent header - stays outside AnimatePresence */}
+      <PageHeader />
+
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
+          <Route path="/video" element={<PageWrapper><VideoPage /></PageWrapper>} />
+          <Route path="/grafika" element={<PageWrapper><GrafikaPage /></PageWrapper>} />
+          <Route path="/social" element={<PageWrapper><SocialPage /></PageWrapper>} />
+          <Route path="/kontakt" element={<PageWrapper><KontaktPage /></PageWrapper>} />
+        </Routes>
+      </AnimatePresence>
+    </>
   );
 };
 

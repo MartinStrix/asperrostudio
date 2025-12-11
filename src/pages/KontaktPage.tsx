@@ -2,7 +2,6 @@ import { useState, FormEvent } from 'react';
 import { motion } from 'framer-motion';
 import { EnvelopeIcon, PhoneIcon } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
-import { PageHeader } from '../components/layout/PageHeader';
 import { Button } from '../components/common/Button';
 import { CONTACT_INFO, SOCIAL_LINKS } from '../utils/constants';
 
@@ -27,8 +26,6 @@ export const KontaktPage = () => {
 
   return (
     <div className="min-h-screen bg-dark text-white">
-      <PageHeader />
-
       {/* Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-0 w-96 h-96 bg-cyan-500/15 rounded-full blur-[128px]" />

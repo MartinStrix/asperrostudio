@@ -9,7 +9,6 @@ import {
   CheckIcon
 } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
-import { PageHeader } from '../components/layout/PageHeader';
 import { Footer } from '../components/layout/Footer';
 
 const services = [
@@ -46,8 +45,6 @@ const features = [
 export const SocialPage = () => {
   return (
     <div className="min-h-screen bg-dark text-white">
-      <PageHeader />
-
       {/* Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-0 w-96 h-96 bg-purple-500/15 rounded-full blur-[128px]" />
