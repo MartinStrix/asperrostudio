@@ -15,32 +15,32 @@ import { Footer } from '../components/layout/Footer';
 const services = [
   {
     icon: <CameraIcon className="w-6 h-6" />,
-    title: 'Photo Content',
-    description: 'Professional photography optimized for Instagram, Facebook, and other platforms.',
+    title: 'Foto obsah',
+    description: 'Profesionální fotografie optimalizované pro Instagram, Facebook a další platformy.',
   },
   {
     icon: <VideoCameraIcon className="w-6 h-6" />,
-    title: 'Reels & TikTok',
-    description: 'Short-form videos designed for viral reach on social media.',
+    title: 'Reels a TikTok',
+    description: 'Krátká videa navržená pro virální dosah na sociálních sítích.',
   },
   {
     icon: <SparklesIcon className="w-6 h-6" />,
-    title: 'Stories & Highlights',
-    description: 'Creative stories and highlight covers that engage your followers.',
+    title: 'Stories a Highlights',
+    description: 'Kreativní stories a highlight covery, které zaujmou vaše sledující.',
   },
   {
     icon: <ChartBarIcon className="w-6 h-6" />,
-    title: 'Content Strategy',
-    description: 'Comprehensive planning for consistent brand presentation.',
+    title: 'Content strategie',
+    description: 'Komplexní plánování obsahu pro konzistentní prezentaci značky.',
   },
 ];
 
 const features = [
-  'Platform-optimized content',
-  'Consistent posting schedule',
-  'Engaging captions & hashtags',
-  'Analytics & performance tracking',
-  'Trend-aware content creation',
+  'Obsah optimalizovaný pro platformy',
+  'Konzistentní harmonogram příspěvků',
+  'Poutavé popisky a hashtagy',
+  'Analytika a sledování výkonu',
+  'Tvorba obsahu v souladu s trendy',
 ];
 
 export const SocialPage = () => {
@@ -65,26 +65,26 @@ export const SocialPage = () => {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium mb-6">
               <DevicePhoneMobileIcon className="w-4 h-4" />
-              <span>Social Media Services</span>
+              <span>Služby pro sociální sítě</span>
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display mb-6">
-              Content That
+              Obsah, který
               <br />
               <span className="bg-gradient-to-r from-purple-400 to-cyan-500 bg-clip-text text-transparent">
-                Drives Engagement
+                zvyšuje engagement
               </span>
             </h1>
 
             <p className="text-gray-400 text-lg md:text-xl mb-8">
-              From reels to stories, we create content that captures attention and grows your audience.
+              Od reels po stories - vytváříme obsah, který přitahuje pozornost a rozšiřuje vaše publikum.
             </p>
 
             <Link
               to="/kontakt"
               className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-purple-500 to-cyan-500 text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-purple-500/25 hover:scale-105"
             >
-              Get Started
+              Začít spolupráci
             </Link>
           </motion.div>
         </Container>
@@ -100,10 +100,10 @@ export const SocialPage = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-bold font-display mb-4">
-              Our Services
+              Naše služby
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Everything you need to dominate social media
+              Vše, co potřebujete k ovládnutí sociálních sítí
             </p>
           </motion.div>
 
@@ -142,10 +142,10 @@ export const SocialPage = () => {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <h2 className="text-2xl md:text-3xl font-bold font-display mb-4">
-                  Why Choose Us?
+                  Proč si vybrat nás?
                 </h2>
                 <p className="text-gray-400">
-                  We understand what makes content perform and know how to make your brand stand out.
+                  Rozumíme tomu, co dělá obsah úspěšným a víme, jak vaši značku odlišit od ostatních.
                 </p>
               </div>
               <div className="space-y-3">
@@ -173,16 +173,16 @@ export const SocialPage = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-2xl md:text-3xl font-bold font-display mb-4">
-              Ready to Grow Your Social Presence?
+              Připraveni růst na sociálních sítích?
             </h2>
             <p className="text-gray-400 mb-8 max-w-xl mx-auto">
-              Let's create content that your audience will love.
+              Pojďme vytvořit obsah, který vaše publikum bude milovat.
             </p>
             <Link
               to="/kontakt"
               className="inline-flex items-center justify-center px-8 py-4 bg-white text-dark font-semibold rounded-xl transition-all duration-300 hover:bg-gray-100 hover:scale-105"
             >
-              Contact Us
+              Kontaktujte nás
             </Link>
           </motion.div>
         </Container>

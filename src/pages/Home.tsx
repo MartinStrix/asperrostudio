@@ -39,10 +39,10 @@ export const Home = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                Creative Studio
+                Kreativní Studio
                 <br />
                 <span className="bg-gradient-to-r from-cyan-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
-                  For Your Brand
+                  Pro Váš Brand
                 </span>
               </motion.h1>
 
@@ -53,7 +53,7 @@ export const Home = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                Video production, graphic design, and social media content that makes your brand stand out.
+                Video produkce, grafický design a obsah pro sociální sítě, který vaši značku odliší od konkurence.
               </motion.p>
 
               {/* Category Cards */}
@@ -69,10 +69,10 @@ export const Home = () => {
                     <div className="w-14 h-14 mb-4 mx-auto flex items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 to-cyan-600 text-white shadow-lg shadow-cyan-500/25">
                       <VideoCameraIcon className="w-7 h-7" />
                     </div>
-                    <h3 className="text-xl font-bold font-display mb-2">Video Edit</h3>
-                    <p className="text-gray-400 text-sm mb-4">Professional video production & editing</p>
+                    <h3 className="text-xl font-bold font-display mb-2">Videotvorba</h3>
+                    <p className="text-gray-400 text-sm mb-4">Profesionální video produkce a střih</p>
                     <div className="flex items-center justify-center gap-2 text-cyan-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                      <span>Explore</span>
+                      <span>Prozkoumat</span>
                       <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
@@ -84,10 +84,10 @@ export const Home = () => {
                     <div className="w-14 h-14 mb-4 mx-auto flex items-center justify-center rounded-xl bg-gradient-to-br from-pink-400 to-pink-600 text-white shadow-lg shadow-pink-500/25">
                       <PaintBrushIcon className="w-7 h-7" />
                     </div>
-                    <h3 className="text-xl font-bold font-display mb-2">Graphic Design</h3>
-                    <p className="text-gray-400 text-sm mb-4">Visual identity & brand design</p>
+                    <h3 className="text-xl font-bold font-display mb-2">Grafika</h3>
+                    <p className="text-gray-400 text-sm mb-4">Vizuální identita a brand design</p>
                     <div className="flex items-center justify-center gap-2 text-pink-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                      <span>Explore</span>
+                      <span>Prozkoumat</span>
                       <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
@@ -99,10 +99,10 @@ export const Home = () => {
                     <div className="w-14 h-14 mb-4 mx-auto flex items-center justify-center rounded-xl bg-gradient-to-br from-purple-400 to-purple-600 text-white shadow-lg shadow-purple-500/25">
                       <DevicePhoneMobileIcon className="w-7 h-7" />
                     </div>
-                    <h3 className="text-xl font-bold font-display mb-2">Social Media</h3>
-                    <p className="text-gray-400 text-sm mb-4">Content that engages your audience</p>
+                    <h3 className="text-xl font-bold font-display mb-2">Sociální sítě</h3>
+                    <p className="text-gray-400 text-sm mb-4">Obsah, který zaujme vaše publikum</p>
                     <div className="flex items-center justify-center gap-2 text-purple-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                      <span>Explore</span>
+                      <span>Prozkoumat</span>
                       <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
@@ -122,7 +122,7 @@ export const Home = () => {
               transition={{ delay: 0.5 }}
             >
               <Link to="/kontakt" className="hover:text-white transition-colors">
-                Contact
+                Kontakt
               </Link>
               <span className="hidden sm:inline text-gray-700">•</span>
               <span>&copy; {new Date().getFullYear()} AsperroStudio</span>

@@ -5,10 +5,10 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Container } from '../common/Container';
 
 const NAV_ITEMS = [
-  { label: 'Video', href: '/video', color: 'cyan' },
-  { label: 'Graphic Design', href: '/grafika', color: 'pink' },
-  { label: 'Social Media', href: '/social', color: 'purple' },
-  { label: 'Contact', href: '/kontakt', color: 'white' },
+  { label: 'Videotvorba', href: '/video', color: 'cyan' },
+  { label: 'Grafika', href: '/grafika', color: 'pink' },
+  { label: 'Sociální sítě', href: '/social', color: 'purple' },
+  { label: 'Kontakt', href: '/kontakt', color: 'white' },
 ];
 
 export const PageHeader = () => {

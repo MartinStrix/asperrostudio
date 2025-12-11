@@ -14,32 +14,32 @@ import { Footer } from '../components/layout/Footer';
 const services = [
   {
     icon: <SwatchIcon className="w-6 h-6" />,
-    title: 'Brand Identity',
-    description: 'Complete visual identity including logos, color palettes, and brand guidelines.',
+    title: 'Vizuální identita',
+    description: 'Kompletní vizuální identita včetně loga, barevné palety a brand manuálu.',
   },
   {
     icon: <PaintBrushIcon className="w-6 h-6" />,
-    title: 'Logo Design',
-    description: 'Unique, memorable logos that capture the essence of your brand.',
+    title: 'Tvorba loga',
+    description: 'Unikátní a zapamatovatelná loga, která vystihují podstatu vaší značky.',
   },
   {
     icon: <DocumentTextIcon className="w-6 h-6" />,
-    title: 'Print Design',
-    description: 'Business cards, brochures, flyers, and other marketing materials.',
+    title: 'Tiskové materiály',
+    description: 'Vizitky, brožury, letáky a další marketingové materiály.',
   },
   {
     icon: <SparklesIcon className="w-6 h-6" />,
-    title: 'Digital Graphics',
-    description: 'Web graphics, social media assets, and digital advertisements.',
+    title: 'Digitální grafika',
+    description: 'Webová grafika, příspěvky na sociální sítě a digitální reklamy.',
   },
 ];
 
 const features = [
-  'Custom designs tailored to your brand',
-  'Unlimited revisions until you\'re satisfied',
-  'Full source files included',
-  'Fast turnaround times',
-  'Consistent brand application',
+  'Návrhy na míru vaší značce',
+  'Neomezené revize až do spokojenosti',
+  'Kompletní zdrojové soubory',
+  'Rychlé dodání',
+  'Konzistentní aplikace značky',
 ];
 
 export const GrafikaPage = () => {
@@ -64,26 +64,26 @@ export const GrafikaPage = () => {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pink-500/10 border border-pink-500/20 text-pink-400 text-sm font-medium mb-6">
               <PaintBrushIcon className="w-4 h-4" />
-              <span>Graphic Design Services</span>
+              <span>Grafické služby</span>
             </div>
 
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-display mb-6">
-              Design That
+              Design, který
               <br />
               <span className="bg-gradient-to-r from-pink-400 to-purple-500 bg-clip-text text-transparent">
-                Tells Your Story
+                vypráví váš příběh
               </span>
             </h1>
 
             <p className="text-gray-400 text-lg md:text-xl mb-8">
-              From brand identity to marketing materials, we create visuals that resonate with your audience and elevate your brand.
+              Od vizuální identity po marketingové materiály - vytváříme vizuály, které osloví vaše publikum a pozvednou vaši značku.
             </p>
 
             <Link
               to="/kontakt"
               className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:shadow-pink-500/25 hover:scale-105"
             >
-              Start Your Project
+              Začít projekt
             </Link>
           </motion.div>
         </Container>
@@ -99,10 +99,10 @@ export const GrafikaPage = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-bold font-display mb-4">
-              Our Services
+              Naše služby
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
-              Comprehensive graphic design solutions for every need
+              Komplexní grafická řešení pro každou potřebu
             </p>
           </motion.div>
 
@@ -141,10 +141,10 @@ export const GrafikaPage = () => {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <h2 className="text-2xl md:text-3xl font-bold font-display mb-4">
-                  Why Work With Us?
+                  Proč spolupracovat s námi?
                 </h2>
                 <p className="text-gray-400">
-                  We're committed to delivering exceptional design work that exceeds your expectations.
+                  Jsme odhodláni dodávat výjimečnou designovou práci, která předčí vaše očekávání.
                 </p>
               </div>
               <div className="space-y-3">
@@ -172,16 +172,16 @@ export const GrafikaPage = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-2xl md:text-3xl font-bold font-display mb-4">
-              Ready to Transform Your Brand?
+              Připraveni transformovat vaši značku?
             </h2>
             <p className="text-gray-400 mb-8 max-w-xl mx-auto">
-              Let's discuss your project and create something amazing together.
+              Pojďme probrat váš projekt a společně vytvořit něco úžasného.
             </p>
             <Link
               to="/kontakt"
               className="inline-flex items-center justify-center px-8 py-4 bg-white text-dark font-semibold rounded-xl transition-all duration-300 hover:bg-gray-100 hover:scale-105"
             >
-              Get in Touch
+              Kontaktujte nás
             </Link>
           </motion.div>
         </Container>

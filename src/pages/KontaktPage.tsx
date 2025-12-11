@@ -17,7 +17,7 @@ export const KontaktPage = () => {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-    alert('Thank you for your message! We\'ll get back to you soon.');
+    alert('Děkujeme za vaši zprávu! Brzy se vám ozveme.');
     setFormData({ name: '', email: '', phone: '', message: '' });
   };
 
@@ -44,10 +44,10 @@ export const KontaktPage = () => {
             animate={{ opacity: 1, y: 0 }}
           >
             <h1 className="text-4xl md:text-5xl font-bold font-display mb-4">
-              Let's <span className="bg-gradient-to-r from-cyan-400 to-pink-500 bg-clip-text text-transparent">Talk</span>
+              Pojďme <span className="bg-gradient-to-r from-cyan-400 to-pink-500 bg-clip-text text-transparent">spolupracovat</span>
             </h1>
             <p className="text-gray-400 text-lg max-w-xl mx-auto">
-              Have a project in mind? We'd love to hear about it.
+              Máte projekt na mysli? Rádi si o něm promluvíme.
             </p>
           </motion.div>
 
@@ -62,7 +62,7 @@ export const KontaktPage = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                    Name *
+                    Jméno *
                   </label>
                   <input
                     type="text"
@@ -72,7 +72,7 @@ export const KontaktPage = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors"
-                    placeholder="Your name"
+                    placeholder="Vaše jméno"
                   />
                 </div>
 
@@ -88,13 +88,13 @@ export const KontaktPage = () => {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors"
-                    placeholder="your@email.com"
+                    placeholder="vas@email.cz"
                   />
                 </div>
 
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">
-                    Phone
+                    Telefon
                   </label>
                   <input
                     type="tel"
@@ -109,7 +109,7 @@ export const KontaktPage = () => {
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                    Message *
+                    Zpráva *
                   </label>
                   <textarea
                     id="message"
@@ -119,11 +119,11 @@ export const KontaktPage = () => {
                     required
                     rows={5}
                     className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400 transition-colors resize-none"
-                    placeholder="Tell us about your project..."
+                    placeholder="Popište svůj projekt..."
                   />
                 </div>
 
-                <Button className="w-full">Send Message</Button>
+                <Button className="w-full">Odeslat zprávu</Button>
               </form>
             </div>
 
@@ -151,7 +151,7 @@ export const KontaktPage = () => {
                   <PhoneIcon className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-white mb-1">Phone</h4>
+                  <h4 className="font-semibold text-white mb-1">Telefon</h4>
                   <a
                     href={`tel:${CONTACT_INFO.phone.replace(/\s/g, '')}`}
                     className="text-gray-400 hover:text-cyan-400 transition-colors"
@@ -163,7 +163,7 @@ export const KontaktPage = () => {
 
               {/* Social Links */}
               <div>
-                <h4 className="font-semibold text-white mb-4">Follow Us</h4>
+                <h4 className="font-semibold text-white mb-4">Sledujte nás</h4>
                 <div className="flex gap-4">
                   <a
                     href={SOCIAL_LINKS.instagram}
@@ -203,9 +203,9 @@ export const KontaktPage = () => {
 
               {/* Response time */}
               <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-                <h4 className="font-semibold text-white mb-2">Quick Response</h4>
+                <h4 className="font-semibold text-white mb-2">Rychlá odpověď</h4>
                 <p className="text-gray-400 text-sm">
-                  We respond to all messages within 24 hours. For urgent matters, please call us directly.
+                  Na všechny zprávy odpovídáme do 24 hodin. V naléhavých případech nám prosím zavolejte.
                 </p>
               </div>
             </div>
