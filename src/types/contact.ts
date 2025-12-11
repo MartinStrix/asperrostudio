@@ -3,6 +3,7 @@ export interface ContactFormData {
   email: string;
   phone: string;
   message: string;
+  _honeypot?: string;
 }
 
 export interface ContactFormState {

@@ -1,4 +1,4 @@
-import { useState, FormEvent } from 'react';
+import { useState, useCallback, useRef, useEffect, FormEvent } from 'react';
 import type { ContactFormData, ContactFormState, ApiResponse } from '../types/contact';
 
 const initialFormData: ContactFormData = {
@@ -6,6 +6,7 @@ const initialFormData: ContactFormData = {
   email: '',
   phone: '',
   message: '',
+  _honeypot: '',
 };
 
 const initialFormState: ContactFormState = {
@@ -18,25 +19,43 @@ const initialFormState: ContactFormState = {
 export const useContactForm = () => {
   const [formData, setFormData] = useState<ContactFormData>(initialFormData);
   const [formState, setFormState] = useState<ContactFormState>(initialFormState);
+  const successTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (successTimeoutRef.current) {
+        clearTimeout(successTimeoutRef.current);
+      }
+    };
+  }, []);
 
-    // Clear error state when user starts typing
-    if (formState.isError) {
-      setFormState((prev) => ({ ...prev, isError: false, errorMessage: null }));
-    }
-  };
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target;
+      setFormData((prev) => ({ ...prev, [name]: value }));
 
-  const resetForm = () => {
+      // Clear error state when user starts typing
+      setFormState((prev) => {
+        if (prev.isError) {
+          return { ...prev, isError: false, errorMessage: null };
+        }
+        return prev;
+      });
+    },
+    []
+  );
+
+  const resetForm = useCallback(() => {
     setFormData(initialFormData);
     setFormState(initialFormState);
-  };
+    if (successTimeoutRef.current) {
+      clearTimeout(successTimeoutRef.current);
+      successTimeoutRef.current = null;
+    }
+  }, []);
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = useCallback(async (e: FormEvent) => {
     e.preventDefault();
 
     // Client-side validation
@@ -92,20 +111,33 @@ export const useContactForm = () => {
       });
       setFormData(initialFormData);
 
+      // Clear any existing timeout
+      if (successTimeoutRef.current) {
+        clearTimeout(successTimeoutRef.current);
+      }
+
       // Reset success state after 5 seconds
-      setTimeout(() => {
+      successTimeoutRef.current = setTimeout(() => {
         setFormState((prev) => ({ ...prev, isSuccess: false }));
+        successTimeoutRef.current = null;
       }, 5000);
     } catch (error) {
+      let errorMessage = 'Došlo k neočekávané chybě.';
+
+      if (error instanceof TypeError && error.message === 'Failed to fetch') {
+        errorMessage = 'Zkontrolujte své připojení k internetu.';
+      } else if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+
       setFormState({
         isLoading: false,
         isSuccess: false,
         isError: true,
-        errorMessage:
-          error instanceof Error ? error.message : 'Došlo k neočekávané chybě.',
+        errorMessage,
       });
     }
-  };
+  }, [formData]);
 
   return {
     formData,
