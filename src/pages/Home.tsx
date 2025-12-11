@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { VideoCameraIcon, PaintBrushIcon, DevicePhoneMobileIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
+import { PageHeader } from '../components/layout/PageHeader';
 
 export const Home = () => {
   return (
@@ -15,18 +16,7 @@ export const Home = () => {
       {/* Main content */}
       <div className="relative z-10 min-h-screen flex flex-col">
         {/* Header */}
-        <header className="py-6">
-          <Container>
-            <div className="flex items-center justify-center">
-              <Link to="/" className="flex items-center gap-3">
-                <img src="/logo.png" alt="AsperroStudio" className="w-12 h-12" />
-                <span className="text-xl font-bold font-display">
-                  Asperro<span className="text-cyan-400">Studio</span>
-                </span>
-              </Link>
-            </div>
-          </Container>
-        </header>
+        <PageHeader />
 
         {/* Hero Section */}
         <section className="flex-1 flex items-center justify-center py-8 md:py-16">

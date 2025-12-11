@@ -5,6 +5,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Container } from '../common/Container';
 
 const NAV_ITEMS = [
+  { label: 'Domů', href: '/', color: 'white' },
   { label: 'Videotvorba', href: '/video', color: 'cyan' },
   { label: 'Grafika', href: '/grafika', color: 'pink' },
   { label: 'Sociální sítě', href: '/social', color: 'purple' },
