@@ -67,7 +67,7 @@ export const PageHeader = () => {
     <>
       <motion.header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'bg-dark/95 backdrop-blur-lg border-b border-white/10' : 'bg-transparent'
+          isScrolled ? 'bg-dark/90 backdrop-blur-lg' : ''
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
