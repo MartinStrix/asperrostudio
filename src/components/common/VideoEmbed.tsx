@@ -1,4 +1,6 @@
-import ReactPlayer from 'react-player';
+import { useState } from 'react';
+// Import only YouTube player to reduce bundle size (~35KB savings)
+import ReactPlayer from 'react-player/youtube';
 
 interface VideoEmbedProps {
   url: string;
@@ -6,6 +8,8 @@ interface VideoEmbedProps {
 }
 
 export const VideoEmbed = ({ url, title }: VideoEmbedProps) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+
   return (
     <div className="relative aspect-video rounded-xl overflow-hidden glass">
       <ReactPlayer
@@ -14,15 +18,18 @@ export const VideoEmbed = ({ url, title }: VideoEmbedProps) => {
         height="100%"
         controls
         light
-        playing={false}
+        playing={isPlaying}
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
         config={{
-          youtube: {
-            playerVars: { showinfo: 1 },
+          playerVars: {
+            modestbranding: 1,
+            rel: 0,
           },
         }}
       />
-      {title && (
-        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+      {title && !isPlaying && (
+        <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
           <h3 className="text-white font-semibold">{title}</h3>
         </div>
       )}

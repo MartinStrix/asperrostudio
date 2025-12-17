@@ -4,6 +4,7 @@ import { Container } from '../components/common/Container';
 import { Button } from '../components/common/Button';
 import { CONTACT_INFO, SOCIAL_LINKS } from '../utils/constants';
 import { useContactForm } from '../hooks/useContactForm';
+import { SEO } from '../components/common/SEO';
 
 export const KontaktPage = () => {
   const { formData, formState, handleChange, handleSubmit } = useContactForm();
@@ -16,8 +17,13 @@ export const KontaktPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-dark text-white">
-      {/* Background */}
+    <>
+      <SEO
+        title="Kontakt - Spojte se s nami"
+        description="Mate projekt na mysli? Kontaktujte AsperroStudio pro nezavaznou konzultaci. Rychla odpoved do 24 hodin."
+      />
+      <div className="min-h-screen bg-dark text-white">
+        {/* Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-0 w-96 h-96 bg-cyan-500/15 rounded-full blur-[128px]" />
         <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-pink-500/15 rounded-full blur-[128px]" />
@@ -275,6 +281,7 @@ export const KontaktPage = () => {
           </div>
         </Container>
       </footer>
-    </div>
+      </div>
+    </>
   );
 };

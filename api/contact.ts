@@ -1,7 +1,12 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Validate API key exists before initializing
+const apiKey = process.env.RESEND_API_KEY;
+if (!apiKey) {
+  console.error('RESEND_API_KEY environment variable is not configured');
+}
+const resend = new Resend(apiKey);
 
 // Security constants for input validation
 const MAX_NAME_LENGTH = 100;
@@ -9,8 +14,54 @@ const MAX_EMAIL_LENGTH = 254;
 const MAX_PHONE_LENGTH = 20;
 const MAX_MESSAGE_LENGTH = 5000;
 
+// Rate limiting configuration (in-memory for serverless - resets per cold start)
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 hour
+const MAX_REQUESTS_PER_WINDOW = 5;
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+
 // CORS allowed origin
 const ALLOWED_ORIGIN = 'https://www.asperrostudio.cz';
+
+/**
+ * Sanitizes email address to prevent header injection
+ * Removes CRLF characters that could be used for injection
+ */
+function sanitizeEmailForHeader(email: string): string {
+  return email.replace(/[\r\n\t]/g, '').trim();
+}
+
+/**
+ * Get client IP from Vercel request headers
+ */
+function getClientIp(req: VercelRequest): string {
+  const forwarded = req.headers['x-forwarded-for'];
+  if (typeof forwarded === 'string') {
+    return forwarded.split(',')[0].trim();
+  }
+  return 'unknown';
+}
+
+/**
+ * Check rate limit for an IP address
+ * Returns true if request is allowed, false if rate limited
+ */
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip);
+
+  if (!entry || now > entry.resetTime) {
+    // First request or window expired - reset
+    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW_MS });
+    return true;
+  }
+
+  if (entry.count >= MAX_REQUESTS_PER_WINDOW) {
+    return false;
+  }
+
+  entry.count++;
+  return true;
+}
 
 // TypeScript interface for request body
 interface ContactFormData {
@@ -72,6 +123,23 @@ export default async function handler(
     return res.status(405).json({
       success: false,
       message: 'Metoda není povolena',
+    });
+  }
+
+  // Check rate limit
+  const clientIp = getClientIp(req);
+  if (!checkRateLimit(clientIp)) {
+    return res.status(429).json({
+      success: false,
+      message: 'Prilis mnoho pozadavku. Zkuste to prosim pozdeji.',
+    });
+  }
+
+  // Check if API key is configured
+  if (!apiKey) {
+    return res.status(500).json({
+      success: false,
+      message: 'Sluzba je docasne nedostupna.',
     });
   }
 
@@ -147,13 +215,39 @@ export default async function handler(
       });
     }
 
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // Email validation with stricter regex
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
     if (!emailRegex.test(email)) {
       return res.status(400).json({
         success: false,
         message: 'Zadejte prosím platnou emailovou adresu.',
       });
+    }
+
+    // Additional email part length validation (RFC 5321)
+    const [localPart, domain] = email.split('@');
+    if (localPart && localPart.length > 64) {
+      return res.status(400).json({
+        success: false,
+        message: 'Zadejte prosím platnou emailovou adresu.',
+      });
+    }
+    if (domain && domain.length > 253) {
+      return res.status(400).json({
+        success: false,
+        message: 'Zadejte prosím platnou emailovou adresu.',
+      });
+    }
+
+    // Phone format validation (if provided)
+    if (phone) {
+      const phoneRegex = /^[+]?[\d\s\-()]{7,20}$/;
+      if (!phoneRegex.test(phone)) {
+        return res.status(400).json({
+          success: false,
+          message: 'Zadejte prosím platné telefonní číslo.',
+        });
+      }
     }
 
     // Escape all user inputs to prevent XSS
@@ -166,7 +260,7 @@ export default async function handler(
     const { error } = await resend.emails.send({
       from: 'AsperroStudio <noreply@asperrostudio.cz>',
       to: ['mpenkava1337@gmail.com'],
-      replyTo: email, // Original email for reply functionality
+      replyTo: sanitizeEmailForHeader(email), // Sanitized email for reply functionality
       subject: `Nová zpráva od ${safeName} - AsperroStudio`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">

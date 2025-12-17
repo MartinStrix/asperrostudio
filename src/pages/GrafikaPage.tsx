@@ -9,6 +9,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
 import { Footer } from '../components/layout/Footer';
+import { SEO } from '../components/common/SEO';
 
 const services = [
   {
@@ -43,8 +44,13 @@ const features = [
 
 export const GrafikaPage = () => {
   return (
-    <div className="min-h-screen bg-dark text-white">
-      {/* Background */}
+    <>
+      <SEO
+        title="Grafika - Vizualni identita a brand design"
+        description="Tvorba loga, vizualni identita, tiskove materialy a digitalni grafika. Navrhy na miru vasi znacce."
+      />
+      <div className="min-h-screen bg-dark text-white">
+        {/* Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-0 w-96 h-96 bg-pink-500/15 rounded-full blur-[128px]" />
         <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-purple-500/15 rounded-full blur-[128px]" />
@@ -185,6 +191,7 @@ export const GrafikaPage = () => {
       </section>
 
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };

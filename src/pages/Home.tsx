@@ -2,25 +2,61 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { VideoCameraIcon, PaintBrushIcon, DevicePhoneMobileIcon, ArrowRightIcon } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
+import { SEO } from '../components/common/SEO';
+import { useState, useEffect } from 'react';
+
+// Check if we should load the video based on screen size and connection
+const shouldLoadVideo = () => {
+  if (typeof window === 'undefined') return false;
+  const isLargeScreen = window.innerWidth > 768;
+  const connection = (navigator as any).connection;
+  const isFastConnection = !connection || !['slow-2g', '2g'].includes(connection.effectiveType);
+  return isLargeScreen && isFastConnection;
+};
 
 export const Home = () => {
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
+
+  useEffect(() => {
+    setShowVideo(shouldLoadVideo());
+  }, []);
+
   return (
-    <div className="min-h-screen bg-dark text-white">
-      {/* Fullscreen Background Video */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
+    <>
+      <SEO
+        title="Kreativni Studio Pro Vas Brand"
+        description="Video produkce, graficky design a obsah pro socialni site, ktery vasi znacku odlisi od konkurence."
+      />
+      <div className="min-h-screen bg-dark text-white">
+        {/* Fullscreen Background Video - optimized loading */}
+        <div
+          className="fixed inset-0 overflow-hidden pointer-events-none"
+          aria-hidden="true"
+          role="presentation"
         >
-          <source src="/videos/ink-abstract.mp4" type="video/mp4" />
-        </video>
-        {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-dark/40" />
-      </div>
+          {showVideo ? (
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="none"
+              onLoadedData={() => setVideoLoaded(true)}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+                videoLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <source src="/videos/ink-abstract-hq.webm" type="video/webm" />
+              <source src="/videos/ink-abstract-hq.mp4" type="video/mp4" />
+            </video>
+          ) : (
+            // Fallback gradient for mobile/slow connections
+            <div className="absolute inset-0 bg-gradient-to-br from-dark via-gray-900 to-dark" />
+          )}
+          {/* Dark overlay for better text readability */}
+          <div className="absolute inset-0 bg-dark/40" />
+        </div>
 
       {/* Main content */}
       <div className="relative z-10 min-h-screen flex flex-col">
@@ -128,5 +164,6 @@ export const Home = () => {
         </footer>
       </div>
     </div>
+    </>
   );
 };

@@ -10,6 +10,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
 import { Footer } from '../components/layout/Footer';
+import { SEO } from '../components/common/SEO';
 
 const services = [
   {
@@ -44,8 +45,13 @@ const features = [
 
 export const SocialPage = () => {
   return (
-    <div className="min-h-screen bg-dark text-white">
-      {/* Background */}
+    <>
+      <SEO
+        title="Socialni site - Obsah ktery zaujme"
+        description="Foto obsah, Reels, TikTok videa, Stories a content strategie. Obsah optimalizovany pro socialni platformy."
+      />
+      <div className="min-h-screen bg-dark text-white">
+        {/* Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-0 w-96 h-96 bg-purple-500/15 rounded-full blur-[128px]" />
         <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-cyan-500/15 rounded-full blur-[128px]" />
@@ -186,6 +192,7 @@ export const SocialPage = () => {
       </section>
 
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };

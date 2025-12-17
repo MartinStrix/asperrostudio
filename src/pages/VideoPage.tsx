@@ -12,6 +12,7 @@ import {
 import { Container } from '../components/common/Container';
 import { Footer } from '../components/layout/Footer';
 import { VideoEmbed } from '../components/common/VideoEmbed';
+import { SEO } from '../components/common/SEO';
 
 const services = [
   {
@@ -56,8 +57,13 @@ const features = [
 
 export const VideoPage = () => {
   return (
-    <div className="min-h-screen bg-dark text-white">
-      {/* Background */}
+    <>
+      <SEO
+        title="Videotvorba - Profesionalni video produkce"
+        description="Reklamni spoty, firemni videa, svatebni zaznamy a dokumenty. Komplexni produkce od napadu po strih."
+      />
+      <div className="min-h-screen bg-dark text-white">
+        {/* Background */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 left-0 w-96 h-96 bg-cyan-500/15 rounded-full blur-[128px]" />
         <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-blue-500/15 rounded-full blur-[128px]" />
@@ -253,6 +259,7 @@ export const VideoPage = () => {
       </section>
 
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
