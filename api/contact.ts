@@ -259,7 +259,7 @@ export default async function handler(
     // Send email using Resend with sanitized content
     const { error } = await resend.emails.send({
       from: 'AsperroStudio <noreply@asperrostudio.cz>',
-      to: ['mpenkava1337@gmail.com'],
+      to: ['asperro.spoluprace@gmail.com'],
       replyTo: sanitizeEmailForHeader(email), // Sanitized email for reply functionality
       subject: `Nová zpráva od ${safeName} - AsperroStudio`,
       html: `
