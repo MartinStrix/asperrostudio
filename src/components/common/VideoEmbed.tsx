@@ -29,11 +29,9 @@ export const VideoEmbed = ({ url, title }: VideoEmbedProps) => {
         }}
         onReady={() => console.log('Video ready:', url)}
         config={{
-          youtube: {
-            playerVars: {
-              modestbranding: 1,
-              rel: 0,
-            },
+          playerVars: {
+            modestbranding: 1,
+            rel: 0,
           },
         }}
       />
