@@ -7,6 +7,28 @@ interface VideoEmbedProps {
   title?: string;
 }
 
+// Extract YouTube video ID from various URL formats
+const getYouTubeVideoId = (url: string): string | null => {
+  const patterns = [
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&?/]+)/,
+    /youtube\.com\/v\/([^&?/]+)/,
+  ];
+  for (const pattern of patterns) {
+    const match = url.match(pattern);
+    if (match) return match[1];
+  }
+  return null;
+};
+
+// Get direct YouTube thumbnail URL (bypasses noembed.com)
+const getYouTubeThumbnail = (url: string): string | boolean => {
+  const videoId = getYouTubeVideoId(url);
+  if (videoId) {
+    return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+  }
+  return true; // Fallback to react-player's default behavior
+};
+
 export const VideoEmbed = ({ url, title }: VideoEmbedProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -18,7 +40,7 @@ export const VideoEmbed = ({ url, title }: VideoEmbedProps) => {
         width="100%"
         height="100%"
         controls
-        light
+        light={getYouTubeThumbnail(url)}
         playing={isPlaying}
         onClickPreview={() => setIsPlaying(true)}
         onPlay={() => setIsPlaying(true)}
