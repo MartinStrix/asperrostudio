@@ -170,7 +170,7 @@ export const VideoPage = () => {
             transition={{ delay: 0.1 }}
           >
             <VideoEmbed
-              url="https://www.youtube.com/watch?v=uTmfflJWOvM"
+              url="https://youtu.be/yXYDx3daA_o"
               title="Ukázka naší práce"
             />
 
@@ -185,7 +185,7 @@ export const VideoPage = () => {
                 Chcete vidět více? Navštivte náš YouTube kanál.
               </p>
               <a
-                href="https://youtube.com/@asperrostudio"
+                href="https://www.youtube.com/@Asperro.Studio"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 transition-colors font-medium"

@@ -7,12 +7,11 @@ export const NAV_LINKS = [
 ];
 
 export const SOCIAL_LINKS = {
-  instagram: 'https://instagram.com/asperrostudio',
-  youtube: 'https://youtube.com/@asperrostudio',
-  facebook: 'https://facebook.com/asperrostudio',
+  instagram: 'https://www.instagram.com/asperro.studio?igsh=MTJpb2VxbDF5YTNmNA%3D%3D',
+  youtube: 'https://www.youtube.com/@Asperro.Studio',
+  tiktok: 'https://www.tiktok.com/@asperro.studio',
 };
 
 export const CONTACT_INFO = {
-  email: 'info@asperrostudio.cz',
-  phone: '+420 XXX XXX XXX',
+  email: 'asperro.spoluprace@gmail.com',
 };
