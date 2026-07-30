@@ -44,10 +44,6 @@ export const teamMembers: TeamMember[] = [
         text: 'Moje cesta ke střihu začala u obyčejného programu Movie Maker. Z něj jsem se posunul ke Camtasia Studiu, ale i to mi po čase přestalo stačit. Nakonec jsem se ocitl na rozcestí a rozhodoval se mezi Adobe Premiere a DaVinci Resolve. Jednoduše řečeno – vybral jsem si DaVinci a této volby zdaleka nelituji. Pracuji v něm již několik let a zjišťuji, že možnosti, které nabízí pro střih i vizuální úpravy, jsou takřka neomezené.',
       },
       {
-        title: 'Tým, na který je spolehnutí',
-        text: 'Ačkoliv jsem na začátku stál sám, rozhodl jsem se vybudovat vlastní úzký tým o třech lidech. Zakládám si na tom, abychom se navzájem vedli k seberozvoji a poznání. Mít vedle sebe lidi, na které se mohu vždy a za všech okolností spolehnout, je pro mě při realizaci projektů naprostý základ.',
-      },
-      {
         title: 'Seberozvoj a čistá hlava',
         text: 'Nebojím se investovat – a to jak do spolehlivé techniky, tak především do sebe samotného. Jsem už nějakou dobu členem komunity The 1% a měl jsem možnost účastnit se hned několika jejich akcí. Neustále studuji, hledám nové postupy a snažím se posouvat dál. Kreativní práce vyžaduje soustředění a balanc, a proto se nedílnou součástí mého každodenního života staly také meditace, které mi pomáhají udržet si čistou mysl.',
       },

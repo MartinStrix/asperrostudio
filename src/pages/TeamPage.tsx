@@ -94,7 +94,14 @@ export const TeamPage = () => {
         description="Poznejte editory AsperroStudio – klikněte na profil a prohlédněte si jejich styl a ukázky práce."
       />
       <div className="min-h-screen bg-dark text-white pt-28 pb-20">
-        <Container>
+        {/* Background – jemné záře ve firemních barvách */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+          <div className="absolute top-1/4 left-0 w-96 h-96 bg-cyan-500/15 rounded-full blur-[128px]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-96 h-96 bg-purple-600/10 rounded-full blur-[128px]" />
+          <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-pink-500/15 rounded-full blur-[128px]" />
+        </div>
+
+        <Container className="relative z-10">
           <motion.div
             className="text-center max-w-2xl mx-auto mb-16"
             initial={{ opacity: 0, y: 20 }}
