@@ -11,6 +11,7 @@ const VideoPage = lazy(() => import('./pages/VideoPage').then(m => ({ default: m
 const GrafikaPage = lazy(() => import('./pages/GrafikaPage').then(m => ({ default: m.GrafikaPage })));
 const SocialPage = lazy(() => import('./pages/SocialPage').then(m => ({ default: m.SocialPage })));
 const KontaktPage = lazy(() => import('./pages/KontaktPage').then(m => ({ default: m.KontaktPage })));
+const TeamPage = lazy(() => import('./pages/TeamPage').then(m => ({ default: m.TeamPage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 
 // Loading fallback component
@@ -103,6 +104,7 @@ const AnimatedRoutes = () => {
               <Route path="/video" element={<PageWrapper><VideoPage /></PageWrapper>} />
               <Route path="/grafika" element={<PageWrapper><GrafikaPage /></PageWrapper>} />
               <Route path="/social" element={<PageWrapper><SocialPage /></PageWrapper>} />
+              <Route path="/tym" element={<PageWrapper><TeamPage /></PageWrapper>} />
               <Route path="/kontakt" element={<PageWrapper><KontaktPage /></PageWrapper>} />
               <Route path="*" element={<PageWrapper><NotFoundPage /></PageWrapper>} />
             </Routes>
