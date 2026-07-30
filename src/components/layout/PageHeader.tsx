@@ -7,8 +7,6 @@ import { Container } from '../common/Container';
 const NAV_ITEMS = [
   { label: 'Domů', href: '/', color: 'white', gradient: 'from-white/20 to-white/10' },
   { label: 'Videotvorba', href: '/video', color: 'cyan', gradient: 'from-cyan-400/20 to-cyan-600/10' },
-  { label: 'Grafika', href: '/grafika', color: 'pink', gradient: 'from-pink-400/20 to-pink-600/10' },
-  { label: 'Sociální sítě', href: '/social', color: 'purple', gradient: 'from-purple-400/20 to-purple-600/10' },
   { label: 'Náš tým', href: '/tym', color: 'white', gradient: 'from-white/20 to-white/10' },
   { label: 'Kontakt', href: '/kontakt', color: 'white', gradient: 'from-white/20 to-white/10' },
 ];

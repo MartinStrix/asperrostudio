@@ -1,18 +1,13 @@
 // ============================================================
 //  TÝM ASPERROSTUDIO
 // ------------------------------------------------------------
-//  Tohle je JEDINÝ soubor, který musíš upravovat, když chceš
-//  přidat / změnit editora nebo jeho videa.
+//  Jediný soubor, který upravuješ, když chceš změnit editory.
 //
-//  JAK PŘIDAT EDITORA:
-//  1. Zkopíruj jeden blok { ... } níže a uprav údaje.
-//  2. Fotku nahraj do složky  public/team/  (např. martin.jpg)
-//     a do pole `photo` napiš '/team/martin.jpg'.
-//     Pokud fotku zatím nemáš, nech photo: null — místo ní se
-//     zobrazí kolečko s iniciály.
-//  3. Do `videos` vlož odkazy na YouTube (stačí normální odkaz
-//     z prohlížeče, např. https://www.youtube.com/watch?v=XXXX
-//     nebo zkrácený https://youtu.be/XXXX).
+//  - Fotku nahraj do  public/team/  (např. martin.jpg)
+//    a nastav photo: '/team/martin.jpg'.
+//    Dokud je photo: null, zobrazí se kolečko s iniciály.
+//  - `instagram` = odkaz na profil editora (zkopíruj z prohlížeče).
+//  - Videa: stačí běžný YouTube odkaz.
 // ============================================================
 
 export interface TeamVideo {
@@ -21,52 +16,53 @@ export interface TeamVideo {
 }
 
 export interface TeamMember {
-  id: string;                       // unikátní, malými písmeny, bez diakritiky (použije se v adrese)
-  name: string;                     // Jméno editora
-  role: string;                     // Specializace, např. „Střih & Motion Design"
-  bio: string;                      // Krátké představení (2–3 věty)
-  photo: string | null;             // '/team/soubor.jpg' nebo null
-  accent: 'cyan' | 'pink' | 'purple'; // Barva karty (ladí s webem)
-  socials?: {
-    youtube?: string;
-    instagram?: string;
-    tiktok?: string;
-  };
+  id: string;                          // použije se v adrese, např. /tym/martin-polacek
+  name: string;
+  age: number;
+  bio: string;                         // Představení editora (2–4 věty)
+  photo: string | null;                // '/team/soubor.jpg' nebo null
+  accent: 'cyan' | 'pink' | 'purple';  // Barva profilu
+  instagram: string;                   // Odkaz na Instagram
   videos: TeamVideo[];
 }
 
 export const teamMembers: TeamMember[] = [
   {
-    id: 'editor-1',
-    name: 'Jméno Editora',
-    role: 'Střih & Postprodukce',
-    bio: 'Sem napiš krátké představení editora — čemu se věnuje, jaký má styl a co ho baví. Dvě až tři věty stačí.',
-    photo: null, // ← až budeš mít fotku: '/team/editor-1.jpg'
+    id: 'martin-polacek',
+    name: 'Martin Poláček',
+    age: 24,
+    bio: 'Sem doplň Martinovo představení — čemu se ve střihu věnuje, jaký má styl a co ho baví. Dvě až čtyři věty stačí.',
+    photo: null, // ← až bude fotka: '/team/martin.jpg'
     accent: 'cyan',
-    socials: {
-      youtube: 'https://www.youtube.com/@Asperro.Studio',
-    },
+    instagram: 'https://www.instagram.com/asperro.studio', // ← nahraď Martinovým IG
     videos: [
-      {
-        title: 'Ukázka práce',
-        url: 'https://www.youtube.com/watch?v=uTmfflJWOvM',
-      },
-      // ← další videa přidáš takhle:
-      // { title: 'Reklamní spot XY', url: 'https://youtu.be/XXXXXXX' },
+      { title: 'Ukázka práce', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM' },
+      // další video přidáš takhle:
+      // { title: 'Název videa', url: 'https://youtu.be/XXXXXXX' },
     ],
   },
   {
-    id: 'editor-2',
-    name: 'Jméno Editora',
-    role: 'Motion Design & Grafika',
-    bio: 'Sem napiš krátké představení druhého editora. Text i videa upravíš v souboru src/data/team.ts.',
+    id: 'eva-havrdova',
+    name: 'Eva Havrdová',
+    age: 22,
+    bio: 'Sem doplň Evino představení — specializace, styl, co ji na tvorbě baví.',
     photo: null,
     accent: 'pink',
+    instagram: 'https://www.instagram.com/asperro.studio', // ← nahraď Eviným IG
     videos: [
-      {
-        title: 'Ukázka práce',
-        url: 'https://www.youtube.com/watch?v=uTmfflJWOvM',
-      },
+      { title: 'Ukázka práce', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM' },
+    ],
+  },
+  {
+    id: 'vaclav-ivanco',
+    name: 'Václav Ivančo',
+    age: 22,
+    bio: 'Sem doplň Václavovo představení — specializace, styl, co ho na tvorbě baví.',
+    photo: null,
+    accent: 'purple',
+    instagram: 'https://www.instagram.com/asperro.studio', // ← nahraď Václavovým IG
+    videos: [
+      { title: 'Ukázka práce', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM' },
     ],
   },
 ];
