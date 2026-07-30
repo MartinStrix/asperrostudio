@@ -119,6 +119,33 @@ export const TeamMemberPage = () => {
             </div>
           </motion.div>
 
+          {/* Příběh editora (kapitoly) */}
+          {member.story && member.story.length > 0 && (
+            <div className="max-w-3xl mx-auto mb-16 space-y-6">
+              {member.story.map((chapter, index) => (
+                <motion.div
+                  key={chapter.title}
+                  className="rounded-2xl bg-white/5 border border-white/10 p-6 md:p-8 hover:bg-white/[0.07] transition-colors"
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.5, delay: Math.min(index * 0.08, 0.25) }}
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <span
+                      aria-hidden="true"
+                      className={`h-8 w-1 rounded-full bg-gradient-to-b ${accent.avatar}`}
+                    />
+                    <h2 className="text-lg md:text-xl font-bold font-display">
+                      {chapter.title}
+                    </h2>
+                  </div>
+                  <p className="text-gray-200 leading-relaxed">{chapter.text}</p>
+                </motion.div>
+              ))}
+            </div>
+          )}
+
           {/* Portfolio */}
           <motion.div
             className="max-w-4xl mx-auto"

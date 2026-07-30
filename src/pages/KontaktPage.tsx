@@ -20,7 +20,7 @@ export const KontaktPage = () => {
     <>
       <SEO
         title="Kontakt - Spojte se s nami"
-        description="Mate projekt na mysli? Kontaktujte AsperroStudio pro nezavaznou konzultaci. Rychla odpoved do 24 hodin."
+        description="Mate projekt na mysli? Kontaktujte AsperroStudio pro nezavaznou konzultaci. Odpovime co nejdrive."
       />
       <div className="min-h-screen bg-dark text-white">
         {/* Background */}

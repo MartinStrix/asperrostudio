@@ -115,14 +115,14 @@ export const Home = () => {
                 >
                   <Link
                     to="/kontakt"
-                    className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-lg text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:shadow-xl hover:shadow-pink-500/30 hover:brightness-110 active:scale-[0.98] transition-all"
+                    className="w-full sm:w-72 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-lg text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:shadow-xl hover:shadow-pink-500/30 hover:brightness-110 active:scale-[0.98] transition-all"
                   >
                     Nezávazná poptávka
                     <ArrowRightIcon className="w-5 h-5" />
                   </Link>
                   <Link
                     to="/tym"
-                    className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-lg border-2 border-white/20 text-white hover:border-cyan-400 hover:text-cyan-400 active:scale-[0.98] transition-all"
+                    className="w-full sm:w-72 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-lg border-2 border-white/20 text-white hover:border-cyan-400 hover:text-cyan-400 active:scale-[0.98] transition-all"
                   >
                     <UserGroupIcon className="w-5 h-5" />
                     Poznejte náš tým
@@ -255,9 +255,16 @@ export const Home = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <p className="text-gray-300">
+                <p className="text-gray-300 mb-5">
                   Krok 1 je na vás. O zbytek se postaráme my.
                 </p>
+                <Link
+                  to="/kontakt"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-lg text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:shadow-xl hover:shadow-pink-500/30 hover:brightness-110 active:scale-[0.98] transition-all"
+                >
+                  Mám nápad — pojďme na to
+                  <ArrowRightIcon className="w-5 h-5" />
+                </Link>
               </motion.div>
             </Container>
           </section>
@@ -288,17 +295,21 @@ export const Home = () => {
                 ].map((question, index) => (
                   <motion.div
                     key={question}
-                    className="flex items-start gap-4 p-4 md:p-5 rounded-xl bg-white/5 border border-white/10"
+                    className="group flex items-center gap-4 p-4 md:p-5 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 hover:shadow-lg hover:shadow-cyan-500/10 transition-all duration-300 cursor-default"
                     initial={{ opacity: 0, x: -20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true, margin: '-40px' }}
                     transition={{ duration: 0.45, delay: index * 0.08 }}
+                    whileHover={{ x: 10, scale: 1.02 }}
                   >
                     <span
                       aria-hidden="true"
-                      className="mt-1 w-2 h-2 shrink-0 rounded-full bg-gradient-to-r from-cyan-400 to-pink-500"
+                      className="w-2 h-2 shrink-0 rounded-full bg-gradient-to-r from-cyan-400 to-pink-500 transition-all duration-300 group-hover:scale-[2] group-hover:shadow-[0_0_14px_rgba(236,72,153,0.9)]"
                     />
-                    <p className="text-gray-100 text-base md:text-lg">{question}</p>
+                    <p className="text-gray-100 text-base md:text-lg transition-colors duration-300 group-hover:text-white">
+                      {question}
+                    </p>
+                    <ArrowRightIcon className="w-5 h-5 ml-auto shrink-0 text-pink-400 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
                   </motion.div>
                 ))}
               </div>
@@ -315,6 +326,22 @@ export const Home = () => {
                   zvládneme i u vás?
                 </span>
               </motion.p>
+
+              <motion.div
+                className="text-center mt-8"
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
+                <Link
+                  to="/o-nas"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-lg border-2 border-white/20 text-white hover:border-pink-400 hover:text-pink-400 active:scale-[0.98] transition-all"
+                >
+                  Poznejte nás blíž
+                  <ArrowRightIcon className="w-5 h-5" />
+                </Link>
+              </motion.div>
             </Container>
           </section>
 
@@ -345,8 +372,11 @@ export const Home = () => {
                   </h2>
                   <p className="text-gray-200 text-base md:text-lg max-w-xl mx-auto mb-8">
                     Než se pro cokoliv rozhodnete, sedneme si k vašemu projektu
-                    a řekneme vám na rovinu, co dává smysl. Neplatíte nic — a
-                    odnesete si:
+                    a řekneme vám na rovinu, co dává smysl. Neplatíte vůbec nic.
+                  </p>
+
+                  <p className="text-sm uppercase tracking-widest text-gray-400 mb-4">
+                    Co si z konzultace odnesete
                   </p>
 
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mx-auto text-left mb-9">
@@ -371,7 +401,7 @@ export const Home = () => {
                     <ArrowRightIcon className="w-5 h-5" />
                   </Link>
                   <p className="text-gray-400 text-sm mt-4">
-                    Žádné závazky, žádné skryté poplatky. Odpovídáme do 24 hodin.
+                    Žádné závazky, žádné skryté poplatky. Odpovídáme co nejdříve.
                   </p>
                 </div>
               </motion.div>

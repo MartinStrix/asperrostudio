@@ -1,6 +1,6 @@
 // ============================================================
 // AURORA – animované pozadí, které reaguje na scrollování
-// - záře samy pomalu plují (CSS animace)
+// - záře se neustále pohybují, pulzují a mění odstín (CSS animace)
 // - při scrollu se navíc rozestupují, otáčejí a mění odstín,
 //   takže má stránka při posouvání hloubku (parallax efekt)
 // Chceš-li vrátit původní video s dýmem, řekni si o zálohu :)
@@ -60,6 +60,7 @@ export const AnimatedBackground = () => {
       role="presentation"
     >
       <div ref={hueLayer} className="absolute inset-0 will-change-[filter]">
+        <div className="aurora-hue absolute inset-0">
         {/* Vrstvy s parallaxem – uvnitř každé pluje záře sama od sebe */}
         <div ref={layer1} className="absolute inset-0 will-change-transform">
           <div className="aurora-blob aurora-1 w-[55vw] h-[55vw] top-[-15%] left-[-10%] bg-cyan-500/60" />
@@ -69,6 +70,7 @@ export const AnimatedBackground = () => {
         </div>
         <div ref={layer3} className="absolute inset-0 will-change-transform">
           <div className="aurora-blob aurora-3 w-[45vw] h-[45vw] top-[30%] left-[35%] bg-purple-600/45" />
+        </div>
         </div>
       </div>
 
