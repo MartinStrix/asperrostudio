@@ -11,6 +11,8 @@ import {
   FilmIcon,
   ScissorsIcon,
   RocketLaunchIcon,
+  CheckCircleIcon,
+  SparklesIcon,
 } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
 import { AnimatedBackground } from '../components/common/AnimatedBackground';
@@ -253,16 +255,125 @@ export const Home = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                <p className="text-gray-400 mb-5">
+                <p className="text-gray-300">
                   Krok 1 je na vás. O zbytek se postaráme my.
                 </p>
-                <Link
-                  to="/kontakt"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-lg text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:shadow-xl hover:shadow-pink-500/30 hover:brightness-110 active:scale-[0.98] transition-all"
-                >
-                  Mám nápad — pojďme na to
-                  <ArrowRightIcon className="w-5 h-5" />
-                </Link>
+              </motion.div>
+            </Container>
+          </section>
+
+          {/* ====== KAŽDÝ BRAND MÁ JINÝ PŘÍBĚH ====== */}
+          <section className="py-20 md:py-28">
+            <Container>
+              <motion.h2
+                className="text-3xl md:text-5xl font-bold font-display text-center mb-14"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.6 }}
+              >
+                Každý brand má{' '}
+                <span className="bg-gradient-to-r from-cyan-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+                  jiný příběh
+                </span>
+              </motion.h2>
+
+              <div className="max-w-2xl mx-auto space-y-4">
+                {[
+                  'Máte co říct, ale vaše značka není vidět?',
+                  'Tvoříte obsah, ale výsledky pořád nepřicházejí?',
+                  'Cítíte, že váš obsah má větší potenciál?',
+                  'Začínáte na sociálních sítích a nevíte, jak na to?',
+                  'Hledáte tým, který zná algoritmy a rozumí lidem?',
+                ].map((question, index) => (
+                  <motion.div
+                    key={question}
+                    className="flex items-start gap-4 p-4 md:p-5 rounded-xl bg-white/5 border border-white/10"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ duration: 0.45, delay: index * 0.08 }}
+                  >
+                    <span
+                      aria-hidden="true"
+                      className="mt-1 w-2 h-2 shrink-0 rounded-full bg-gradient-to-r from-cyan-400 to-pink-500"
+                    />
+                    <p className="text-gray-100 text-base md:text-lg">{question}</p>
+                  </motion.div>
+                ))}
+              </div>
+
+              <motion.p
+                className="text-center text-xl md:text-2xl font-display font-semibold mt-12"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                Chcete zjistit, jestli to{' '}
+                <span className="bg-gradient-to-r from-cyan-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+                  zvládneme i u vás?
+                </span>
+              </motion.p>
+            </Container>
+          </section>
+
+          {/* ====== KONZULTACE ZDARMA ====== */}
+          <section className="py-20 md:py-28">
+            <Container>
+              <motion.div
+                className="max-w-3xl mx-auto rounded-3xl bg-white/5 border border-white/10 p-8 md:p-12 text-center relative overflow-hidden"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.6 }}
+              >
+                {/* Jemná záře uvnitř karty */}
+                <div
+                  aria-hidden="true"
+                  className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-gradient-to-br from-cyan-500/20 to-pink-500/20 blur-3xl pointer-events-none"
+                />
+
+                <div className="relative">
+                  <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-cyan-400 to-pink-500 mb-5">
+                    <SparklesIcon className="w-4 h-4" />
+                    100 % zdarma a nezávazně
+                  </span>
+
+                  <h2 className="text-3xl md:text-4xl font-bold font-display mb-4">
+                    Konzultace zdarma
+                  </h2>
+                  <p className="text-gray-200 text-base md:text-lg max-w-xl mx-auto mb-8">
+                    Než se pro cokoliv rozhodnete, sedneme si k vašemu projektu
+                    a řekneme vám na rovinu, co dává smysl. Neplatíte nic — a
+                    odnesete si:
+                  </p>
+
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mx-auto text-left mb-9">
+                    {[
+                      'Analýzu vašeho současného obsahu',
+                      'Konkrétní možnosti, jak růst',
+                      'Vlastní návrhy na míru vaší značce',
+                      'Upřímné doporučení dalších kroků',
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-2.5">
+                        <CheckCircleIcon className="w-5 h-5 mt-0.5 shrink-0 text-cyan-400" />
+                        <span className="text-gray-100">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <Link
+                    to="/kontakt"
+                    className="inline-flex items-center gap-2 px-9 py-4 rounded-xl font-semibold text-lg text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:shadow-xl hover:shadow-pink-500/30 hover:brightness-110 active:scale-[0.98] transition-all"
+                  >
+                    Chci konzultaci zdarma
+                    <ArrowRightIcon className="w-5 h-5" />
+                  </Link>
+                  <p className="text-gray-400 text-sm mt-4">
+                    Žádné závazky, žádné skryté poplatky. Odpovídáme do 24 hodin.
+                  </p>
+                </div>
               </motion.div>
             </Container>
           </section>

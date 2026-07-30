@@ -35,8 +35,8 @@ export const teamMembers: TeamMember[] = [
     bio: 'Sem doplň Martinovo představení — čemu se ve střihu věnuje, jaký má styl a co ho baví. Dvě až čtyři věty stačí.',
     photo: null, // ← až bude fotka: '/team/martin.jpg'
     accent: 'cyan',
-    instagram: 'https://www.instagram.com/asperro.studio', // ← nahraď Martinovým IG
-    ico: null, // ← až budeš mít: '12345678'
+    instagram: 'https://www.instagram.com/martinpollacek/',
+    ico: '24399949',
     videos: [
       { title: 'Ukázka práce', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM' },
       // další video přidáš takhle:

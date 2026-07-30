@@ -216,54 +216,87 @@ export const AboutPage = () => {
             </h2>
           </motion.div>
 
-          <div className="relative max-w-3xl mx-auto">
-            {/* Středová čára (na mobilu vlevo) */}
+          {/* Zakroucený had – vlnovka s kartami střídavě po stranách */}
+          <div className="relative max-w-4xl mx-auto">
+            {/* Vlnitá čára v pozadí (jen na větších obrazovkách) */}
+            <svg
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full hidden md:block"
+              viewBox="0 0 100 100"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="waveGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#22d3ee" />
+                  <stop offset="50%" stopColor="#a855f7" />
+                  <stop offset="100%" stopColor="#ec4899" />
+                </linearGradient>
+              </defs>
+              <path
+                d="M 50 0
+                   C 85 6, 85 19, 50 25
+                   C 15 31, 15 44, 50 50
+                   C 85 56, 85 69, 50 75
+                   C 15 81, 15 94, 50 100"
+                fill="none"
+                stroke="url(#waveGradient)"
+                strokeWidth="0.5"
+                strokeDasharray="2 1.5"
+                opacity="0.5"
+                vectorEffect="non-scaling-stroke"
+                strokeLinecap="round"
+              />
+            </svg>
+
+            {/* Svislá čára pro mobil */}
             <div
               aria-hidden="true"
-              className="absolute left-6 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-cyan-400 via-purple-500 to-pink-500 opacity-60"
+              className="absolute left-6 top-0 bottom-0 w-px bg-gradient-to-b from-cyan-400 via-purple-500 to-pink-500 opacity-60 md:hidden"
             />
 
-            <ol className="space-y-12">
+            <ol className="relative space-y-10 md:space-y-0">
               {DAVINCI_PAGES.map((page, index) => {
                 const Icon = page.icon;
                 const isLeft = index % 2 === 0;
                 return (
                   <motion.li
                     key={page.name}
-                    className="relative"
-                    initial={{ opacity: 0, x: isLeft ? -30 : 30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    className={`relative md:w-[46%] md:py-6 ${
+                      isLeft ? 'md:mr-auto' : 'md:ml-auto'
+                    }`}
+                    initial={{ opacity: 0, y: 30, rotate: isLeft ? -2 : 2 }}
+                    whileInView={{ opacity: 1, y: 0, rotate: 0 }}
                     viewport={{ once: true, margin: '-60px' }}
-                    transition={{ duration: 0.5 }}
+                    transition={{ duration: 0.55 }}
                   >
+                    {/* Bod na čáře – jen mobil */}
                     <div
                       aria-hidden="true"
-                      className={`absolute left-6 md:left-1/2 top-6 -translate-x-1/2 w-4 h-4 rounded-full bg-gradient-to-br ${page.dot} shadow-lg ring-4 ring-dark`}
+                      className={`absolute left-6 top-8 -translate-x-1/2 w-4 h-4 rounded-full bg-gradient-to-br ${page.dot} shadow-lg ring-4 ring-dark md:hidden`}
                     />
 
                     <div
-                      className={`ml-14 md:ml-0 md:w-[calc(50%-2.5rem)] ${
-                        isLeft ? 'md:mr-auto md:text-right' : 'md:ml-auto md:text-left'
-                      }`}
+                      className={`ml-14 md:ml-0 relative rounded-3xl bg-dark-50/80 backdrop-blur border border-white/10 hover:border-white/25 transition-colors p-6 md:p-7 pt-10 md:pt-12 text-center`}
                     >
-                      <div className="p-5 md:p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-colors">
-                        <div
-                          className={`flex items-center gap-3 mb-1 ${
-                            isLeft ? 'md:flex-row-reverse' : ''
-                          }`}
-                        >
-                          <Icon className={`w-6 h-6 shrink-0 ${page.color}`} />
-                          <h3 className="text-lg md:text-xl font-bold font-display">
-                            {page.name}
-                          </h3>
-                        </div>
-                        <p className={`${page.color} text-sm font-medium mb-2`}>
-                          {page.subtitle}
-                        </p>
-                        <p className="text-gray-200 text-base leading-relaxed">
-                          {page.desc}
-                        </p>
+                      {/* Ikona v bublině přesahující kartu */}
+                      <div
+                        className={`absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-2xl rotate-45 bg-gradient-to-br ${page.dot} shadow-lg flex items-center justify-center`}
+                      >
+                        <Icon className="w-6 h-6 -rotate-45 text-white" />
                       </div>
+
+                      <span className="text-xs uppercase tracking-[0.25em] text-gray-500">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <h3 className="text-xl md:text-2xl font-bold font-display mt-1">
+                        {page.name}
+                      </h3>
+                      <p className={`${page.color} text-sm font-medium mt-1 mb-3`}>
+                        {page.subtitle}
+                      </p>
+                      <p className="text-gray-200 text-base leading-relaxed text-left">
+                        {page.desc}
+                      </p>
                     </div>
                   </motion.li>
                 );
