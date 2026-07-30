@@ -102,6 +102,9 @@ export const TeamMemberPage = () => {
                 {member.name}
               </h1>
               <p className={`${accent.text} font-medium mt-1`}>{member.age} let</p>
+              {member.ico && (
+                <p className="text-gray-500 text-sm mt-1">IČO: {member.ico}</p>
+              )}
               <p className="text-gray-400 mt-4 leading-relaxed">{member.bio}</p>
 
               <a

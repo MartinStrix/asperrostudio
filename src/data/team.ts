@@ -23,6 +23,7 @@ export interface TeamMember {
   photo: string | null;                // '/team/soubor.jpg' nebo null
   accent: 'cyan' | 'pink' | 'purple';  // Barva profilu
   instagram: string;                   // Odkaz na Instagram
+  ico: string | null;                  // IČO editora, např. '12345678' (null = zatím nezobrazovat)
   videos: TeamVideo[];
 }
 
@@ -35,6 +36,7 @@ export const teamMembers: TeamMember[] = [
     photo: null, // ← až bude fotka: '/team/martin.jpg'
     accent: 'cyan',
     instagram: 'https://www.instagram.com/asperro.studio', // ← nahraď Martinovým IG
+    ico: null, // ← až budeš mít: '12345678'
     videos: [
       { title: 'Ukázka práce', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM' },
       // další video přidáš takhle:
@@ -49,6 +51,7 @@ export const teamMembers: TeamMember[] = [
     photo: null,
     accent: 'pink',
     instagram: 'https://www.instagram.com/asperro.studio', // ← nahraď Eviným IG
+    ico: null,
     videos: [
       { title: 'Ukázka práce', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM' },
     ],
@@ -61,6 +64,7 @@ export const teamMembers: TeamMember[] = [
     photo: null,
     accent: 'purple',
     instagram: 'https://www.instagram.com/asperro.studio', // ← nahraď Václavovým IG
+    ico: null,
     videos: [
       { title: 'Ukázka práce', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM' },
     ],

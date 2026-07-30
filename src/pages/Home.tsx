@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   VideoCameraIcon,
   ArrowRightIcon,
+  IdentificationIcon,
   UserGroupIcon,
   LightBulbIcon,
   ChatBubbleLeftRightIcon,
@@ -12,17 +13,8 @@ import {
   RocketLaunchIcon,
 } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
+import { AnimatedBackground } from '../components/common/AnimatedBackground';
 import { SEO } from '../components/common/SEO';
-import { useState, useEffect } from 'react';
-
-// Check if we should load the video based on screen size and connection
-const shouldLoadVideo = () => {
-  if (typeof window === 'undefined') return false;
-  const isLargeScreen = window.innerWidth > 768;
-  const connection = (navigator as any).connection;
-  const isFastConnection = !connection || !['slow-2g', '2g'].includes(connection.effectiveType);
-  return isLargeScreen && isFastConnection;
-};
 
 // ------------------------------------------------------------
 // „HAD" – proces od nápadu k finálnímu videu
@@ -74,13 +66,6 @@ const PROCESS_STEPS = [
 ];
 
 export const Home = () => {
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  const [showVideo, setShowVideo] = useState(false);
-
-  useEffect(() => {
-    setShowVideo(shouldLoadVideo());
-  }, []);
-
   return (
     <>
       <SEO
@@ -88,32 +73,7 @@ export const Home = () => {
         description="Video produkce a obsah, který vaši značku odliší od konkurence. Od nápadu po finální video. Nezávazná konzultace zdarma."
       />
       <div className="min-h-screen bg-dark text-white">
-        {/* Fullscreen Background Video - optimized loading */}
-        <div
-          className="fixed inset-0 overflow-hidden pointer-events-none"
-          aria-hidden="true"
-          role="presentation"
-        >
-          {showVideo ? (
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="none"
-              onLoadedData={() => setVideoLoaded(true)}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
-                videoLoaded ? 'opacity-100' : 'opacity-0'
-              }`}
-            >
-              <source src="/videos/ink-abstract-hq.webm" type="video/webm" />
-              <source src="/videos/ink-abstract-hq.mp4" type="video/mp4" />
-            </video>
-          ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-dark via-gray-900 to-dark" />
-          )}
-          <div className="absolute inset-0 bg-dark/50" />
-        </div>
+        <AnimatedBackground />
 
         {/* Main content */}
         <div className="relative z-10">
@@ -167,15 +127,15 @@ export const Home = () => {
                   </Link>
                 </motion.div>
 
-                {/* Videotvorba card */}
+                {/* Karty: Videotvorba + O nás */}
                 <motion.div
-                  className="max-w-md mx-auto"
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 max-w-2xl mx-auto"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
                 >
-                  <Link to="/video" className="group block">
-                    <div className="relative p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 transition-all duration-300">
+                  <Link to="/video" className="group">
+                    <div className="relative p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 transition-all duration-300 h-full">
                       <div className="w-14 h-14 mb-4 mx-auto flex items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 to-cyan-600 text-white shadow-lg shadow-cyan-500/25">
                         <VideoCameraIcon className="w-7 h-7" />
                       </div>
@@ -184,6 +144,22 @@ export const Home = () => {
                         Profesionální video produkce a střih
                       </p>
                       <div className="flex items-center justify-center gap-2 text-cyan-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span>Prozkoumat</span>
+                        <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                  </Link>
+
+                  <Link to="/o-nas" className="group">
+                    <div className="relative p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-pink-400/50 hover:bg-white/10 transition-all duration-300 h-full">
+                      <div className="w-14 h-14 mb-4 mx-auto flex items-center justify-center rounded-xl bg-gradient-to-br from-pink-400 to-pink-600 text-white shadow-lg shadow-pink-500/25">
+                        <IdentificationIcon className="w-7 h-7" />
+                      </div>
+                      <h3 className="text-xl font-bold font-display mb-2">O nás</h3>
+                      <p className="text-gray-400 text-sm mb-4">
+                        Kdo jsme a v čem tvoříme
+                      </p>
+                      <div className="flex items-center justify-center gap-2 text-pink-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
                         <span>Prozkoumat</span>
                         <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </div>
@@ -260,7 +236,7 @@ export const Home = () => {
                                 {step.title}
                               </h3>
                             </div>
-                            <p className="text-gray-400 text-sm md:text-base">{step.desc}</p>
+                            <p className="text-gray-200 text-base md:text-lg leading-relaxed">{step.desc}</p>
                           </div>
                         </div>
                       </motion.li>
