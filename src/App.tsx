@@ -4,7 +4,7 @@ import { Suspense, lazy, useEffect, useRef } from 'react';
 import { PageHeader } from './components/layout/PageHeader';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { SkipLink } from './components/common/SkipLink';
-import { ChatWidget } from './components/common/ChatWidget';
+import { ScrollToTop } from './components/common/ScrollToTop';
 
 // Lazy load all page components for code splitting
 const Home = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
@@ -111,7 +111,6 @@ const AnimatedRoutes = () => {
             </Routes>
           </AnimatePresence>
         </Suspense>
-        <ChatWidget />
       </main>
     </>
   );
@@ -121,6 +120,7 @@ function App() {
   return (
     <ErrorBoundary>
       <Router>
+      <ScrollToTop />
         <AnimatedRoutes />
       </Router>
     </ErrorBoundary>
