@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom';
 import { Container } from '../common/Container';
+import { openCookieSettings } from '../../utils/cookieConsent';
 import { NAV_LINKS, SOCIAL_LINKS, CONTACT_INFO } from '../../utils/constants';
 
 export const Footer = () => {
@@ -93,6 +95,19 @@ export const Footer = () => {
           {/* Copyright */}
           <div className="mt-12 pt-8 border-t border-white/10 text-center text-sm text-gray-500">
             <p>&copy; {currentYear} AsperroStudio. Všechna práva vyhrazena.</p>
+            <div className="flex items-center justify-center gap-4 mt-3">
+              <Link to="/cookies" className="hover:text-white transition-colors">
+                Zásady cookies
+              </Link>
+              <span className="text-gray-700">•</span>
+              <button
+                type="button"
+                onClick={openCookieSettings}
+                className="hover:text-white transition-colors"
+              >
+                Nastavení cookies
+              </button>
+            </div>
           </div>
         </div>
       </Container>

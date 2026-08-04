@@ -425,6 +425,10 @@ export const Home = () => {
                   Kontakt
                 </Link>
                 <span className="hidden sm:inline text-gray-700">•</span>
+                <Link to="/cookies" className="hover:text-white transition-colors">
+                  Zásady cookies
+                </Link>
+                <span className="hidden sm:inline text-gray-700">•</span>
                 <span>&copy; {new Date().getFullYear()} AsperroStudio</span>
               </motion.div>
             </Container>
