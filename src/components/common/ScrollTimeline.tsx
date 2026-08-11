@@ -1,33 +1,32 @@
 // ============================================================
-//  SCROLL TIMELINE – dekorace na boku hlavní stránky
-//  Svislá "střihová" timeline ve stylu NLE (DaVinci):
-//  pravítko s timecodem, barevné klipy na trackách a playhead.
-//  Scrollování funguje jako scrubbing – timeline se posouvá
-//  pod playheadem a timecode ubíhá podle pozice na stránce.
+//  SCROLL TIMELINE – jemná dekorace na levém boku hlavní stránky
+//  Nenápadná svislá "střihová" timeline: tenké tracky s klipy
+//  a playhead. Scroll = scrubbing, timecode ubíhá dle pozice.
+//  Bez panelu – volně splývá s pozadím webu, okraje se rozplývají.
 //  Zobrazuje se jen na velkých obrazovkách (lg a víc).
 // ============================================================
 import { useEffect, useRef, useState } from 'react';
 
-// Celková "délka projektu" zobrazená na timecodu (ve vteřinách, 24 fps)
+// Celková "délka projektu" na timecodu (ve vteřinách, 24 fps)
 const PROJECT_SECONDS = 90;
 const FPS = 24;
 
 // Klipy na trackách: [track 0/1, začátek %, výška %, barva]
 const CLIPS: { track: 0 | 1; top: number; height: number; className: string }[] = [
-  { track: 0, top: 0,  height: 14, className: 'from-cyan-400/80 to-cyan-600/80' },
-  { track: 0, top: 15, height: 9,  className: 'from-purple-400/80 to-purple-600/80' },
-  { track: 0, top: 25, height: 17, className: 'from-pink-400/80 to-pink-600/80' },
-  { track: 0, top: 43, height: 7,  className: 'from-cyan-300/80 to-cyan-500/80' },
-  { track: 0, top: 51, height: 13, className: 'from-violet-400/80 to-violet-600/80' },
-  { track: 0, top: 65, height: 10, className: 'from-pink-300/80 to-pink-500/80' },
-  { track: 0, top: 76, height: 15, className: 'from-cyan-400/80 to-cyan-600/80' },
-  { track: 0, top: 92, height: 8,  className: 'from-purple-300/80 to-purple-500/80' },
+  { track: 0, top: 0,  height: 14, className: 'from-cyan-400/30 to-cyan-600/30' },
+  { track: 0, top: 15, height: 9,  className: 'from-purple-400/30 to-purple-600/30' },
+  { track: 0, top: 25, height: 17, className: 'from-pink-400/30 to-pink-600/30' },
+  { track: 0, top: 43, height: 7,  className: 'from-cyan-300/30 to-cyan-500/30' },
+  { track: 0, top: 51, height: 13, className: 'from-violet-400/30 to-violet-600/30' },
+  { track: 0, top: 65, height: 10, className: 'from-pink-300/30 to-pink-500/30' },
+  { track: 0, top: 76, height: 15, className: 'from-cyan-400/30 to-cyan-600/30' },
+  { track: 0, top: 92, height: 8,  className: 'from-purple-300/30 to-purple-500/30' },
   // Track 1 = "audio" (tyrkysové bloky s vlnkou)
-  { track: 1, top: 0,  height: 23, className: 'from-teal-400/70 to-teal-600/70' },
-  { track: 1, top: 25, height: 17, className: 'from-teal-400/70 to-teal-600/70' },
-  { track: 1, top: 43, height: 21, className: 'from-teal-400/70 to-teal-600/70' },
-  { track: 1, top: 65, height: 26, className: 'from-teal-400/70 to-teal-600/70' },
-  { track: 1, top: 92, height: 8,  className: 'from-teal-400/70 to-teal-600/70' },
+  { track: 1, top: 0,  height: 23, className: 'from-teal-400/25 to-teal-600/25' },
+  { track: 1, top: 25, height: 17, className: 'from-teal-400/25 to-teal-600/25' },
+  { track: 1, top: 43, height: 21, className: 'from-teal-400/25 to-teal-600/25' },
+  { track: 1, top: 65, height: 26, className: 'from-teal-400/25 to-teal-600/25' },
+  { track: 1, top: 92, height: 8,  className: 'from-teal-400/25 to-teal-600/25' },
 ];
 
 // Formát timecodu HH:MM:SS:FF jako ve střižně
@@ -86,30 +85,36 @@ export const ScrollTimeline = () => {
 
   return (
     <div
-      className="hidden lg:flex fixed right-4 xl:right-6 top-24 bottom-8 z-20 pointer-events-none flex-col items-stretch w-20"
+      className="hidden lg:flex fixed left-3 xl:left-5 top-28 bottom-10 z-0 pointer-events-none flex-col w-9 opacity-70"
       aria-hidden="true"
     >
-      {/* Timecode displej */}
-      <div className="mb-2 rounded-lg bg-dark-100/90 border border-white/15 px-1.5 py-1 text-center">
-        <span className="font-mono text-[10px] tracking-tight text-cyan-300 tabular-nums">
-          {timecode}
-        </span>
-      </div>
+      {/* Timecode – jen jemný monospace text */}
+      <span className="mb-3 font-mono text-[9px] tracking-tight text-white/30 tabular-nums text-center">
+        {timecode}
+      </span>
 
-      {/* Okno timeline */}
-      <div className="relative flex-1 rounded-xl bg-dark-100/70 backdrop-blur-sm border border-white/10 overflow-hidden">
-        {/* Posouvaný obsah (2× výška okna) */}
+      {/* Timeline – bez panelu, okraje se rozplývají do stránky */}
+      <div
+        className="relative flex-1 overflow-hidden"
+        style={{
+          maskImage:
+            'linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)',
+          WebkitMaskImage:
+            'linear-gradient(to bottom, transparent, black 12%, black 88%, transparent)',
+        }}
+      >
+        {/* Posouvaný obsah (2× výška) */}
         <div
           ref={contentRef}
           className="absolute inset-x-0 top-0 will-change-transform"
           style={{ height: '200%' }}
         >
-          {/* Pravítko s dílky */}
+          {/* Jemné dílky pravítka */}
           <div
-            className="absolute left-0 top-0 bottom-0 w-4 opacity-70"
+            className="absolute left-0 top-0 bottom-0 w-1.5 opacity-30"
             style={{
               backgroundImage:
-                'repeating-linear-gradient(to bottom, rgba(255,255,255,0.35) 0 1px, transparent 1px 8px), repeating-linear-gradient(to bottom, rgba(255,255,255,0.7) 0 1px, transparent 1px 40px)',
+                'repeating-linear-gradient(to bottom, rgba(255,255,255,0.4) 0 1px, transparent 1px 10px)',
             }}
           />
 
@@ -117,32 +122,25 @@ export const ScrollTimeline = () => {
           {CLIPS.map((clip, index) => (
             <div
               key={index}
-              className={`absolute rounded-[3px] bg-gradient-to-b ${clip.className} border border-white/20`}
+              className={`absolute rounded-[2px] bg-gradient-to-b ${clip.className}`}
               style={{
-                left: clip.track === 0 ? '38%' : '72%',
-                width: clip.track === 0 ? '28%' : '20%',
+                left: clip.track === 0 ? '30%' : '72%',
+                width: clip.track === 0 ? '32%' : '18%',
                 top: `${clip.top}%`,
                 height: `${clip.height}%`,
                 // "vlnka" u audio klipů
                 backgroundImage:
                   clip.track === 1
-                    ? 'repeating-linear-gradient(to bottom, rgba(255,255,255,0.35) 0 2px, transparent 2px 5px)'
+                    ? 'repeating-linear-gradient(to bottom, rgba(255,255,255,0.18) 0 2px, transparent 2px 6px)'
                     : undefined,
               }}
             />
           ))}
         </div>
 
-        {/* Playhead – pevně uprostřed, timeline jede pod ním */}
+        {/* Playhead – tenká linka pevně uprostřed */}
         <div className="absolute left-0 right-0 top-1/2 -translate-y-1/2">
-          <div className="h-px bg-red-500 shadow-[0_0_6px_rgba(239,68,68,0.9)]" />
-          <div
-            className="absolute -top-[5px] left-0 w-0 h-0"
-            style={{
-              borderTop: '5px solid rgb(239,68,68)',
-              borderRight: '6px solid transparent',
-            }}
-          />
+          <div className="h-px bg-red-500/50" />
         </div>
       </div>
     </div>
