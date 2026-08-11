@@ -16,6 +16,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
 import { AnimatedBackground } from '../components/common/AnimatedBackground';
+import { ScrollTimeline } from '../components/common/ScrollTimeline';
 import { SEO } from '../components/common/SEO';
 
 // ------------------------------------------------------------
@@ -76,6 +77,7 @@ export const Home = () => {
       />
       <div className="min-h-screen bg-dark text-white">
         <AnimatedBackground />
+        <ScrollTimeline />
 
         {/* Main content */}
         <div className="relative z-10">
