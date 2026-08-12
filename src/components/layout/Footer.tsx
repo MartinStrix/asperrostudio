@@ -7,18 +7,18 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-dark-50 border-t border-white/10">
+    <footer className="relative z-10 bg-dark-50 border-t border-white/10">
       <Container>
-        <div className="py-12 md:py-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+        <div className="py-8 md:py-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-7 md:gap-10">
             {/* Brand */}
             <div>
-              <a href="#hero" className="flex items-center gap-3 mb-4">
-                <img src="/logo.png" alt="AsperroStudio" className="w-14 h-14" />
-                <span className="text-2xl font-bold font-display">
+              <Link to="/" className="flex items-center gap-2.5 mb-3">
+                <img src="/logo.png" alt="AsperroStudio" className="w-10 h-10" />
+                <span className="text-xl font-bold font-display">
                   Asperro<span className="text-cyan-400">Studio</span>
                 </span>
-              </a>
+              </Link>
               <p className="text-gray-400 text-sm">
                 Profesionální video produkce pro vaše projekty.
                 Tvoříme videa, která zaujmou.
@@ -27,7 +27,7 @@ export const Footer = () => {
 
             {/* Quick Links */}
             <div>
-              <h4 className="font-semibold text-white mb-4">Rychlé odkazy</h4>
+              <h4 className="font-semibold text-white mb-3">Rychlé odkazy</h4>
               <ul className="space-y-2">
                 {NAV_LINKS.map((link) => (
                   <li key={link.href}>
@@ -44,7 +44,7 @@ export const Footer = () => {
 
             {/* Contact & Social */}
             <div>
-              <h4 className="font-semibold text-white mb-4">Kontakt</h4>
+              <h4 className="font-semibold text-white mb-3">Kontakt</h4>
               <ul className="space-y-2 text-sm text-gray-400 mb-6">
                 <li>
                   <a href={`mailto:${CONTACT_INFO.email}`} className="hover:text-cyan-400 transition-colors">
@@ -96,7 +96,7 @@ export const Footer = () => {
           </div>
 
           {/* Copyright */}
-          <div className="mt-12 pt-8 border-t border-white/10 text-center text-sm text-gray-500">
+          <div className="mt-8 pt-6 border-t border-white/10 text-center text-sm text-gray-500">
             <p>&copy; {currentYear} AsperroStudio. Všechna práva vyhrazena.</p>
             <div className="flex items-center justify-center gap-4 mt-3">
               <Link to="/cookies" className="hover:text-white transition-colors">

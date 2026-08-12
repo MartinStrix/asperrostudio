@@ -14,6 +14,7 @@ import {
   RocketLaunchIcon,
   CheckCircleIcon,
   SparklesIcon,
+  PaperAirplaneIcon,
 } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
 import { AnimatedBackground } from '../components/common/AnimatedBackground';
@@ -434,35 +435,87 @@ export const Home = () => {
             </Container>
           </section>
 
-          {/* Footer */}
-          <footer className="py-6">
+          {/* ====== NATÁČÍME KDEKOLIV: KAMERA + DRON ====== */}
+          <section className="py-20 md:py-28">
             <Container>
               <motion.div
-                className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-gray-500"
+                className="text-center max-w-2xl mx-auto mb-12"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.6 }}
+              >
+                <h2 className="text-3xl md:text-5xl font-bold font-display mb-4">
+                  Natáčíme{' '}
+                  <span className="bg-gradient-to-r from-cyan-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+                    kdekoliv
+                  </span>
+                </h2>
+                <p className="text-gray-400 text-lg">
+                  Nečekáme, až nám pošlete materiál. Za zajímavým projektem
+                  vyrazíme s technikou prakticky kamkoliv.
+                </p>
+              </motion.div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl mx-auto">
+                <motion.div
+                  className="p-7 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 transition-all duration-300"
+                  initial={{ opacity: 0, x: -24 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <div className="w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center text-white shadow-lg shadow-cyan-500/25">
+                    <VideoCameraIcon className="w-7 h-7" />
+                  </div>
+                  <h3 className="text-xl font-bold font-display mb-2">
+                    Natáčení kamerou
+                  </h3>
+                  <p className="text-gray-300">
+                    Stabilní záběry na bezzrcadlovku — rozhovory, produkty,
+                    eventy i atmosféra vašeho provozu. Profesionální technika
+                    a cit pro kompozici v každém záběru.
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  className="p-7 rounded-2xl bg-white/5 border border-white/10 hover:border-pink-400/50 hover:bg-white/10 transition-all duration-300"
+                  initial={{ opacity: 0, x: 24 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <div className="w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center text-white shadow-lg shadow-pink-500/25">
+                    <PaperAirplaneIcon className="w-7 h-7 -rotate-45" />
+                  </div>
+                  <h3 className="text-xl font-bold font-display mb-2">
+                    Záběry z dronu
+                  </h3>
+                  <p className="text-gray-300">
+                    Letecké záběry, které dodají videu velkolepost — areály,
+                    krajina, svatby i dynamické průlety. Perspektiva, kterou
+                    ze země nezachytíte.
+                  </p>
+                </motion.div>
+              </div>
+
+              <motion.div
+                className="text-center mt-10"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
               >
-                <Link to="/o-nas" className="hover:text-white transition-colors">
-                  O nás
+                <Link
+                  to="/kontakt"
+                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-lg text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:shadow-xl hover:shadow-pink-500/30 hover:brightness-110 active:scale-[0.98] transition-all"
+                >
+                  Domluvit natáčení
+                  <ArrowRightIcon className="w-5 h-5" />
                 </Link>
-                <span className="hidden sm:inline text-gray-700">•</span>
-                <Link to="/cenik" className="hover:text-white transition-colors">
-                  Ceník
-                </Link>
-                <span className="hidden sm:inline text-gray-700">•</span>
-                <Link to="/kontakt" className="hover:text-white transition-colors">
-                  Kontakt
-                </Link>
-                <span className="hidden sm:inline text-gray-700">•</span>
-                <Link to="/cookies" className="hover:text-white transition-colors">
-                  Zásady cookies
-                </Link>
-                <span className="hidden sm:inline text-gray-700">•</span>
-                <span>&copy; {new Date().getFullYear()} AsperroStudio</span>
               </motion.div>
             </Container>
-          </footer>
+          </section>
         </div>
       </div>
     </>

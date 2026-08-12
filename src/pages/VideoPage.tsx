@@ -12,7 +12,6 @@ import {
   UserGroupIcon,
 } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
-import { Footer } from '../components/layout/Footer';
 import { VideoEmbed } from '../components/common/VideoEmbed';
 import { SEO } from '../components/common/SEO';
 
@@ -328,7 +327,6 @@ export const VideoPage = () => {
           </Container>
         </section>
 
-        <Footer />
       </div>
     </>
   );

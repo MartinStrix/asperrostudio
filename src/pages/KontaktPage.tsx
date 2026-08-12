@@ -58,16 +58,6 @@ export const KontaktPage = () => {
               Máte projekt na mysli? Rádi si o něm promluvíme.
             </p>
 
-            {/* Konzultace zdarma */}
-            <div className="mt-6 inline-flex flex-col sm:flex-row items-center gap-3 sm:gap-5 px-5 py-3.5 rounded-2xl bg-white/5 border border-white/10">
-              <span className="px-3.5 py-1.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-cyan-400 to-pink-500 whitespace-nowrap">
-                Konzultace zdarma
-              </span>
-              <p className="text-gray-300 text-sm">
-                Vyplněním formuláře si nezávazně rezervujete konzultaci —
-                analýza, možnosti i vlastní návrhy. Neplatíte nic.
-              </p>
-            </div>
           </motion.div>
 
           <motion.div
@@ -280,19 +270,22 @@ export const KontaktPage = () => {
                   Na všechny vaše zprávy se snažíme odpovědět co nejdříve.
                 </p>
               </div>
+
+              {/* Konzultace zdarma */}
+              <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+                <span className="inline-block px-3.5 py-1.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-cyan-400 to-pink-500 mb-3">
+                  Konzultace zdarma
+                </span>
+                <p className="text-gray-400 text-sm">
+                  Vyplněním formuláře si nezávazně rezervujete konzultaci —
+                  analýza, možnosti i vlastní návrhy. Neplatíte nic.
+                </p>
+              </div>
             </div>
           </motion.div>
         </Container>
       </main>
 
-      {/* Footer */}
-      <footer className="relative z-10 py-8 border-t border-white/10">
-        <Container>
-          <div className="text-center text-sm text-gray-500">
-            &copy; {new Date().getFullYear()} AsperroStudio
-          </div>
-        </Container>
-      </footer>
       </div>
     </>
   );

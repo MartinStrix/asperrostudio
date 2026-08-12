@@ -425,7 +425,8 @@ export interface PromoCode {
 }
 
 export const PROMO_CODES: PromoCode[] = [
-  { code: 'TymAS+', discountPercent: 10, label: 'Tým Asperro' },
+  { code: 'OpenAS2026', discountPercent: 25, label: 'Uvítací akce' },
+  { code: 'AS10', discountPercent: 10 },
   // další akce přidáš takhle:
   // { code: 'LETO2026', discountPercent: 15, label: 'Letní akce' },
 ];

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRightIcon, FilmIcon } from '@heroicons/react/24/outline';
+import { ArrowRightIcon, FilmIcon, UserIcon } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
 import { SEO } from '../components/common/SEO';
 import { PageBadge } from '../components/common/PageBadge';
@@ -79,31 +79,31 @@ export const PortfolioPage = () => {
               return (
                 <motion.div
                   key={member.id}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  className={`md:w-[86%] ${index % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto'}`}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: '-60px' }}
-                  transition={{ duration: 0.5, delay: Math.min(index * 0.1, 0.2) }}
+                  transition={{ duration: 0.5 }}
                 >
-                  <Link
-                    to={`/tym/${member.id}`}
-                    className={`group flex items-center gap-5 md:gap-7 p-5 md:p-6 rounded-2xl bg-white/5 border border-white/10 ${accent.border} hover:bg-white/10 transition-all duration-300`}
+                  <div
+                    className={`flex flex-col sm:flex-row items-center gap-5 md:gap-6 p-5 md:p-6 rounded-2xl bg-white/5 border border-white/10 ${accent.border} hover:bg-white/[0.07] transition-all duration-300`}
                   >
                     {member.photo ? (
                       <img
                         src={member.photo}
                         alt={`Fotka – ${member.name}`}
                         loading="lazy"
-                        className="w-20 h-20 md:w-28 md:h-28 shrink-0 rounded-2xl object-cover border border-white/15 shadow-lg transition-transform duration-300 group-hover:scale-105"
+                        className="w-24 h-24 md:w-28 md:h-28 shrink-0 rounded-2xl object-cover border border-white/15 shadow-lg"
                       />
                     ) : (
                       <div
-                        className={`w-20 h-20 md:w-28 md:h-28 shrink-0 rounded-2xl flex items-center justify-center text-2xl md:text-3xl font-bold font-display text-white bg-gradient-to-br ${accent.avatar} border border-white/15 shadow-lg transition-transform duration-300 group-hover:scale-105`}
+                        className={`w-24 h-24 md:w-28 md:h-28 shrink-0 rounded-2xl flex items-center justify-center text-2xl md:text-3xl font-bold font-display text-white bg-gradient-to-br ${accent.avatar} border border-white/15 shadow-lg`}
                       >
                         {getInitials(member.name)}
                       </div>
                     )}
 
-                    <div className="flex-1 min-w-0">
+                    <div className="flex-1 min-w-0 text-center sm:text-left">
                       <h2 className="text-lg md:text-2xl font-bold font-display">
                         {member.name}
                       </h2>
@@ -115,13 +115,24 @@ export const PortfolioPage = () => {
                       </p>
                     </div>
 
-                    <div className="shrink-0 hidden sm:flex flex-col items-center gap-1 text-gray-500 group-hover:text-white transition-colors">
-                      <span className="text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">
-                        Zobrazit videa
-                      </span>
-                      <ArrowRightIcon className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                    {/* Dvě tlačítka: profil + portfolio */}
+                    <div className="shrink-0 flex flex-row sm:flex-col gap-2.5 w-full sm:w-44">
+                      <Link
+                        to={`/tym/${member.id}`}
+                        className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-semibold border-2 border-white/20 text-white hover:border-cyan-400 hover:text-cyan-400 active:scale-[0.98] transition-all"
+                      >
+                        <UserIcon className="w-4 h-4" />
+                        Profil
+                      </Link>
+                      <Link
+                        to={`/portfolio/${member.id}`}
+                        className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:brightness-110 hover:shadow-lg hover:shadow-pink-500/25 active:scale-[0.98] transition-all"
+                      >
+                        <FilmIcon className="w-4 h-4" />
+                        Portfolio
+                      </Link>
                     </div>
-                  </Link>
+                  </div>
                 </motion.div>
               );
             })}

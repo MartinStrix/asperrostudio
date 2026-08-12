@@ -6,12 +6,15 @@ import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { SkipLink } from './components/common/SkipLink';
 import { ScrollToTop } from './components/common/ScrollToTop';
 import { CookieBanner } from './components/common/CookieBanner';
+import { PromoPopup } from './components/common/PromoPopup';
+import { Footer } from './components/layout/Footer';
 import { ScrollTimeline } from './components/common/ScrollTimeline';
 
 // Lazy load all page components for code splitting
 const Home = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
 const VideoPage = lazy(() => import('./pages/VideoPage').then(m => ({ default: m.VideoPage })));
 const KontaktPage = lazy(() => import('./pages/KontaktPage').then(m => ({ default: m.KontaktPage })));
+const EditorPortfolioPage = lazy(() => import('./pages/EditorPortfolioPage').then(m => ({ default: m.EditorPortfolioPage })));
 const PortfolioPage = lazy(() => import('./pages/PortfolioPage').then(m => ({ default: m.PortfolioPage })));
 const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
 const TeamMemberPage = lazy(() => import('./pages/TeamMemberPage').then(m => ({ default: m.TeamMemberPage })));
@@ -108,6 +111,7 @@ const AnimatedRoutes = () => {
               <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
               <Route path="/video" element={<PageWrapper><VideoPage /></PageWrapper>} />
               <Route path="/portfolio" element={<PageWrapper><PortfolioPage /></PageWrapper>} />
+              <Route path="/portfolio/:memberId" element={<PageWrapper><EditorPortfolioPage /></PageWrapper>} />
               <Route path="/o-nas" element={<PageWrapper><AboutPage /></PageWrapper>} />
               <Route path="/tym" element={<Navigate to="/o-nas" replace />} />
               <Route path="/tym/:memberId" element={<PageWrapper><TeamMemberPage /></PageWrapper>} />
@@ -118,8 +122,10 @@ const AnimatedRoutes = () => {
             </Routes>
           </AnimatePresence>
         </Suspense>
+        <Footer />
         <ScrollTimeline />
         <CookieBanner />
+        <PromoPopup />
       </main>
     </>
   );

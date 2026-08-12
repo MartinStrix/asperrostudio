@@ -10,9 +10,15 @@
 //  - Videa: stačí běžný YouTube odkaz.
 // ============================================================
 
+export type VideoCategory = 'short' | 'long' | 'motion';
+// short  = Krátké formáty (Reels, TikTok, Shorts)
+// long   = Dlouhé formáty (YouTube, spoty, filmy)
+// motion = Motion grafika (animace, efekty)
+
 export interface TeamVideo {
-  title: string;   // Název ukázky (zobrazí se pod videem)
-  url: string;     // Odkaz na YouTube
+  title: string;           // Název ukázky (zobrazí se pod videem)
+  url: string;             // Odkaz na YouTube
+  category: VideoCategory; // 'short' | 'long' | 'motion'
 }
 
 export interface TeamMember {
@@ -49,9 +55,11 @@ export const teamMembers: TeamMember[] = [
       },
     ],
     videos: [
-      { title: 'Ukázka práce', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM' },
+      { title: 'Ukázka – krátký formát', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM', category: 'short' },
+      { title: 'Ukázka – dlouhý formát', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM', category: 'long' },
+      { title: 'Ukázka – motion grafika', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM', category: 'motion' },
       // další video přidáš takhle:
-      // { title: 'Název videa', url: 'https://youtu.be/XXXXXXX' },
+      // { title: 'Název videa', url: 'https://youtu.be/XXXXXXX', category: 'short' },
     ],
   },
   {
@@ -64,7 +72,9 @@ export const teamMembers: TeamMember[] = [
     instagram: 'https://www.instagram.com/asperro.studio', // ← nahraď Eviným IG
     ico: null,
     videos: [
-      { title: 'Ukázka práce', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM' },
+      { title: 'Ukázka – krátký formát', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM', category: 'short' },
+      { title: 'Ukázka – dlouhý formát', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM', category: 'long' },
+      { title: 'Ukázka – motion grafika', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM', category: 'motion' },
     ],
   },
   {
@@ -77,7 +87,9 @@ export const teamMembers: TeamMember[] = [
     instagram: 'https://www.instagram.com/asperro.studio', // ← nahraď Václavovým IG
     ico: null,
     videos: [
-      { title: 'Ukázka práce', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM' },
+      { title: 'Ukázka – krátký formát', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM', category: 'short' },
+      { title: 'Ukázka – dlouhý formát', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM', category: 'long' },
+      { title: 'Ukázka – motion grafika', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM', category: 'motion' },
     ],
   },
 ];
