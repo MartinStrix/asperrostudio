@@ -34,7 +34,7 @@ export const teamMembers: TeamMember[] = [
     name: 'Martin Poláček',
     age: 24,
     bio: 'Ahoj, jmenuji se Martin. Pocházím z Plzeňského kraje a v současné době působím přímo v Plzni. Už řadu let se naplno věnuji grafickému designu a video editu pod hlavičkou AsperroStudio. Vzhledem k tomu, že do mé kompetence spadá i samotné natáčení, není pro mě problém za zajímavým projektem s kamerou nebo dronem vycestovat v podstatě kamkoliv.',
-    photo: null, // ← až bude fotka: '/team/martin.jpg'
+    photo: '/team/martin.jpg',
     accent: 'cyan',
     instagram: 'https://www.instagram.com/martinpollacek/',
     ico: '24399949',

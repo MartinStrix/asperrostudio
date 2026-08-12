@@ -47,7 +47,7 @@ export const TeamMemberPage = () => {
 
   // Neexistující editor → zpět na přehled týmu
   if (!member) {
-    return <Navigate to="/tym" replace />;
+    return <Navigate to="/o-nas" replace />;
   }
 
   const accent = accentStyles[member.accent];
@@ -67,18 +67,18 @@ export const TeamMemberPage = () => {
         </div>
 
         <Container className="relative z-10">
-          {/* Zpět na tým */}
+          {/* Zpět na O nás */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
           >
             <Link
-              to="/tym"
+              to="/o-nas"
               className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-10"
             >
               <ArrowLeftIcon className="w-4 h-4" />
-              Zpět na tým
+              Zpět na O nás
             </Link>
           </motion.div>
 

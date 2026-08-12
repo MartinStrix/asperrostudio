@@ -62,14 +62,14 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
       {
         id: 'shorts-standard',
         name: 'Standardní produkce',
-        desc: 'Pokročilé dynamické titulky, color grading a základní motion grafika.',
+        desc: 'Dynamické titulky, color grading, základní motion grafika i horizontální verze — vše v ceně.',
         priceFrom: 600,
         priceSuffix: '/ video',
       },
       {
         id: 'shorts-komplex',
         name: 'Komplexní produkce',
-        desc: 'Náročné efekty, pokročilá motion grafika a sound design. Obsah, co vyčnívá.',
+        desc: 'Náročné efekty, pokročilá motion grafika, sound design, voiceover i titulky v dalším jazyce — vše v ceně.',
         priceFrom: 1000,
         priceSuffix: '/ video',
       },
@@ -94,27 +94,6 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
         priceFrom: 2500,
       },
       {
-        id: 'shorts-voiceover',
-        name: 'Voiceover / mluvené slovo',
-        desc: 'Nahrání a zpracování hlasu k videu.',
-        priceFrom: 250,
-        perUnit: true,
-      },
-      {
-        id: 'shorts-titulky-jazyk',
-        name: 'Titulky v dalším jazyce',
-        desc: 'Např. anglická verze titulků.',
-        priceFrom: 150,
-        perUnit: true,
-      },
-      {
-        id: 'shorts-horizontal',
-        name: 'Horizontální verze navíc',
-        desc: 'Stejné video přizpůsobené pro YouTube / web.',
-        priceFrom: 200,
-        perUnit: true,
-      },
-      {
         id: 'shorts-expres',
         name: 'Expresní dodání',
         desc: 'Přednostní zpracování vašich videí.',
@@ -133,19 +112,19 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
       {
         id: 'reklama-social',
         name: 'Reklamní spot pro sociální sítě',
-        desc: 'Krátký úderný spot optimalizovaný pro výkonnostní kampaně na sítích.',
+        desc: 'Krátký úderný spot pro výkonnostní kampaně — verze pro jednotlivé sítě v ceně.',
         priceFrom: 6000,
       },
       {
         id: 'reklama-online',
         name: 'Online / TV reklamní spot',
-        desc: 'Plnohodnotný spot s propracovaným scénářem, natáčením a postprodukcí.',
+        desc: 'Plnohodnotný spot — scénář, natáčení, postprodukce i profesionální voiceover v ceně.',
         priceFrom: 15000,
       },
       {
         id: 'reklama-kampan',
         name: 'Prémiová kampaň',
-        desc: 'Sada spotů a formátů pro celou kampaň, jednotný vizuální styl.',
+        desc: 'Sada spotů a formátů pro celou kampaň — scénář, natáčení, voiceover i verze pro sítě v ceně.',
         priceFrom: 30000,
       },
     ],
@@ -174,12 +153,14 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
         id: 'reklama-voiceover',
         name: 'Profesionální voiceover',
         priceFrom: 1500,
+        includedIn: ['reklama-online', 'reklama-kampan'],
       },
       {
         id: 'reklama-social-verze',
         name: 'Vertikální verze pro sítě',
         desc: 'Reels / TikTok sestřihy ze spotu.',
         priceFrom: 1500,
+        includedIn: ['reklama-social', 'reklama-kampan'],
       },
       {
         id: 'reklama-expres',
@@ -211,7 +192,7 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
       {
         id: 'firemni-image',
         name: 'Korporátní image video',
-        desc: 'Rozsáhlá produkce s důrazem na prémiový vizuál, storytelling a sound design.',
+        desc: 'Rozsáhlá produkce — prémiový vizuál, storytelling, sound design i vertikální sestřihy pro sítě v ceně.',
         priceFrom: 20000,
       },
     ],
@@ -223,17 +204,11 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
         priceFrom: 2500,
       },
       {
-        id: 'firemni-scenar',
-        name: 'Scénář a kreativa na míru',
-        desc: 'Kompletní příprava konceptu před natáčením.',
-        priceFrom: 3000,
-        includedIn: ['firemni-promo', 'firemni-image'],
-      },
-      {
         id: 'firemni-social',
         name: 'Vertikální sestřihy pro sítě',
         desc: 'Reels / TikTok verze z natočeného materiálu.',
         priceFrom: 1500,
+        includedIn: ['firemni-image'],
       },
       {
         id: 'firemni-expres',
@@ -285,17 +260,11 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
         includedIn: ['svatba-premium'],
       },
       {
-        id: 'svatba-raw',
-        name: 'Nezkrácené záznamy',
-        desc: 'Kompletní surové záběry z celého dne.',
-        priceFrom: 3000,
-        includedIn: ['svatba-premium'],
-      },
-      {
         id: 'svatba-teaser',
         name: 'Teaser hned po svatbě',
         desc: 'Krátká ochutnávka na sítě, dokud emoce žijí.',
         priceFrom: 2000,
+        includedIn: ['svatba-premium'],
       },
       {
         id: 'svatba-expres',
@@ -321,13 +290,13 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
       {
         id: 'post-stredni',
         name: 'Střední projekt',
-        desc: 'Kompletní střih a základní color grading.',
+        desc: 'Kompletní střih a základní color grading v ceně.',
         priceFrom: 7500,
       },
       {
         id: 'post-velky',
         name: 'Velký projekt',
-        desc: 'Náročný střih a pokročilá postprodukce bez kompromisů.',
+        desc: 'Náročný střih — pokročilý color grading, VFX i sound design v ceně.',
         priceFrom: 12000,
       },
     ],
@@ -343,24 +312,6 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
         name: 'Záběry z dronu',
         desc: 'Doplnění projektu o letecké záběry.',
         priceFrom: 2500,
-      },
-      {
-        id: 'post-grading',
-        name: 'Pokročilý color grading',
-        desc: 'Filmový look laděný ručně v Color page.',
-        priceFrom: 1500,
-      },
-      {
-        id: 'post-vfx',
-        name: 'VFX a kompozice ve Fusion',
-        desc: 'Odstranění objektů, trackování, efekty.',
-        priceFrom: 2000,
-      },
-      {
-        id: 'post-sound',
-        name: 'Sound design a mix',
-        desc: 'Čistý zvuk a úderný mix ve Fairlight.',
-        priceFrom: 1500,
       },
       {
         id: 'post-expres',
@@ -448,16 +399,6 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
         name: 'Vertikální verze pro sítě',
         desc: 'Reels / TikTok sestřihy z projektu.',
         priceFrom: 1500,
-      },
-      {
-        id: 'namiru-raw',
-        name: 'Nezkrácené záznamy',
-        priceFrom: 3000,
-      },
-      {
-        id: 'namiru-teaser',
-        name: 'Krátký teaser navíc',
-        priceFrom: 2000,
       },
       {
         id: 'namiru-expres',

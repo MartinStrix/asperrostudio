@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Suspense, lazy, useEffect, useRef } from 'react';
 import { PageHeader } from './components/layout/PageHeader';
@@ -13,7 +13,6 @@ const Home = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })))
 const VideoPage = lazy(() => import('./pages/VideoPage').then(m => ({ default: m.VideoPage })));
 const KontaktPage = lazy(() => import('./pages/KontaktPage').then(m => ({ default: m.KontaktPage })));
 const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
-const TeamPage = lazy(() => import('./pages/TeamPage').then(m => ({ default: m.TeamPage })));
 const TeamMemberPage = lazy(() => import('./pages/TeamMemberPage').then(m => ({ default: m.TeamMemberPage })));
 const CenikPage = lazy(() => import('./pages/CenikPage').then(m => ({ default: m.CenikPage })));
 const CookiesPage = lazy(() => import('./pages/CookiesPage').then(m => ({ default: m.CookiesPage })));
@@ -108,7 +107,7 @@ const AnimatedRoutes = () => {
               <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
               <Route path="/video" element={<PageWrapper><VideoPage /></PageWrapper>} />
               <Route path="/o-nas" element={<PageWrapper><AboutPage /></PageWrapper>} />
-              <Route path="/tym" element={<PageWrapper><TeamPage /></PageWrapper>} />
+              <Route path="/tym" element={<Navigate to="/o-nas" replace />} />
               <Route path="/tym/:memberId" element={<PageWrapper><TeamMemberPage /></PageWrapper>} />
               <Route path="/cenik" element={<PageWrapper><CenikPage /></PageWrapper>} />
               <Route path="/kontakt" element={<PageWrapper><KontaktPage /></PageWrapper>} />

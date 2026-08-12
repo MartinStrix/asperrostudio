@@ -121,11 +121,11 @@ export const Home = () => {
                     <ArrowRightIcon className="w-5 h-5" />
                   </Link>
                   <Link
-                    to="/tym"
+                    to="/o-nas"
                     className="w-full sm:w-72 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-lg border-2 border-white/20 text-white hover:border-cyan-400 hover:text-cyan-400 active:scale-[0.98] transition-all"
                   >
                     <UserGroupIcon className="w-5 h-5" />
-                    Poznejte náš tým
+                    Poznejte nás
                   </Link>
                 </motion.div>
 
@@ -417,8 +417,8 @@ export const Home = () => {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
               >
-                <Link to="/tym" className="hover:text-white transition-colors">
-                  Náš tým
+                <Link to="/o-nas" className="hover:text-white transition-colors">
+                  O nás
                 </Link>
                 <span className="hidden sm:inline text-gray-700">•</span>
                 <Link to="/kontakt" className="hover:text-white transition-colors">

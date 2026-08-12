@@ -129,11 +129,11 @@ export const VideoPage = () => {
                   <ArrowRightIcon className="w-5 h-5" />
                 </Link>
                 <Link
-                  to="/tym"
+                  to="/o-nas"
                   className="w-full sm:w-72 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-lg border-2 border-white/20 text-white hover:border-cyan-400 hover:text-cyan-400 active:scale-[0.98] transition-all"
                 >
                   <UserGroupIcon className="w-5 h-5" />
-                  Poznejte náš tým
+                  Poznejte nás
                 </Link>
               </div>
             </motion.div>
@@ -227,8 +227,7 @@ export const VideoPage = () => {
                 transition={{ delay: 0.2 }}
               >
                 <p className="text-gray-300 mb-4">
-                  Chcete vidět více? Navštivte náš YouTube kanál nebo profily
-                  našich editorů.
+                  Chcete vidět více? Navštivte náš YouTube kanál nebo profily našich editorů na stránce O nás.
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-5">
                   <a
@@ -243,7 +242,7 @@ export const VideoPage = () => {
                     Navštívit YouTube
                   </a>
                   <Link
-                    to="/tym"
+                    to="/o-nas"
                     className="inline-flex items-center gap-2 text-pink-400 hover:text-pink-300 transition-colors font-medium"
                   >
                     <UserGroupIcon className="w-5 h-5" />

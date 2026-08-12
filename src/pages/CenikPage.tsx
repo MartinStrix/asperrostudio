@@ -49,6 +49,7 @@ export const CenikPage = () => {
   const [tier, setTier] = useState<PricingTier | null>(null);
   const [quantity, setQuantity] = useState<QuantityOption | null>(null);
   const [addonIds, setAddonIds] = useState<string[]>([]);
+  const [note, setNote] = useState('');
 
   const qty = quantity?.count ?? 1;
 
@@ -89,6 +90,7 @@ export const CenikPage = () => {
     setTier(null);
     setQuantity(null);
     setAddonIds([]);
+    setNote('');
   };
 
   const toggleAddon = (id: string) => {
@@ -117,6 +119,9 @@ export const CenikPage = () => {
           )
           .join(', ')}`
       );
+    }
+    if (note.trim()) {
+      lines.push(`• Poznámka: ${note.trim()}`);
     }
     lines.push(
       '',
@@ -480,6 +485,25 @@ export const CenikPage = () => {
                         </li>
                       ))}
                     </ul>
+
+                    {/* Poznámka */}
+                    <div className="mb-7">
+                      <label
+                        htmlFor="cenik-note"
+                        className="block text-sm font-medium text-gray-300 mb-2"
+                      >
+                        Poznámka (nepovinné)
+                      </label>
+                      <textarea
+                        id="cenik-note"
+                        value={note}
+                        onChange={(e) => setNote(e.target.value)}
+                        rows={3}
+                        maxLength={500}
+                        placeholder="Např. termín, představa o stylu, odkaz na inspiraci…"
+                        className="w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400/60 transition-colors resize-none"
+                      />
+                    </div>
 
                     <div className="text-center mb-2">
                       <p className="text-gray-400 text-sm mb-1">Orientační cena</p>
