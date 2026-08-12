@@ -9,10 +9,10 @@ export const Footer = () => {
   return (
     <footer className="relative z-10 bg-dark-50 border-t border-white/10">
       <Container>
-        <div className="py-8 md:py-10">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-7 md:gap-10">
+        <div className="py-6 md:py-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-6 md:gap-8">
             {/* Brand */}
-            <div>
+            <div className="col-span-2 md:col-span-1">
               <Link to="/" className="flex items-center gap-2.5 mb-3">
                 <img src="/logo.png" alt="AsperroStudio" className="w-10 h-10" />
                 <span className="text-xl font-bold font-display">
@@ -27,8 +27,8 @@ export const Footer = () => {
 
             {/* Quick Links */}
             <div>
-              <h4 className="font-semibold text-white mb-3">Rychlé odkazy</h4>
-              <ul className="space-y-2">
+              <h4 className="font-semibold text-white mb-2 text-sm">Rychlé odkazy</h4>
+              <ul className="space-y-1.5">
                 {NAV_LINKS.map((link) => (
                   <li key={link.href}>
                     <a
@@ -44,7 +44,7 @@ export const Footer = () => {
 
             {/* Contact & Social */}
             <div>
-              <h4 className="font-semibold text-white mb-3">Kontakt</h4>
+              <h4 className="font-semibold text-white mb-2 text-sm">Kontakt</h4>
               <ul className="space-y-2 text-sm text-gray-400 mb-6">
                 <li>
                   <a href={`mailto:${CONTACT_INFO.email}`} className="hover:text-cyan-400 transition-colors">
@@ -96,21 +96,20 @@ export const Footer = () => {
           </div>
 
           {/* Copyright */}
-          <div className="mt-8 pt-6 border-t border-white/10 text-center text-sm text-gray-500">
+          <div className="mt-6 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-sm text-gray-500 text-center">
             <p>&copy; {currentYear} AsperroStudio. Všechna práva vyhrazena.</p>
-            <div className="flex items-center justify-center gap-4 mt-3">
-              <Link to="/cookies" className="hover:text-white transition-colors">
-                Zásady cookies
-              </Link>
-              <span className="text-gray-700">•</span>
-              <button
-                type="button"
-                onClick={openCookieSettings}
-                className="hover:text-white transition-colors"
-              >
-                Nastavení cookies
-              </button>
-            </div>
+            <span className="hidden sm:inline text-gray-700">•</span>
+            <Link to="/cookies" className="hover:text-white transition-colors">
+              Zásady cookies
+            </Link>
+            <span className="hidden sm:inline text-gray-700">•</span>
+            <button
+              type="button"
+              onClick={openCookieSettings}
+              className="hover:text-white transition-colors"
+            >
+              Nastavení cookies
+            </button>
           </div>
         </div>
       </Container>

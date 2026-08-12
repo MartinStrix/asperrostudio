@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ShieldCheckIcon } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
+import { AnimatedBackground } from '../components/common/AnimatedBackground';
 import { PageBadge } from '../components/common/PageBadge';
 import { SEO } from '../components/common/SEO';
 import { openCookieSettings } from '../utils/cookieConsent';
@@ -27,11 +28,7 @@ export const CookiesPage = () => {
         description="Informace o používání souborů cookie na webu AsperroStudio."
       />
       <div className="min-h-screen bg-dark text-white pt-28 pb-20">
-        {/* Background – jemné záře ve firemních barvách */}
-        <div className="fixed inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          <div className="absolute top-1/4 left-0 w-96 h-96 bg-cyan-500/15 rounded-full blur-[128px]" />
-          <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-pink-500/15 rounded-full blur-[128px]" />
-        </div>
+        <AnimatedBackground />
 
         <Container className="relative z-10">
           <motion.div

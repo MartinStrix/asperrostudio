@@ -15,6 +15,8 @@ import {
   CheckCircleIcon,
   SparklesIcon,
   PaperAirplaneIcon,
+  CpuChipIcon,
+  FingerPrintIcon,
 } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
 import { AnimatedBackground } from '../components/common/AnimatedBackground';
@@ -514,6 +516,71 @@ export const Home = () => {
                   <ArrowRightIcon className="w-5 h-5" />
                 </Link>
               </motion.div>
+            </Container>
+          </section>
+
+          {/* ====== AI: JDEME S DOBOU, ALE STŘIH JE ŘEMESLO ====== */}
+          <section className="py-20 md:py-28">
+            <Container>
+              <motion.div
+                className="text-center max-w-2xl mx-auto mb-12"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={{ duration: 0.6 }}
+              >
+                <h2 className="text-3xl md:text-5xl font-bold font-display mb-4">
+                  Jdeme s dobou.{' '}
+                  <span className="bg-gradient-to-r from-cyan-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+                    Ale střih je řemeslo.
+                  </span>
+                </h2>
+                <p className="text-gray-400 text-lg">
+                  K umělé inteligenci máme jasný postoj — a rádi ho říkáme nahlas.
+                </p>
+              </motion.div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto">
+                <motion.div
+                  className="p-7 md:p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-cyan-400/40 transition-all duration-300"
+                  initial={{ opacity: 0, x: -24 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <div className="w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center text-white shadow-lg shadow-cyan-500/25">
+                    <CpuChipIcon className="w-7 h-7" />
+                  </div>
+                  <h3 className="text-xl font-bold font-display mb-2">
+                    AI využíváme tam, kde dává smysl
+                  </h3>
+                  <p className="text-gray-300">
+                    Sledujeme nové technologie a nebojíme se jich. Umělá
+                    inteligence nám pomáhá s organizací, přípravou a rutinou —
+                    díky tomu máme víc času na to podstatné: vaši tvorbu.
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  className="p-7 md:p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-pink-400/40 transition-all duration-300"
+                  initial={{ opacity: 0, x: 24 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <div className="w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center text-white shadow-lg shadow-pink-500/25">
+                    <FingerPrintIcon className="w-7 h-7" />
+                  </div>
+                  <h3 className="text-xl font-bold font-display mb-2">
+                    Vaše video je ale čistě naše práce
+                  </h3>
+                  <p className="text-gray-300">
+                    Střih, color grading, VFX i zvuk tvoříme vlastníma rukama
+                    v DaVinci Resolve — žádné AI zkratky. Každé video je naší
+                    vizitkou, a tu za nás žádná umělá inteligence neudělá.
+                  </p>
+                </motion.div>
+              </div>
             </Container>
           </section>
         </div>

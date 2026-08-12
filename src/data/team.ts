@@ -70,7 +70,7 @@ export const teamMembers: TeamMember[] = [
     photo: null,
     accent: 'pink',
     instagram: 'https://www.instagram.com/asperro.studio', // ← nahraď Eviným IG
-    ico: null,
+    ico: '29561876',
     videos: [
       { title: 'Ukázka – krátký formát', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM', category: 'short' },
       { title: 'Ukázka – dlouhý formát', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM', category: 'long' },
@@ -85,7 +85,7 @@ export const teamMembers: TeamMember[] = [
     photo: null,
     accent: 'purple',
     instagram: 'https://www.instagram.com/asperro.studio', // ← nahraď Václavovým IG
-    ico: null,
+    ico: '24401013',
     videos: [
       { title: 'Ukázka – krátký formát', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM', category: 'short' },
       { title: 'Ukázka – dlouhý formát', url: 'https://www.youtube.com/watch?v=uTmfflJWOvM', category: 'long' },

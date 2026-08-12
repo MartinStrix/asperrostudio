@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { EnvelopeIcon, CheckCircleIcon, ExclamationCircleIcon } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
+import { AnimatedBackground } from '../components/common/AnimatedBackground';
 import { PageBadge } from '../components/common/PageBadge';
 import { Button } from '../components/common/Button';
 import { CONTACT_INFO, SOCIAL_LINKS } from '../utils/constants';
@@ -36,11 +37,7 @@ export const KontaktPage = () => {
         description="Mate projekt na mysli? Kontaktujte AsperroStudio pro nezavaznou konzultaci. Odpovime co nejdrive."
       />
       <div className="min-h-screen bg-dark text-white">
-        {/* Background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-0 w-96 h-96 bg-cyan-500/15 rounded-full blur-[128px]" />
-        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-pink-500/15 rounded-full blur-[128px]" />
-      </div>
+        <AnimatedBackground />
 
       {/* Main Content */}
       <main className="relative z-10 py-16 md:py-24">

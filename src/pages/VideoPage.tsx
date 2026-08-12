@@ -12,6 +12,7 @@ import {
   UserGroupIcon,
 } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
+import { AnimatedBackground } from '../components/common/AnimatedBackground';
 import { VideoEmbed } from '../components/common/VideoEmbed';
 import { SEO } from '../components/common/SEO';
 
@@ -54,20 +55,51 @@ const services = [
   },
 ];
 
+// Styl "nodů" jako ve Fusion page DaVinci Resolve
 const accentStyles = {
   cyan: {
-    border: 'hover:border-cyan-400/50',
-    iconBox: 'from-cyan-400/20 to-cyan-600/20 text-cyan-400 group-hover:from-cyan-400 group-hover:to-cyan-600',
+    node: 'border-cyan-400/60 hover:border-cyan-300 shadow-cyan-500/15 hover:shadow-cyan-500/30',
+    iconBox: 'from-cyan-400 to-cyan-600',
+    port: 'bg-cyan-400',
   },
   purple: {
-    border: 'hover:border-purple-400/50',
-    iconBox: 'from-purple-400/20 to-purple-600/20 text-purple-400 group-hover:from-purple-400 group-hover:to-purple-600',
+    node: 'border-purple-400/60 hover:border-purple-300 shadow-purple-500/15 hover:shadow-purple-500/30',
+    iconBox: 'from-purple-400 to-purple-600',
+    port: 'bg-purple-400',
   },
   pink: {
-    border: 'hover:border-pink-400/50',
-    iconBox: 'from-pink-400/20 to-pink-600/20 text-pink-400 group-hover:from-pink-400 group-hover:to-pink-600',
+    node: 'border-pink-400/60 hover:border-pink-300 shadow-pink-500/15 hover:shadow-pink-500/30',
+    iconBox: 'from-pink-400 to-pink-600',
+    port: 'bg-pink-400',
   },
 } as const;
+
+// Vodicí prvky "node grafu"
+const NodeWire = ({ vertical = false }: { vertical?: boolean }) => (
+  <div aria-hidden="true" className="flex items-center justify-center shrink-0">
+    <span
+      className={`rounded-full bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 opacity-60 ${
+        vertical ? 'w-0.5 h-7' : 'w-0.5 h-7 md:w-9 md:h-0.5'
+      }`}
+    />
+  </div>
+);
+
+const MiniNode = ({ label, accent }: { label: string; accent: 'cyan' | 'pink' }) => (
+  <div
+    aria-hidden="true"
+    className={`inline-flex items-center gap-2.5 px-5 py-2 rounded-lg bg-dark-100/80 backdrop-blur border-2 ${
+      accent === 'cyan' ? 'border-cyan-400/60 shadow-cyan-500/20' : 'border-pink-400/60 shadow-pink-500/20'
+    } shadow-lg`}
+  >
+    <span className="flex gap-1">
+      <span className="w-1.5 h-1.5 rounded-full bg-red-400/80" />
+      <span className="w-1.5 h-1.5 rounded-full bg-yellow-400/80" />
+      <span className="w-1.5 h-1.5 rounded-full bg-green-400/80" />
+    </span>
+    <span className="font-mono text-sm text-gray-200">{label}</span>
+  </div>
+);
 
 const features = [
   'Komplexní produkce od nápadu po střih',
@@ -85,12 +117,7 @@ export const VideoPage = () => {
         description="Reklamni spoty, firemni videa, svatebni zaznamy a dokumenty. Komplexni produkce od napadu po strih. Konzultace zdarma."
       />
       <div className="min-h-screen bg-dark text-white">
-        {/* Background – jemné záře ve firemních barvách */}
-        <div className="fixed inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          <div className="absolute top-1/4 left-0 w-96 h-96 bg-cyan-500/15 rounded-full blur-[128px]" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-96 h-96 bg-purple-600/10 rounded-full blur-[128px]" />
-          <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-pink-500/15 rounded-full blur-[128px]" />
-        </div>
+        <AnimatedBackground />
 
         {/* Hero Section */}
         <section className="relative z-10 pt-28 pb-16 md:pb-24">
@@ -139,7 +166,7 @@ export const VideoPage = () => {
           </Container>
         </section>
 
-        {/* Services Grid */}
+        {/* Services Grid – jako nody ve Fusion */}
         <section className="relative z-10 py-16">
           <Container>
             <motion.div
@@ -155,33 +182,82 @@ export const VideoPage = () => {
                 </span>
               </h2>
               <p className="text-gray-300 max-w-2xl mx-auto">
-                Široká škála video služeb pro jakýkoliv projekt
+                Široká škála video služeb pro jakýkoliv projekt — propojených
+                jako nody ve Fusion.
               </p>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {services.map((service, index) => {
-                const accent = accentStyles[service.accent as keyof typeof accentStyles];
-                return (
-                  <motion.div
-                    key={service.title}
-                    className={`p-6 rounded-2xl bg-white/5 border border-white/10 ${accent.border} hover:bg-white/10 transition-all duration-300 group`}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-40px' }}
-                    transition={{ duration: 0.45, delay: Math.min(index * 0.06, 0.3) }}
-                    whileHover={{ y: -6 }}
-                  >
-                    <div
-                      className={`w-12 h-12 rounded-xl bg-gradient-to-br ${accent.iconBox} flex items-center justify-center mb-4 group-hover:text-white transition-all`}
-                    >
-                      {service.icon}
-                    </div>
-                    <h3 className="text-lg font-bold font-display mb-2">{service.title}</h3>
-                    <p className="text-gray-300 text-sm">{service.description}</p>
-                  </motion.div>
-                );
-              })}
+            <div className="flex flex-col items-center">
+              {/* MediaIn */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <MiniNode label="MediaIn" accent="cyan" />
+              </motion.div>
+              <NodeWire vertical />
+
+              {/* Dvě řady nodů */}
+              {[services.slice(0, 3), services.slice(3, 6)].map((row, rowIndex) => (
+                <div key={rowIndex} className="contents">
+                  <div className="flex flex-col md:flex-row items-center md:items-stretch justify-center w-full">
+                    {row.map((service, index) => {
+                      const accent = accentStyles[service.accent as keyof typeof accentStyles];
+                      return (
+                        <div key={service.title} className="contents">
+                          {index > 0 && <NodeWire />}
+                          <motion.div
+                            className={`relative w-full max-w-sm md:w-72 rounded-xl bg-dark-100/80 backdrop-blur border-2 ${accent.node} p-5 shadow-lg transition-all duration-300`}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: '-40px' }}
+                            transition={{ duration: 0.45, delay: Math.min(index * 0.08, 0.25) }}
+                            whileHover={{ y: -4 }}
+                          >
+                            {/* Kontrolky nodu */}
+                            <div className="flex gap-1.5 mb-3" aria-hidden="true">
+                              <span className="w-2 h-2 rounded-full bg-red-400/80" />
+                              <span className="w-2 h-2 rounded-full bg-yellow-400/80" />
+                              <span className="w-2 h-2 rounded-full bg-green-400/80" />
+                            </div>
+
+                            <div className="flex items-center gap-3 mb-2">
+                              <div
+                                className={`w-9 h-9 shrink-0 rounded-lg bg-gradient-to-br ${accent.iconBox} flex items-center justify-center text-white`}
+                              >
+                                {service.icon}
+                              </div>
+                              <h3 className="font-bold font-display">{service.title}</h3>
+                            </div>
+                            <p className="text-gray-400 text-sm">{service.description}</p>
+
+                            {/* Porty nodu */}
+                            <span
+                              aria-hidden="true"
+                              className={`hidden md:block absolute -left-[7px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full ${accent.port} ring-4 ring-dark`}
+                            />
+                            <span
+                              aria-hidden="true"
+                              className={`hidden md:block absolute -right-[7px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full ${accent.port} ring-4 ring-dark`}
+                            />
+                          </motion.div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <NodeWire vertical />
+                </div>
+              ))}
+
+              {/* MediaOut */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <MiniNode label="MediaOut" accent="pink" />
+              </motion.div>
             </div>
           </Container>
         </section>

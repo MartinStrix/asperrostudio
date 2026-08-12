@@ -9,6 +9,7 @@ import {
   SparklesIcon,
 } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
+import { AnimatedBackground } from '../components/common/AnimatedBackground';
 import { SEO } from '../components/common/SEO';
 import { PageBadge } from '../components/common/PageBadge';
 import { VideoEmbed } from '../components/common/VideoEmbed';
@@ -70,12 +71,7 @@ export const EditorPortfolioPage = () => {
         description={`Videa editora ${member.name} z AsperroStudio – krátké formáty, dlouhé formáty a motion grafika.`}
       />
       <div className="min-h-screen bg-dark text-white pt-28 pb-20">
-        {/* Background – jemné záře ve firemních barvách */}
-        <div className="fixed inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          <div className="absolute top-1/4 left-0 w-96 h-96 bg-cyan-500/15 rounded-full blur-[128px]" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-96 h-96 bg-purple-600/10 rounded-full blur-[128px]" />
-          <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-pink-500/15 rounded-full blur-[128px]" />
-        </div>
+        <AnimatedBackground />
 
         <Container className="relative z-10">
           {/* Zpět */}

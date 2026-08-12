@@ -15,6 +15,7 @@ import {
   CalculatorIcon,
 } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
+import { AnimatedBackground } from '../components/common/AnimatedBackground';
 import { PageBadge } from '../components/common/PageBadge';
 import { SEO } from '../components/common/SEO';
 import {
@@ -57,6 +58,7 @@ export const CenikPage = () => {
   const [promoInput, setPromoInput] = useState('');
   const [promo, setPromo] = useState<PromoCode | null>(null);
   const [promoError, setPromoError] = useState(false);
+  const [wantConsult, setWantConsult] = useState(true);
 
   const qty = quantity?.count ?? 1;
 
@@ -117,6 +119,7 @@ export const CenikPage = () => {
     setPromoInput('');
     setPromo(null);
     setPromoError(false);
+    setWantConsult(true);
   };
 
   const toggleAddon = (id: string) => {
@@ -152,12 +155,16 @@ export const CenikPage = () => {
     if (promo) {
       lines.push(`• Slevový kód: ${promo.code} (−${promo.discountPercent} %)`);
     }
+    if (wantConsult) {
+      lines.push('• Mám zájem o konzultaci zdarma');
+    }
     lines.push(
       '',
-      `Orientační cena z kalkulačky: od ${formatPrice(discountedTotal)} Kč`,
-      '',
-      'Prosím o nezávaznou konzultaci zdarma.'
+      `Orientační cena z kalkulačky: od ${formatPrice(discountedTotal)} Kč`
     );
+    if (wantConsult) {
+      lines.push('', 'Prosím o nezávaznou konzultaci zdarma.');
+    }
     return lines.join('\n');
   };
 
@@ -193,12 +200,7 @@ export const CenikPage = () => {
         description="Orientační ceník videotvorby AsperroStudio. Naklikejte si svůj projekt a získejte cenu během minuty. Finální nabídka na konzultaci zdarma."
       />
       <div className="min-h-screen bg-dark text-white pt-28 pb-24 lg:pb-20">
-        {/* Background – jemné záře ve firemních barvách */}
-        <div className="fixed inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-          <div className="absolute top-1/4 left-0 w-96 h-96 bg-cyan-500/15 rounded-full blur-[128px]" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 w-96 h-96 bg-purple-600/10 rounded-full blur-[128px]" />
-          <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-pink-500/15 rounded-full blur-[128px]" />
-        </div>
+        <AnimatedBackground />
 
         <Container className="relative z-10">
           {/* Hlavička */}
@@ -603,6 +605,36 @@ export const CenikPage = () => {
                         </>
                       )}
                     </div>
+
+                    {/* Konzultace zdarma */}
+                    <button
+                      type="button"
+                      onClick={() => setWantConsult((v) => !v)}
+                      className={`w-full text-left mb-7 p-4 rounded-2xl border transition-all duration-300 flex items-center gap-4 ${
+                        wantConsult
+                          ? 'bg-white/10 border-cyan-400/60'
+                          : 'bg-white/5 border-white/10 hover:border-white/30 hover:bg-white/10'
+                      }`}
+                    >
+                      <span
+                        className={`w-6 h-6 shrink-0 rounded-md border flex items-center justify-center transition-colors ${
+                          wantConsult
+                            ? 'bg-gradient-to-br from-cyan-400 to-pink-500 border-transparent'
+                            : 'border-white/30'
+                        }`}
+                      >
+                        {wantConsult && <CheckIcon className="w-4 h-4 text-white" />}
+                      </span>
+                      <span className="flex-1">
+                        <span className="block font-semibold">
+                          Mám zájem o konzultaci zdarma
+                        </span>
+                        <span className="block text-gray-400 text-sm">
+                          Nezávazně probereme projekt, možnosti i finální cenu.
+                          Neplatíte nic.
+                        </span>
+                      </span>
+                    </button>
 
                     <div className="text-center mb-2">
                       <p className="text-gray-400 text-sm mb-1">Orientační cena</p>
