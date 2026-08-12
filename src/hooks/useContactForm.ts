@@ -46,6 +46,10 @@ export const useContactForm = () => {
     []
   );
 
+  const setMessage = useCallback((message: string) => {
+    setFormData((prev) => ({ ...prev, message }));
+  }, []);
+
   const resetForm = useCallback(() => {
     setFormData(initialFormData);
     setFormState(initialFormState);
@@ -145,5 +149,6 @@ export const useContactForm = () => {
     handleChange,
     handleSubmit,
     resetForm,
+    setMessage,
   };
 };

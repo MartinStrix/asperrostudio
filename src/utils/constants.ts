@@ -1,9 +1,10 @@
 export const NAV_LINKS = [
-  { label: 'Domů', href: '#hero' },
-  { label: 'Videotvorba', href: '#videotvorba' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'O nás', href: '#about' },
-  { label: 'Kontakt', href: '#contact' },
+  { label: 'Domů', href: '/' },
+  { label: 'Videotvorba', href: '/video' },
+  { label: 'O nás', href: '/o-nas' },
+  { label: 'Náš tým', href: '/tym' },
+  { label: 'Ceník', href: '/cenik' },
+  { label: 'Kontakt', href: '/kontakt' },
 ];
 
 export const SOCIAL_LINKS = {

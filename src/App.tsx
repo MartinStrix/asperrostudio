@@ -6,6 +6,7 @@ import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { SkipLink } from './components/common/SkipLink';
 import { ScrollToTop } from './components/common/ScrollToTop';
 import { CookieBanner } from './components/common/CookieBanner';
+import { ScrollTimeline } from './components/common/ScrollTimeline';
 
 // Lazy load all page components for code splitting
 const Home = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
@@ -14,6 +15,7 @@ const KontaktPage = lazy(() => import('./pages/KontaktPage').then(m => ({ defaul
 const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
 const TeamPage = lazy(() => import('./pages/TeamPage').then(m => ({ default: m.TeamPage })));
 const TeamMemberPage = lazy(() => import('./pages/TeamMemberPage').then(m => ({ default: m.TeamMemberPage })));
+const CenikPage = lazy(() => import('./pages/CenikPage').then(m => ({ default: m.CenikPage })));
 const CookiesPage = lazy(() => import('./pages/CookiesPage').then(m => ({ default: m.CookiesPage })));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then(m => ({ default: m.NotFoundPage })));
 
@@ -108,12 +110,14 @@ const AnimatedRoutes = () => {
               <Route path="/o-nas" element={<PageWrapper><AboutPage /></PageWrapper>} />
               <Route path="/tym" element={<PageWrapper><TeamPage /></PageWrapper>} />
               <Route path="/tym/:memberId" element={<PageWrapper><TeamMemberPage /></PageWrapper>} />
+              <Route path="/cenik" element={<PageWrapper><CenikPage /></PageWrapper>} />
               <Route path="/kontakt" element={<PageWrapper><KontaktPage /></PageWrapper>} />
               <Route path="/cookies" element={<PageWrapper><CookiesPage /></PageWrapper>} />
               <Route path="*" element={<PageWrapper><NotFoundPage /></PageWrapper>} />
             </Routes>
           </AnimatePresence>
         </Suspense>
+        <ScrollTimeline />
         <CookieBanner />
       </main>
     </>

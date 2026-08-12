@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { EnvelopeIcon, CheckCircleIcon, ExclamationCircleIcon } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
@@ -7,7 +9,17 @@ import { useContactForm } from '../hooks/useContactForm';
 import { SEO } from '../components/common/SEO';
 
 export const KontaktPage = () => {
-  const { formData, formState, handleChange, handleSubmit } = useContactForm();
+  const { formData, formState, handleChange, handleSubmit, setMessage } = useContactForm();
+
+  // Předvyplnění zprávy z cenové kalkulačky (/cenik)
+  const location = useLocation();
+  useEffect(() => {
+    const prefill = (location.state as { prefill?: string } | null)?.prefill;
+    if (typeof prefill === 'string' && prefill.trim()) {
+      setMessage(prefill);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Compute aria-describedby based on form state
   const getAriaDescribedBy = () => {
