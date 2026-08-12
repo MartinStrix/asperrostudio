@@ -24,13 +24,16 @@ export const PerformanceToggle = () => {
           ? 'Zapnout animace webu'
           : 'Vypnout animace webu – úsporný režim'
       }
-      className="hidden lg:flex fixed bottom-4 left-4 z-40 w-10 h-10 rounded-full bg-dark-100/80 border border-white/15 items-center justify-center text-gray-500 hover:text-white hover:border-white/40 opacity-60 hover:opacity-100 transition-all"
+      className="hidden lg:flex fixed bottom-5 left-5 z-40 items-center gap-2 px-4 py-2.5 rounded-full bg-dark-100/95 border-2 border-white/25 text-gray-200 shadow-lg shadow-black/40 hover:text-white hover:border-cyan-400 hover:shadow-cyan-500/20 active:scale-[0.97] transition-all"
     >
       {lowPerf ? (
-        <BoltSlashIcon className="w-5 h-5" />
+        <BoltSlashIcon className="w-5 h-5 text-pink-400" />
       ) : (
-        <BoltIcon className="w-5 h-5" />
+        <BoltIcon className="w-5 h-5 text-cyan-400" />
       )}
+      <span className="text-sm font-semibold whitespace-nowrap">
+        {lowPerf ? 'Zapnout animace' : 'Bez animací'}
+      </span>
     </button>
   );
 };

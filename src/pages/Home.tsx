@@ -283,7 +283,7 @@ export const Home = () => {
                     to="/kontakt"
                     className="w-full sm:w-72 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-lg text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:shadow-xl hover:shadow-pink-500/30 hover:brightness-110 active:scale-[0.98] transition-all"
                   >
-                    Mám nápad — pojďme na to
+                    Pojďme na to
                     <ArrowRightIcon className="w-5 h-5" />
                   </Link>
                   <Link
