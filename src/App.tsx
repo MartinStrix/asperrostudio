@@ -8,6 +8,9 @@ import { ScrollToTop } from './components/common/ScrollToTop';
 import { CookieBanner } from './components/common/CookieBanner';
 import { PromoPopup } from './components/common/PromoPopup';
 import { Footer } from './components/layout/Footer';
+import { PerformanceToggle } from './components/common/PerformanceToggle';
+import { MotionConfig } from 'framer-motion';
+import { useLowPerf } from './utils/performanceMode';
 import { ScrollTimeline } from './components/common/ScrollTimeline';
 
 // Lazy load all page components for code splitting
@@ -126,18 +129,22 @@ const AnimatedRoutes = () => {
         <ScrollTimeline />
         <CookieBanner />
         <PromoPopup />
+        <PerformanceToggle />
       </main>
     </>
   );
 };
 
 function App() {
+  const lowPerf = useLowPerf();
   return (
     <ErrorBoundary>
       <Router>
+      <MotionConfig reducedMotion={lowPerf ? 'always' : 'user'}>
       <ScrollToTop />
         <AnimatedRoutes />
-      </Router>
+        </MotionConfig>
+    </Router>
     </ErrorBoundary>
   );
 }

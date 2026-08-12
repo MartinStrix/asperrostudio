@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import { Container } from '../common/Container';
 import { openCookieSettings } from '../../utils/cookieConsent';
+import { useLowPerf, setLowPerf } from '../../utils/performanceMode';
 import { NAV_LINKS, SOCIAL_LINKS, CONTACT_INFO } from '../../utils/constants';
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const lowPerf = useLowPerf();
 
   return (
     <footer className="relative z-10 bg-dark-50 border-t border-white/10">
@@ -109,6 +111,14 @@ export const Footer = () => {
               className="hover:text-white transition-colors"
             >
               Nastavení cookies
+            </button>
+            <span className="hidden sm:inline text-gray-700">•</span>
+            <button
+              type="button"
+              onClick={() => setLowPerf(!lowPerf)}
+              className="hover:text-white transition-colors"
+            >
+              {lowPerf ? 'Zapnout animace' : 'Verze bez animací'}
             </button>
           </div>
         </div>

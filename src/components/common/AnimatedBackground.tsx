@@ -6,15 +6,18 @@
 // Chceš-li vrátit původní video s dýmem, řekni si o zálohu :)
 // ============================================================
 import { useEffect, useRef } from 'react';
+import { useLowPerf } from '../../utils/performanceMode';
 
 export const AnimatedBackground = () => {
+  const lowPerf = useLowPerf();
   const layer1 = useRef<HTMLDivElement>(null);
   const layer2 = useRef<HTMLDivElement>(null);
   const layer3 = useRef<HTMLDivElement>(null);
   const hueLayer = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Respektujeme uživatele s vypnutými animacemi
+    // Úsporný režim / uživatelé s vypnutými animacemi – bez scroll efektů
+    if (lowPerf) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     let ticking = false;
@@ -51,7 +54,26 @@ export const AnimatedBackground = () => {
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [lowPerf]);
+
+  if (lowPerf) {
+    // Statické, výkonově nenáročné pozadí
+    return (
+      <div
+        className="fixed inset-0 pointer-events-none bg-dark"
+        aria-hidden="true"
+        role="presentation"
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              'radial-gradient(ellipse at 20% 10%, rgba(34,211,238,0.08), transparent 55%), radial-gradient(ellipse at 80% 90%, rgba(236,72,153,0.08), transparent 55%)',
+          }}
+        />
+      </div>
+    );
+  }
 
   return (
     <div

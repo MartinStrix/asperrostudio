@@ -78,8 +78,8 @@ export const CookiesPage = () => {
                 <code className="text-sm bg-white/10 px-1.5 py-0.5 rounded">
                   asperro-cookie-consent
                 </code>
-                ) a případně technickou poznámku, že jste už zavřeli uvítací
-                nabídku, aby se vám nezobrazovala opakovaně. Obojí zůstává
+                ) a případně technické volby: že jste už zavřeli uvítací
+                nabídku a zda preferujete verzi webu bez animací. Obojí zůstává
                 uložené, dokud je nesmažete v prohlížeči. Žádné vlastní
                 analytické ani marketingové cookies nepoužíváme.
               </p>

@@ -6,6 +6,7 @@
 //  Zobrazuje se jen na velkých obrazovkách (lg a víc).
 // ============================================================
 import { useEffect, useRef, useState } from 'react';
+import { useLowPerf } from '../../utils/performanceMode';
 
 // Celková "délka projektu" na timecodu (ve vteřinách, 24 fps)
 const PROJECT_SECONDS = 90;
@@ -42,11 +43,13 @@ const formatTimecode = (progress: number): string => {
 };
 
 export const ScrollTimeline = () => {
+  const lowPerf = useLowPerf();
   const contentRef = useRef<HTMLDivElement>(null);
   const [timecode, setTimecode] = useState('00:00:00:00');
   const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
+    if (lowPerf) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setReducedMotion(true);
       return;
@@ -79,9 +82,9 @@ export const ScrollTimeline = () => {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
     };
-  }, []);
+  }, [lowPerf]);
 
-  if (reducedMotion) return null;
+  if (lowPerf || reducedMotion) return null;
 
   return (
     <div
