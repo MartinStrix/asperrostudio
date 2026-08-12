@@ -309,13 +309,21 @@ export const VideoPage = () => {
                 Pojďme společně vytvořit video, které zaujme a inspiruje vaše
                 publikum. Konzultace je zdarma a nezávazná.
               </p>
-              <Link
-                to="/kontakt"
-                className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-lg text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:shadow-xl hover:shadow-pink-500/30 hover:brightness-110 active:scale-[0.98] transition-all"
-              >
-                Chci konzultaci zdarma
-                <ArrowRightIcon className="w-5 h-5" />
-              </Link>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Link
+                  to="/kontakt"
+                  className="w-full sm:w-72 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-lg text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:shadow-xl hover:shadow-pink-500/30 hover:brightness-110 active:scale-[0.98] transition-all"
+                >
+                  Chci konzultaci zdarma
+                  <ArrowRightIcon className="w-5 h-5" />
+                </Link>
+                <Link
+                  to="/cenik"
+                  className="w-full sm:w-72 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-lg border-2 border-white/20 text-white hover:border-cyan-400 hover:text-cyan-400 active:scale-[0.98] transition-all"
+                >
+                  Spočítat orientační cenu
+                </Link>
+              </div>
             </motion.div>
           </Container>
         </section>

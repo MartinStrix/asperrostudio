@@ -4,6 +4,7 @@ import {
   VideoCameraIcon,
   ArrowRightIcon,
   IdentificationIcon,
+  CalculatorIcon,
   UserGroupIcon,
   LightBulbIcon,
   ChatBubbleLeftRightIcon,
@@ -131,7 +132,7 @@ export const Home = () => {
 
                 {/* Karty: Videotvorba + O nás */}
                 <motion.div
-                  className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 max-w-2xl mx-auto"
+                  className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
@@ -162,6 +163,22 @@ export const Home = () => {
                         Kdo jsme a v čem tvoříme
                       </p>
                       <div className="flex items-center justify-center gap-2 text-pink-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span>Prozkoumat</span>
+                        <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                  </Link>
+
+                  <Link to="/cenik" className="group">
+                    <div className="relative p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-400/50 hover:bg-white/10 transition-all duration-300 h-full">
+                      <div className="w-14 h-14 mb-4 mx-auto flex items-center justify-center rounded-xl bg-gradient-to-br from-purple-400 to-purple-600 text-white shadow-lg shadow-purple-500/25">
+                        <CalculatorIcon className="w-7 h-7" />
+                      </div>
+                      <h3 className="text-xl font-bold font-display mb-2">Ceník</h3>
+                      <p className="text-gray-400 text-sm mb-4">
+                        Spočítejte si cenu za minutu
+                      </p>
+                      <div className="flex items-center justify-center gap-2 text-purple-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
                         <span>Prozkoumat</span>
                         <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </div>
@@ -258,13 +275,22 @@ export const Home = () => {
                 <p className="text-gray-300 mb-5">
                   Krok 1 je na vás. O zbytek se postaráme my.
                 </p>
-                <Link
-                  to="/kontakt"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-lg text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:shadow-xl hover:shadow-pink-500/30 hover:brightness-110 active:scale-[0.98] transition-all"
-                >
-                  Mám nápad — pojďme na to
-                  <ArrowRightIcon className="w-5 h-5" />
-                </Link>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <Link
+                    to="/kontakt"
+                    className="w-full sm:w-72 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-lg text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:shadow-xl hover:shadow-pink-500/30 hover:brightness-110 active:scale-[0.98] transition-all"
+                  >
+                    Mám nápad — pojďme na to
+                    <ArrowRightIcon className="w-5 h-5" />
+                  </Link>
+                  <Link
+                    to="/cenik"
+                    className="w-full sm:w-72 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-lg border-2 border-white/20 text-white hover:border-purple-400 hover:text-purple-400 active:scale-[0.98] transition-all"
+                  >
+                    <CalculatorIcon className="w-5 h-5" />
+                    Spočítat cenu
+                  </Link>
+                </div>
               </motion.div>
             </Container>
           </section>
@@ -419,6 +445,10 @@ export const Home = () => {
               >
                 <Link to="/o-nas" className="hover:text-white transition-colors">
                   O nás
+                </Link>
+                <span className="hidden sm:inline text-gray-700">•</span>
+                <Link to="/cenik" className="hover:text-white transition-colors">
+                  Ceník
                 </Link>
                 <span className="hidden sm:inline text-gray-700">•</span>
                 <Link to="/kontakt" className="hover:text-white transition-colors">

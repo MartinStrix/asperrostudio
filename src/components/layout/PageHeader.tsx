@@ -128,6 +128,14 @@ export const PageHeader = () => {
               ))}
             </ul>
 
+            {/* CTA – konzultace zdarma (desktop) */}
+            <Link
+              to="/kontakt"
+              className="hidden lg:inline-flex items-center px-4 py-2 rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:brightness-110 hover:shadow-lg hover:shadow-pink-500/25 active:scale-[0.98] transition-all"
+            >
+              Konzultace zdarma
+            </Link>
+
             {/* Mobile Menu Button */}
             <button
               className="md:hidden p-2 text-white hover:bg-white/10 rounded-lg transition-colors"
