@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
+import { ShieldCheckIcon } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
+import { PageBadge } from '../components/common/PageBadge';
 import { SEO } from '../components/common/SEO';
 import { openCookieSettings } from '../utils/cookieConsent';
 import { CONTACT_INFO } from '../utils/constants';
@@ -38,6 +40,7 @@ export const CookiesPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
+            <PageBadge icon={<ShieldCheckIcon className="w-4 h-4" />} label="Zásady cookies" />
             <h1 className="text-4xl md:text-5xl font-bold font-display mb-10">
               Zásady používání{' '}
               <span className="bg-gradient-to-r from-cyan-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">

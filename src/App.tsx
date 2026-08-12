@@ -12,6 +12,7 @@ import { ScrollTimeline } from './components/common/ScrollTimeline';
 const Home = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
 const VideoPage = lazy(() => import('./pages/VideoPage').then(m => ({ default: m.VideoPage })));
 const KontaktPage = lazy(() => import('./pages/KontaktPage').then(m => ({ default: m.KontaktPage })));
+const PortfolioPage = lazy(() => import('./pages/PortfolioPage').then(m => ({ default: m.PortfolioPage })));
 const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
 const TeamMemberPage = lazy(() => import('./pages/TeamMemberPage').then(m => ({ default: m.TeamMemberPage })));
 const CenikPage = lazy(() => import('./pages/CenikPage').then(m => ({ default: m.CenikPage })));
@@ -106,6 +107,7 @@ const AnimatedRoutes = () => {
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
               <Route path="/video" element={<PageWrapper><VideoPage /></PageWrapper>} />
+              <Route path="/portfolio" element={<PageWrapper><PortfolioPage /></PageWrapper>} />
               <Route path="/o-nas" element={<PageWrapper><AboutPage /></PageWrapper>} />
               <Route path="/tym" element={<Navigate to="/o-nas" replace />} />
               <Route path="/tym/:memberId" element={<PageWrapper><TeamMemberPage /></PageWrapper>} />

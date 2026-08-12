@@ -12,8 +12,10 @@ import {
   BuildingOfficeIcon,
   ScissorsIcon,
   PuzzlePieceIcon,
+  CalculatorIcon,
 } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
+import { PageBadge } from '../components/common/PageBadge';
 import { SEO } from '../components/common/SEO';
 import {
   PRICING_CATEGORIES,
@@ -21,6 +23,8 @@ import {
   PricingTier,
   QuantityOption,
   formatPrice,
+  findPromoCode,
+  PromoCode,
 } from '../data/pricing';
 
 // Ikony kategorií
@@ -50,6 +54,9 @@ export const CenikPage = () => {
   const [quantity, setQuantity] = useState<QuantityOption | null>(null);
   const [addonIds, setAddonIds] = useState<string[]>([]);
   const [note, setNote] = useState('');
+  const [promoInput, setPromoInput] = useState('');
+  const [promo, setPromo] = useState<PromoCode | null>(null);
+  const [promoError, setPromoError] = useState(false);
 
   const qty = quantity?.count ?? 1;
 
@@ -69,6 +76,22 @@ export const CenikPage = () => {
     return sum;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, tier, qty, addonIds]);
+
+  // Cena po uplatnění slevového kódu
+  const discountedTotal = promo
+    ? Math.round(total * (1 - promo.discountPercent / 100))
+    : total;
+
+  const applyPromo = () => {
+    const found = findPromoCode(promoInput);
+    if (found) {
+      setPromo(found);
+      setPromoError(false);
+    } else {
+      setPromo(null);
+      setPromoError(true);
+    }
+  };
 
   const selectedAddons = category
     ? category.addons.filter((a) => addonIds.includes(a.id))
@@ -91,6 +114,9 @@ export const CenikPage = () => {
     setQuantity(null);
     setAddonIds([]);
     setNote('');
+    setPromoInput('');
+    setPromo(null);
+    setPromoError(false);
   };
 
   const toggleAddon = (id: string) => {
@@ -123,9 +149,12 @@ export const CenikPage = () => {
     if (note.trim()) {
       lines.push(`• Poznámka: ${note.trim()}`);
     }
+    if (promo) {
+      lines.push(`• Slevový kód: ${promo.code} (−${promo.discountPercent} %)`);
+    }
     lines.push(
       '',
-      `Orientační cena z kalkulačky: od ${formatPrice(total)} Kč`,
+      `Orientační cena z kalkulačky: od ${formatPrice(discountedTotal)} Kč`,
       '',
       'Prosím o nezávaznou konzultaci zdarma.'
     );
@@ -155,7 +184,7 @@ export const CenikPage = () => {
   );
 
   // Obsah živého přehledu (sdílený pro desktop panel i mobilní lištu)
-  const liveTotalLabel = tier ? `od ${formatPrice(total)} Kč` : '—';
+  const liveTotalLabel = tier ? `od ${formatPrice(discountedTotal)} Kč` : '—';
 
   return (
     <>
@@ -179,6 +208,7 @@ export const CenikPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
+            <PageBadge icon={<CalculatorIcon className="w-4 h-4" />} label="Ceník" />
             <h1 className="text-4xl md:text-5xl font-bold font-display mb-4">
               Kolik bude stát{' '}
               <span className="bg-gradient-to-r from-cyan-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
@@ -505,11 +535,90 @@ export const CenikPage = () => {
                       />
                     </div>
 
+                    {/* Slevový kód */}
+                    <div className="mb-7">
+                      <label
+                        htmlFor="cenik-promo"
+                        className="block text-sm font-medium text-gray-300 mb-2"
+                      >
+                        Slevový kód (nepovinné)
+                      </label>
+                      {promo ? (
+                        <div className="flex items-center justify-between gap-3 px-4 py-3 rounded-xl bg-white/5 border border-green-400/40">
+                          <span className="text-sm">
+                            <span className="font-semibold text-green-400">
+                              {promo.code}
+                            </span>{' '}
+                            <span className="text-gray-300">
+                              — sleva {promo.discountPercent} %
+                              {promo.label ? ` (${promo.label})` : ''}
+                            </span>
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setPromo(null);
+                              setPromoInput('');
+                            }}
+                            className="text-gray-400 hover:text-white text-sm underline transition-colors"
+                          >
+                            Odebrat
+                          </button>
+                        </div>
+                      ) : (
+                        <>
+                          <div className="flex gap-2">
+                            <input
+                              id="cenik-promo"
+                              type="text"
+                              value={promoInput}
+                              onChange={(e) => {
+                                setPromoInput(e.target.value);
+                                setPromoError(false);
+                              }}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                  e.preventDefault();
+                                  applyPromo();
+                                }
+                              }}
+                              maxLength={30}
+                              placeholder="Např. kód z akce nebo voucher"
+                              className="flex-1 min-w-0 bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400/60 transition-colors"
+                            />
+                            <button
+                              type="button"
+                              onClick={applyPromo}
+                              disabled={promoInput.trim().length === 0}
+                              className="shrink-0 px-5 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:brightness-110 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                            >
+                              Uplatnit
+                            </button>
+                          </div>
+                          {promoError && (
+                            <p className="text-pink-400 text-sm mt-2">
+                              Tento kód neznáme. Zkontrolujte prosím překlepy.
+                            </p>
+                          )}
+                        </>
+                      )}
+                    </div>
+
                     <div className="text-center mb-2">
                       <p className="text-gray-400 text-sm mb-1">Orientační cena</p>
+                      {promo && (
+                        <p className="text-gray-500 line-through text-lg">
+                          od {formatPrice(total)} Kč
+                        </p>
+                      )}
                       <p className="text-4xl md:text-5xl font-bold font-display bg-gradient-to-r from-cyan-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
-                        od {formatPrice(total)} Kč
+                        od {formatPrice(discountedTotal)} Kč
                       </p>
+                      {promo && (
+                        <p className="text-green-400 text-sm mt-1">
+                          Uplatněna sleva {promo.discountPercent} % (kód {promo.code})
+                        </p>
+                      )}
                     </div>
                     <p className="text-gray-500 text-sm text-center mb-8">
                       Finální cenu upřesníme podle vašich představ na nezávazné

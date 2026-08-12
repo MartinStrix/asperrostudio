@@ -409,5 +409,31 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
   },
 ];
 
+// ============================================================
+//  SLEVOVÉ / PROMO KÓDY
+// ------------------------------------------------------------
+//  Akci spustíš přidáním řádku, ukončíš jeho smazáním.
+//  - code            = kód, který zadá klient (na velikosti
+//                      písmen nezáleží)
+//  - discountPercent = sleva v procentech z celkové ceny
+//  - label           = interní popisek (zobrazí se u slevy)
+// ============================================================
+export interface PromoCode {
+  code: string;
+  discountPercent: number;
+  label?: string;
+}
+
+export const PROMO_CODES: PromoCode[] = [
+  { code: 'TymAS+', discountPercent: 10, label: 'Tým Asperro' },
+  // další akce přidáš takhle:
+  // { code: 'LETO2026', discountPercent: 15, label: 'Letní akce' },
+];
+
+export const findPromoCode = (input: string): PromoCode | undefined =>
+  PROMO_CODES.find(
+    (promo) => promo.code.trim().toLowerCase() === input.trim().toLowerCase()
+  );
+
 export const formatPrice = (price: number): string =>
   price.toLocaleString('cs-CZ');

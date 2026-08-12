@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { EnvelopeIcon, CheckCircleIcon, ExclamationCircleIcon } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
+import { PageBadge } from '../components/common/PageBadge';
 import { Button } from '../components/common/Button';
 import { CONTACT_INFO, SOCIAL_LINKS } from '../utils/constants';
 import { useContactForm } from '../hooks/useContactForm';
@@ -49,6 +50,7 @@ export const KontaktPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
+            <PageBadge icon={<EnvelopeIcon className="w-4 h-4" />} label="Kontakt" />
             <h1 className="text-4xl md:text-5xl font-bold font-display mb-4">
               Pojďme <span className="bg-gradient-to-r from-cyan-400 to-pink-500 bg-clip-text text-transparent">spolupracovat</span>
             </h1>

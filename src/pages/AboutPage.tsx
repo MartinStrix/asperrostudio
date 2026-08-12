@@ -12,8 +12,10 @@ import {
   SwatchIcon,
   SpeakerWaveIcon,
   RocketLaunchIcon,
+  IdentificationIcon,
 } from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
+import { PageBadge } from '../components/common/PageBadge';
 import { teamMembers } from '../data/team';
 import { SEO } from '../components/common/SEO';
 
@@ -113,6 +115,7 @@ export const AboutPage = () => {
         <Container className="relative z-10">
           {/* ===== Kdo jsme? ===== */}
           <motion.div className="text-center max-w-3xl mx-auto mb-10" {...fadeUp}>
+            <PageBadge icon={<IdentificationIcon className="w-4 h-4" />} label="O nás" />
             <h1 className="text-4xl md:text-5xl font-bold font-display mb-4">
               Kdo jsme?
             </h1>
