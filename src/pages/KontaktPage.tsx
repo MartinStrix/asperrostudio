@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { EnvelopeIcon, CheckCircleIcon, ExclamationCircleIcon } from '@heroicons/react/24/outline';
@@ -10,11 +10,17 @@ import { CONTACT_INFO, SOCIAL_LINKS } from '../utils/constants';
 import { useContactForm } from '../hooks/useContactForm';
 import { SEO } from '../components/common/SEO';
 
+// Odkaz na klientský brief (Google Forms) – při změně dotazníku stačí
+// vyměnit tuto adresu. Musí jít o veřejný odkaz na VYPLNĚNÍ (viewform).
+const BRIEF_URL =
+  'https://docs.google.com/forms/d/1AylluyBt8YmB8UlxnC2shfoI_b53uukYSyaKdaBNWnw/viewform';
+
 export const KontaktPage = () => {
   const { formData, formState, handleChange, handleSubmit, setMessage } = useContactForm();
 
   // Předvyplnění zprávy z cenové kalkulačky (/cenik)
   const location = useLocation();
+  const [briefHidden, setBriefHidden] = useState(false);
   useEffect(() => {
     const prefill = (location.state as { prefill?: string } | null)?.prefill;
     if (typeof prefill === 'string' && prefill.trim()) {
@@ -79,6 +85,42 @@ export const KontaktPage = () => {
                   <p className="text-green-400">
                     Děkujeme za vaši zprávu! Brzy se vám ozveme.
                   </p>
+                </motion.div>
+              )}
+
+              {/* Klientský brief – nabídka po úspěšném odeslání */}
+              {formState.isSuccess && !briefHidden && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15 }}
+                  className="mb-6 p-5 rounded-xl bg-white/5 border border-cyan-400/30"
+                >
+                  <p className="font-semibold font-display mb-1">
+                    Chcete přípravu urychlit? 🚀
+                  </p>
+                  <p className="text-gray-400 text-sm mb-4">
+                    Vyplňte krátký klientský brief s podrobnostmi k vašemu
+                    videu — až se ozveme, budeme mít rovnou připravenou
+                    nabídku na míru.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-2.5">
+                    <a
+                      href={BRIEF_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 inline-flex items-center justify-center px-5 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:brightness-110 hover:shadow-lg hover:shadow-pink-500/25 active:scale-[0.98] transition-all"
+                    >
+                      Vyplnit klientský brief
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => setBriefHidden(true)}
+                      className="flex-1 inline-flex items-center justify-center px-5 py-3 rounded-xl text-sm font-semibold border-2 border-white/20 text-white hover:border-white/50 active:scale-[0.98] transition-all"
+                    >
+                      Počkám na kontakt
+                    </button>
+                  </div>
                 </motion.div>
               )}
 

@@ -25,6 +25,7 @@ export interface TeamMember {
   id: string;                          // použije se v adrese, např. /tym/martin-polacek
   name: string;
   age: number;
+  role: string;                        // Postavení ve studiu (zobrazí se pod jménem)
   bio: string;                         // Představení editora (2–4 věty)
   photo: string | null;                // '/team/soubor.jpg' nebo null
   accent: 'cyan' | 'pink' | 'purple';  // Barva profilu
@@ -39,6 +40,7 @@ export const teamMembers: TeamMember[] = [
     id: 'martin-polacek',
     name: 'Martin Poláček',
     age: 24,
+    role: 'Founder · Kameraman · Editor · AI workflow',
     bio: 'Ahoj, jmenuji se Martin. Pocházím z Plzeňského kraje a v současné době působím přímo v Plzni. Už řadu let se naplno věnuji grafickému designu a video editu pod hlavičkou AsperroStudio. Vzhledem k tomu, že do mé kompetence spadá i samotné natáčení, není pro mě problém za zajímavým projektem s kamerou nebo dronem vycestovat v podstatě kamkoliv.',
     photo: '/team/martin.jpg',
     accent: 'cyan',
@@ -66,6 +68,7 @@ export const teamMembers: TeamMember[] = [
     id: 'eva-havrdova',
     name: 'Eva Havrdová',
     age: 22,
+    role: 'Editorka',
     bio: 'Sem doplň Evino představení — specializace, styl, co ji na tvorbě baví.',
     photo: null,
     accent: 'pink',
@@ -81,6 +84,7 @@ export const teamMembers: TeamMember[] = [
     id: 'vaclav-ivanco',
     name: 'Václav Ivančo',
     age: 22,
+    role: 'Editor · AI workflow',
     bio: 'Sem doplň Václavovo představení — specializace, styl, co ho na tvorbě baví.',
     photo: null,
     accent: 'purple',

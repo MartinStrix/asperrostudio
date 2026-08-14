@@ -427,6 +427,10 @@ export interface PromoCode {
 export const PROMO_CODES: PromoCode[] = [
   { code: 'OpenAS2026', discountPercent: 25, label: 'Uvítací akce' },
   { code: 'AS10', discountPercent: 10 },
+  { code: 'MartinEdit15', discountPercent: 15, label: 'Martin' },
+  { code: 'VaclavEdit15', discountPercent: 15, label: 'Václav' },
+  { code: 'EvaEdit15', discountPercent: 15, label: 'Eva' },
+  { code: 'ASEdit15', discountPercent: 15, label: 'AsperroStudio' },
   // další akce přidáš takhle:
   // { code: 'LETO2026', discountPercent: 15, label: 'Letní akce' },
 ];

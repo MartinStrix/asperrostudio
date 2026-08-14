@@ -109,12 +109,89 @@ export const AboutPage = () => {
         <AnimatedBackground />
 
         <Container className="relative z-10">
+          {/* ===== Náš tým ===== */}
+          <motion.div className="text-center max-w-2xl mx-auto mb-12" {...fadeUp}>
+            <PageBadge icon={<IdentificationIcon className="w-4 h-4" />} label="O nás" />
+            <h1 className="text-4xl md:text-5xl font-bold font-display mb-3">
+              Náš{' '}
+              <span className="bg-gradient-to-r from-cyan-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+                tým
+              </span>
+            </h1>
+            <p className="text-gray-400">
+              Za každým videem stojí konkrétní člověk. Klikněte na profil.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-6 max-w-3xl mx-auto mb-20">
+            {teamMembers.map((member, index) => {
+              const initials = member.name
+                .split(' ')
+                .map((part) => part[0])
+                .slice(0, 2)
+                .join('')
+                .toUpperCase();
+              const accentText =
+                member.accent === 'cyan'
+                  ? 'text-cyan-400'
+                  : member.accent === 'pink'
+                    ? 'text-pink-400'
+                    : 'text-purple-400';
+              const avatarGradient =
+                member.accent === 'cyan'
+                  ? 'from-cyan-400 to-cyan-600 shadow-cyan-500/25'
+                  : member.accent === 'pink'
+                    ? 'from-pink-400 to-pink-600 shadow-pink-500/25'
+                    : 'from-purple-400 to-purple-600 shadow-purple-500/25';
+              return (
+                <motion.div
+                  key={member.id}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.5, delay: Math.min(index * 0.1, 0.2) }}
+                >
+                  <Link to={`/tym/${member.id}`} className="group block text-center">
+                    <span className="relative inline-block">
+                      {/* Dekorativní prstenec s animací po najetí */}
+                      <span
+                        aria-hidden="true"
+                        className="absolute -inset-2 rounded-full border-2 border-dashed border-white/20 group-hover:border-cyan-400/70 group-hover:-inset-3 group-hover:rotate-180 transition-all duration-700 ease-out"
+                      />
+                      {member.photo ? (
+                        <img
+                          src={member.photo}
+                          alt={`Fotka – ${member.name}`}
+                          loading="lazy"
+                          className="relative w-36 h-36 md:w-40 md:h-40 mx-auto rounded-full object-cover border-2 border-white/15 shadow-xl transition-transform duration-300 group-hover:scale-105"
+                        />
+                      ) : (
+                        <div
+                          className={`relative w-36 h-36 md:w-40 md:h-40 mx-auto rounded-full flex items-center justify-center text-3xl font-bold font-display text-white bg-gradient-to-br ${avatarGradient} border-2 border-white/15 shadow-xl transition-transform duration-300 group-hover:scale-105`}
+                        >
+                          {initials}
+                        </div>
+                      )}
+                    </span>
+                    <h3 className="text-lg md:text-xl font-bold font-display mt-5">
+                      {member.name}
+                    </h3>
+                    <p className={`${accentText} text-sm font-medium`}>{member.role}</p>
+                    <p className="text-gray-500 text-xs mt-0.5">{member.age} let</p>
+                    <span className="inline-flex items-center gap-1.5 mt-2 text-sm text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity">
+                      Zobrazit profil →
+                    </span>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+
           {/* ===== Kdo jsme? ===== */}
           <motion.div className="text-center max-w-3xl mx-auto mb-10" {...fadeUp}>
-            <PageBadge icon={<IdentificationIcon className="w-4 h-4" />} label="O nás" />
-            <h1 className="text-4xl md:text-5xl font-bold font-display mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold font-display mb-4">
               Kdo jsme?
-            </h1>
+            </h2>
             <p className="text-xl md:text-2xl font-display font-semibold bg-gradient-to-r from-cyan-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
               Kreativci, kteří nedělají průměrný obsah.
             </p>
@@ -147,70 +224,6 @@ export const AboutPage = () => {
               Jsme AsperroStudio. Tvoříme obsah, který má drive.
             </p>
           </motion.div>
-
-          {/* ===== Náš tým ===== */}
-          <motion.div className="text-center max-w-2xl mx-auto mb-12" {...fadeUp}>
-            <h2 className="text-3xl md:text-4xl font-bold font-display mb-3">
-              Náš{' '}
-              <span className="bg-gradient-to-r from-cyan-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
-                tým
-              </span>
-            </h2>
-            <p className="text-gray-400">
-              Za každým videem stojí konkrétní člověk. Klikněte na profil a
-              prohlédněte si styl a ukázky práce.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-6 max-w-3xl mx-auto mb-20">
-            {teamMembers.map((member, index) => {
-              const initials = member.name
-                .split(' ')
-                .map((part) => part[0])
-                .slice(0, 2)
-                .join('')
-                .toUpperCase();
-              const avatarGradient =
-                member.accent === 'cyan'
-                  ? 'from-cyan-400 to-cyan-600 shadow-cyan-500/25'
-                  : member.accent === 'pink'
-                    ? 'from-pink-400 to-pink-600 shadow-pink-500/25'
-                    : 'from-purple-400 to-purple-600 shadow-purple-500/25';
-              return (
-                <motion.div
-                  key={member.id}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-60px' }}
-                  transition={{ duration: 0.5, delay: Math.min(index * 0.1, 0.2) }}
-                >
-                  <Link to={`/tym/${member.id}`} className="group block text-center">
-                    {member.photo ? (
-                      <img
-                        src={member.photo}
-                        alt={`Fotka – ${member.name}`}
-                        loading="lazy"
-                        className={`w-36 h-36 md:w-40 md:h-40 mx-auto rounded-full object-cover border-2 border-white/15 group-hover:border-cyan-400/70 shadow-xl ${avatarGradient.split(' ').pop()} transition-all duration-300 group-hover:scale-105`}
-                      />
-                    ) : (
-                      <div
-                        className={`w-36 h-36 md:w-40 md:h-40 mx-auto rounded-full flex items-center justify-center text-3xl font-bold font-display text-white bg-gradient-to-br ${avatarGradient} border-2 border-white/15 group-hover:border-white/50 shadow-xl transition-all duration-300 group-hover:scale-105`}
-                      >
-                        {initials}
-                      </div>
-                    )}
-                    <h3 className="text-lg md:text-xl font-bold font-display mt-4">
-                      {member.name}
-                    </h3>
-                    <p className="text-gray-500 text-sm">{member.age} let</p>
-                    <span className="inline-flex items-center gap-1.5 mt-2 text-sm text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity">
-                      Zobrazit profil →
-                    </span>
-                  </Link>
-                </motion.div>
-              );
-            })}
-          </div>
 
           {/* ===== Kompletní videoprodukce ===== */}
           <motion.div
@@ -279,7 +292,7 @@ export const AboutPage = () => {
 
           {/* ===== Had: DaVinci Resolve sekce ===== */}
           <motion.div className="text-center max-w-2xl mx-auto mb-14" {...fadeUp}>
-            <h2 className="text-3xl md:text-4xl font-bold font-display">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold font-display md:whitespace-nowrap">
               A co DaVinci Resolve Studio{' '}
               <span className="bg-gradient-to-r from-cyan-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
                 vlastně umí?

@@ -103,9 +103,10 @@ export const PortfolioPage = () => {
                       <h2 className="text-lg md:text-2xl font-bold font-display">
                         {member.name}
                       </h2>
-                      <p className={`${accent.text} text-sm font-medium mb-1.5`}>
-                        {member.age} let
+                      <p className={`${accent.text} text-sm font-medium`}>
+                        {member.role}
                       </p>
+                      <p className="text-gray-500 text-xs mb-1.5">{member.age} let</p>
                       <p className="text-gray-400 text-sm md:text-base line-clamp-2">
                         {member.bio}
                       </p>
