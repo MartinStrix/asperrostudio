@@ -126,13 +126,21 @@ const AnimatedRoutes = () => {
           </AnimatePresence>
         </Suspense>
         <Footer />
-        <ScrollTimeline />
+        <SideTimeline />
         <CookieBanner />
         <PromoPopup />
         <PerformanceToggle />
       </main>
     </>
   );
+};
+
+// Boční timeline nemá být na hlavní stránce – ta má vlastní
+// plnohodnotnou Resolve timeline dole (součást 3D hero sekce)
+const SideTimeline = () => {
+  const { pathname } = useLocation();
+  if (pathname === '/') return null;
+  return <ScrollTimeline />;
 };
 
 function App() {

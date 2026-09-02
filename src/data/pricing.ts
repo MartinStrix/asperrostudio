@@ -1,14 +1,15 @@
 // ============================================================
 //  CENÍK – DATA PRO KALKULAČKU
 // ------------------------------------------------------------
-//  Všechny ceny a texty kalkulačky upravuješ TADY.
-//  Ceny jsou vždy "od" – finální nabídka vzniká na konzultaci.
+//  Ceny nastavené podle průzkumu trhu (léto 2026) pro
+//  ambiciózní semi-pro tým: viditelně dostupnější než velké
+//  agentury, ale ne podezřele levné. Vše "od" – finální
+//  nabídka vzniká na konzultaci zdarma.
+//  Podrobné vysvětlení cen máš v souboru cenik-noty (jen pro tebe).
 //
 //  - priceFrom  = cena "od" v Kč
-//  - perUnit    = true → cena se násobí počtem videí
-//                 (má smysl jen u krátkých formátů)
-//  - includedIn = ID variant, ve kterých je doplněk už v ceně
-//                 (pak se nepřičítá a zobrazí se "v ceně")
+//  - perUnit    = cena se násobí počtem videí (krátké formáty)
+//  - includedIn = ID variant, kde je doplněk už v ceně
 // ============================================================
 
 export interface PricingTier {
@@ -16,7 +17,7 @@ export interface PricingTier {
   name: string;
   desc: string;
   priceFrom: number;
-  priceSuffix?: string; // např. '/ video'
+  priceSuffix?: string;
 }
 
 export interface PricingAddon {
@@ -49,13 +50,13 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
   {
     id: 'shorts',
     name: 'Krátké formáty',
-    desc: 'Reels, TikTok, YouTube Shorts – dynamický obsah, který zastaví scrollování.',
+    desc: 'Reels, TikTok, YouTube Shorts – obsah, který zastaví scrollování.',
     tierTitle: 'Vyberte úroveň zpracování',
     tiers: [
       {
         id: 'shorts-zakladni',
         name: 'Základní rychlý střih',
-        desc: 'Jednoduchý střih, hudba a plynulé přechody. Ideální na pravidelný obsah.',
+        desc: 'Střih, hudba a plynulé přechody. Ideální na pravidelný obsah.',
         priceFrom: 250,
         priceSuffix: '/ video',
       },
@@ -63,14 +64,14 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
         id: 'shorts-standard',
         name: 'Standardní produkce',
         desc: 'Dynamické titulky, color grading, základní motion grafika i horizontální verze — vše v ceně.',
-        priceFrom: 600,
+        priceFrom: 550,
         priceSuffix: '/ video',
       },
       {
         id: 'shorts-komplex',
         name: 'Komplexní produkce',
         desc: 'Náročné efekty, pokročilá motion grafika, sound design, voiceover i titulky v dalším jazyce — vše v ceně.',
-        priceFrom: 1000,
+        priceFrom: 950,
         priceSuffix: '/ video',
       },
     ],
@@ -85,7 +86,7 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
         id: 'shorts-nataceni',
         name: 'Natočení materiálu u vás',
         desc: 'Přijedeme a natočíme podklady přímo na místě.',
-        priceFrom: 3000,
+        priceFrom: 2500,
       },
       {
         id: 'shorts-dron',
@@ -103,96 +104,28 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
   },
   // ----------------------------------------------------------
   {
-    id: 'reklama',
-    name: 'Reklama',
-    desc: 'Reklamní spoty, které zaujmou a prodávají – pro sítě, web i kampaně.',
-    tierTitle: 'Vyberte typ reklamy',
-    tiers: [
-      {
-        id: 'reklama-social',
-        name: 'Reklamní spot pro sociální sítě',
-        desc: 'Krátký úderný spot pro výkonnostní kampaně — verze pro jednotlivé sítě v ceně.',
-        priceFrom: 6000,
-      },
-      {
-        id: 'reklama-online',
-        name: 'Online / TV reklamní spot',
-        desc: 'Plnohodnotný spot — scénář, natáčení, postprodukce i profesionální voiceover v ceně.',
-        priceFrom: 15000,
-      },
-      {
-        id: 'reklama-kampan',
-        name: 'Prémiová kampaň',
-        desc: 'Sada spotů a formátů pro celou kampaň — scénář, natáčení, voiceover i verze pro sítě v ceně.',
-        priceFrom: 30000,
-      },
-    ],
-    addons: [
-      {
-        id: 'reklama-nataceni',
-        name: 'Natáčení na lokaci',
-        desc: 'Natočení materiálu s profesionální technikou.',
-        priceFrom: 3000,
-        includedIn: ['reklama-online', 'reklama-kampan'],
-      },
-      {
-        id: 'reklama-dron',
-        name: 'Záběry z dronu',
-        desc: 'Letecké záběry, které dodají spotu velkolepost.',
-        priceFrom: 2500,
-      },
-      {
-        id: 'reklama-scenar',
-        name: 'Scénář a kreativa na míru',
-        desc: 'Kompletní příprava konceptu spotu.',
-        priceFrom: 3000,
-        includedIn: ['reklama-online', 'reklama-kampan'],
-      },
-      {
-        id: 'reklama-voiceover',
-        name: 'Profesionální voiceover',
-        priceFrom: 1500,
-        includedIn: ['reklama-online', 'reklama-kampan'],
-      },
-      {
-        id: 'reklama-social-verze',
-        name: 'Vertikální verze pro sítě',
-        desc: 'Reels / TikTok sestřihy ze spotu.',
-        priceFrom: 1500,
-        includedIn: ['reklama-social', 'reklama-kampan'],
-      },
-      {
-        id: 'reklama-expres',
-        name: 'Expresní dodání',
-        desc: 'Přednostní zpracování projektu.',
-        priceFrom: 1000,
-      },
-    ],
-  },
-  // ----------------------------------------------------------
-  {
     id: 'firemni',
-    name: 'Firemní & promo video',
-    desc: 'Podniky, služby a eventy. Video, které představí vaši značku profesionálně.',
+    name: 'Firemní & reklamní video',
+    desc: 'Promo, spoty a prezentace — video, které vaši značku prodává.',
     tierTitle: 'Vyberte typ projektu',
     tiers: [
       {
         id: 'firemni-den',
         name: 'Kameramanské práce na lokaci',
-        desc: 'Natáčení s profesionální technikou – event, rozhovory, záběry provozu.',
-        priceFrom: 5000,
+        desc: 'Natáčení s profesionální technikou — event, rozhovory, záběry provozu.',
+        priceFrom: 4500,
       },
       {
         id: 'firemni-promo',
-        name: 'Menší promo video',
-        desc: 'Např. pro kavárnu či službu. Kompletní proces od scénáře přes natáčení po finální video.',
-        priceFrom: 8000,
+        name: 'Promo / spot pro sociální sítě',
+        desc: 'Kompletní proces od scénáře přes natáčení po finální video. Ideální pro menší podniky a kampaně na sítích.',
+        priceFrom: 7500,
       },
       {
         id: 'firemni-image',
-        name: 'Korporátní image video',
-        desc: 'Rozsáhlá produkce — prémiový vizuál, storytelling, sound design i vertikální sestřihy pro sítě v ceně.',
-        priceFrom: 20000,
+        name: 'Image video / velký spot',
+        desc: 'Rozsáhlá produkce s důrazem na prémiový vizuál a storytelling — scénář, voiceover i vertikální sestřihy v ceně.',
+        priceFrom: 16000,
       },
     ],
     addons: [
@@ -201,6 +134,19 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
         name: 'Záběry z dronu',
         desc: 'Letecké záběry, které dodají produkci velkolepost.',
         priceFrom: 2500,
+      },
+      {
+        id: 'firemni-scenar',
+        name: 'Scénář a kreativa na míru',
+        desc: 'Kompletní příprava konceptu před natáčením.',
+        priceFrom: 2500,
+        includedIn: ['firemni-promo', 'firemni-image'],
+      },
+      {
+        id: 'firemni-voiceover',
+        name: 'Profesionální voiceover',
+        priceFrom: 1200,
+        includedIn: ['firemni-image'],
       },
       {
         id: 'firemni-social',
@@ -213,7 +159,7 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
         id: 'firemni-expres',
         name: 'Expresní dodání',
         desc: 'Přednostní zpracování projektu.',
-        priceFrom: 1500,
+        priceFrom: 1200,
       },
     ],
   },
@@ -234,13 +180,13 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
         id: 'svatba-celodenni',
         name: 'Standard (celodenní)',
         desc: 'Kompletní den od příprav po párty včetně záběrů z dronu. Delší video + krátký highlight klip.',
-        priceFrom: 18000,
+        priceFrom: 16500,
       },
       {
         id: 'svatba-premium',
         name: 'Prémiový balíček',
-        desc: 'Více kameramanů ze studia, delší stopáž, dron i dodání nezkrácených záznamů v ceně.',
-        priceFrom: 30000,
+        desc: 'Více kameramanů, delší stopáž, dron, teaser i nezkrácené záznamy v ceně.',
+        priceFrom: 26000,
       },
     ],
     addons: [
@@ -255,7 +201,7 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
         id: 'svatba-kameraman',
         name: 'Druhý kameraman',
         desc: 'Více úhlů, žádný ztracený moment.',
-        priceFrom: 5000,
+        priceFrom: 4500,
         includedIn: ['svatba-premium'],
       },
       {
@@ -277,26 +223,26 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
   {
     id: 'postprodukce',
     name: 'Samostatná postprodukce',
-    desc: 'Máte natočeno? Postaráme se o střih, grading, VFX i zvuk ve špičkové kvalitě.',
+    desc: 'Máte natočeno? Postaráme se o střih, grading, VFX i zvuk.',
     tierTitle: 'Vyberte rozsah projektu',
     tiers: [
       {
         id: 'post-maly',
         name: 'Menší zakázka',
         desc: 'Kratší střih nebo dílčí úpravy vašeho materiálu.',
-        priceFrom: 2500,
+        priceFrom: 2000,
       },
       {
         id: 'post-stredni',
         name: 'Střední projekt',
         desc: 'Kompletní střih a základní color grading v ceně.',
-        priceFrom: 7500,
+        priceFrom: 6500,
       },
       {
         id: 'post-velky',
         name: 'Velký projekt',
         desc: 'Náročný střih — pokročilý color grading, VFX i sound design v ceně.',
-        priceFrom: 12000,
+        priceFrom: 11000,
       },
     ],
     addons: [
@@ -304,7 +250,7 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
         id: 'post-nataceni',
         name: 'Dotáčky na lokaci',
         desc: 'Chybí záběry? Přijedeme je natočit.',
-        priceFrom: 3000,
+        priceFrom: 2500,
       },
       {
         id: 'post-dron',
@@ -324,26 +270,26 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
   {
     id: 'namiru',
     name: 'Projekt na míru (od A do Z)',
-    desc: 'Kompletně volitelný projekt – sami si poskládáte přesně to, co potřebujete.',
+    desc: 'Kompletně volitelný projekt — poskládáte si přesně to, co potřebujete.',
     tierTitle: 'Vyberte základ projektu',
     tiers: [
       {
         id: 'namiru-post',
         name: 'Pouze postprodukce',
         desc: 'Materiál dodáte vy, my zajistíme kompletní zpracování.',
-        priceFrom: 2500,
+        priceFrom: 2000,
       },
       {
         id: 'namiru-nataceni',
         name: 'Natáčení + postprodukce',
         desc: 'Natočíme i zpracujeme. Klasická kompletní zakázka.',
-        priceFrom: 8000,
+        priceFrom: 7000,
       },
       {
         id: 'namiru-komplet',
         name: 'Kompletní produkce od scénáře',
         desc: 'Od prvotní kreativy a scénáře přes natáčení až po finální video.',
-        priceFrom: 12000,
+        priceFrom: 11000,
       },
     ],
     addons: [
@@ -356,7 +302,7 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
       {
         id: 'namiru-scenar',
         name: 'Scénář a kreativa na míru',
-        priceFrom: 3000,
+        priceFrom: 2500,
         includedIn: ['namiru-komplet'],
       },
       {
@@ -386,7 +332,7 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
       {
         id: 'namiru-voiceover',
         name: 'Profesionální voiceover',
-        priceFrom: 1500,
+        priceFrom: 1200,
       },
       {
         id: 'namiru-titulky',
@@ -403,7 +349,7 @@ export const PRICING_CATEGORIES: PricingCategory[] = [
         id: 'namiru-expres',
         name: 'Expresní dodání',
         desc: 'Přednostní zpracování projektu.',
-        priceFrom: 1500,
+        priceFrom: 1200,
       },
     ],
   },

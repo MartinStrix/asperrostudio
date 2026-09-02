@@ -1,590 +1,219 @@
-import { motion } from 'framer-motion';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  VideoCameraIcon,
-  ArrowRightIcon,
-  IdentificationIcon,
-  CalculatorIcon,
-  UserGroupIcon,
-  LightBulbIcon,
-  ChatBubbleLeftRightIcon,
-  DocumentTextIcon,
-  FilmIcon,
-  ScissorsIcon,
-  RocketLaunchIcon,
-  CheckCircleIcon,
-  SparklesIcon,
-  PaperAirplaneIcon,
-  CpuChipIcon,
-  FingerPrintIcon,
-} from '@heroicons/react/24/outline';
-import { Container } from '../components/common/Container';
-import { AnimatedBackground } from '../components/common/AnimatedBackground';
 import { SEO } from '../components/common/SEO';
+import { useLowPerf } from '../utils/performanceMode';
+import { initHeroRig } from '../lib/heroRigCore';
+import '../styles/hero-rig.css';
 
-// ------------------------------------------------------------
-// „HAD" – proces od nápadu k finálnímu videu
-// Kroky můžeš kdykoliv upravit / přidat zde:
-// ------------------------------------------------------------
-const PROCESS_STEPS = [
-  {
-    icon: LightBulbIcon,
-    title: 'Nápad',
-    desc: 'Přijdete s představou — klidně jen hrubou. My ji pomůžeme dotáhnout.',
-    color: 'text-cyan-400',
-    dot: 'from-cyan-400 to-cyan-600 shadow-cyan-500/40',
-  },
-  {
-    icon: ChatBubbleLeftRightIcon,
-    title: 'Konzultace',
-    desc: 'Nezávazně probereme cíle, styl a rozpočet. Zdarma.',
-    color: 'text-cyan-300',
-    dot: 'from-cyan-300 to-cyan-500 shadow-cyan-400/40',
-  },
-  {
-    icon: DocumentTextIcon,
-    title: 'Scénář',
-    desc: 'Připravíme scénář a plán, ať přesně víte, co vznikne.',
-    color: 'text-purple-400',
-    dot: 'from-purple-400 to-purple-600 shadow-purple-500/40',
-  },
-  {
-    icon: FilmIcon,
-    title: 'Natáčení',
-    desc: 'Natočíme vlastní záběry, nebo pracujeme s vašimi materiály.',
-    color: 'text-purple-300',
-    dot: 'from-purple-300 to-purple-500 shadow-purple-400/40',
-  },
-  {
-    icon: ScissorsIcon,
-    title: 'Střih a postprodukce',
-    desc: 'Střih, zvuk, barvy, titulky a grafika — tady se rodí výsledek.',
-    color: 'text-pink-400',
-    dot: 'from-pink-400 to-pink-600 shadow-pink-500/40',
-  },
-  {
-    icon: RocketLaunchIcon,
-    title: 'Finální video',
-    desc: 'Hotové video připravené k publikování. A vy záříte.',
-    color: 'text-pink-300',
-    dot: 'from-pink-300 to-pink-500 shadow-pink-400/40',
-  },
-];
+// ============================================================
+//  HLAVNÍ STRÁNKA – 3D hero řízené scrollem
+//  Texty aktů upravíš přímo tady; choreografii řídí
+//  src/lib/heroRigCore.js. V úsporném režimu se 3D vrstva
+//  vůbec nespouští a texty zůstávají čitelné pod sebou.
+// ============================================================
 
 export const Home = () => {
+  const lowPerf = useLowPerf();
+
+  useEffect(() => {
+    if (lowPerf) return;
+    const cleanup = initHeroRig();
+    return cleanup;
+  }, [lowPerf]);
+
   return (
     <>
       <SEO
-        title="Kreativní studio pro váš brand"
-        description="Video produkce a obsah, který vaši značku odliší od konkurence. Od nápadu po finální video. Nezávazná konzultace zdarma."
+        title="AsperroStudio – videa, která prodávají váš brand"
+        description="Profesionální videotvorba: střih, postprodukce a obsah pro sociální sítě, firmy i svatby. Konzultace zdarma, reels už od 250 Kč."
       />
-      <div className="min-h-screen bg-dark text-white">
-        <AnimatedBackground />
 
-        {/* Main content */}
-        <div className="relative z-10">
-          {/* Hero Section */}
-          <section className="min-h-screen flex items-center justify-center py-24">
-            <Container>
-              <div className="text-center max-w-4xl mx-auto">
-                <motion.h1
-                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-display leading-tight mb-6"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  Videa, která
-                  <br />
-                  <span className="bg-gradient-to-r from-cyan-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
-                    prodávají váš brand
-                  </span>
-                </motion.h1>
+      {/* Podklad + zrno + 3D plátno */}
+      <div className="ambient" aria-hidden="true" />
+      {!lowPerf && <canvas id="stage" />}
+      {!lowPerf && <div className="grain" aria-hidden="true" />}
+      {!lowPerf && (
+        <div className="fallback">3D vrstva se nenačetla — obsah zůstává čitelný</div>
+      )}
 
-                <motion.p
-                  className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-8"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                >
-                  Střih, postprodukce a obsah od týmu, který ví, co diváky
-                  zastaví uprostřed scrollování.
-                </motion.p>
-
-                {/* CTA */}
-                <motion.div
-                  className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                  <Link
-                    to="/kontakt"
-                    className="w-full sm:w-72 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-lg text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:shadow-xl hover:shadow-pink-500/30 hover:brightness-110 active:scale-[0.98] transition-all"
-                  >
-                    Nezávazná poptávka
-                    <ArrowRightIcon className="w-5 h-5" />
-                  </Link>
-                  <Link
-                    to="/o-nas"
-                    className="w-full sm:w-72 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-lg border-2 border-white/20 text-white hover:border-cyan-400 hover:text-cyan-400 active:scale-[0.98] transition-all"
-                  >
-                    <UserGroupIcon className="w-5 h-5" />
-                    Poznejte nás
-                  </Link>
-                </motion.div>
-
-                {/* Karty: Videotvorba + O nás */}
-                <motion.div
-                  className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                >
-                  <Link to="/video" className="group">
-                    <div className="relative p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 transition-all duration-300 h-full">
-                      <div className="w-14 h-14 mb-4 mx-auto flex items-center justify-center rounded-xl bg-gradient-to-br from-cyan-400 to-cyan-600 text-white shadow-lg shadow-cyan-500/25">
-                        <VideoCameraIcon className="w-7 h-7" />
-                      </div>
-                      <h3 className="text-xl font-bold font-display mb-2">Videotvorba</h3>
-                      <p className="text-gray-400 text-sm mb-4">
-                        Profesionální video produkce a střih
-                      </p>
-                      <div className="flex items-center justify-center gap-2 text-cyan-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                        <span>Prozkoumat</span>
-                        <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </div>
-                  </Link>
-
-                  <Link to="/o-nas" className="group">
-                    <div className="relative p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-pink-400/50 hover:bg-white/10 transition-all duration-300 h-full">
-                      <div className="w-14 h-14 mb-4 mx-auto flex items-center justify-center rounded-xl bg-gradient-to-br from-pink-400 to-pink-600 text-white shadow-lg shadow-pink-500/25">
-                        <IdentificationIcon className="w-7 h-7" />
-                      </div>
-                      <h3 className="text-xl font-bold font-display mb-2">O nás</h3>
-                      <p className="text-gray-400 text-sm mb-4">
-                        Kdo jsme a v čem tvoříme
-                      </p>
-                      <div className="flex items-center justify-center gap-2 text-pink-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                        <span>Prozkoumat</span>
-                        <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </div>
-                  </Link>
-
-                  <Link to="/cenik" className="group">
-                    <div className="relative p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-purple-400/50 hover:bg-white/10 transition-all duration-300 h-full">
-                      <div className="w-14 h-14 mb-4 mx-auto flex items-center justify-center rounded-xl bg-gradient-to-br from-purple-400 to-purple-600 text-white shadow-lg shadow-purple-500/25">
-                        <CalculatorIcon className="w-7 h-7" />
-                      </div>
-                      <h3 className="text-xl font-bold font-display mb-2">Ceník</h3>
-                      <p className="text-gray-400 text-sm mb-4">
-                        Spočítejte si cenu za minutu
-                      </p>
-                      <div className="flex items-center justify-center gap-2 text-purple-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                        <span>Prozkoumat</span>
-                        <ArrowRightIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              </div>
-            </Container>
-          </section>
-
-          {/* ====== HAD: OD NÁPADU K FINÁLNÍMU VIDEU ====== */}
-          <section className="py-20 md:py-28">
-            <Container>
-              <motion.div
-                className="text-center max-w-2xl mx-auto mb-16"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-80px' }}
-                transition={{ duration: 0.6 }}
-              >
-                <h2 className="text-3xl md:text-5xl font-bold font-display mb-4">
-                  Od nápadu{' '}
-                  <span className="bg-gradient-to-r from-cyan-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
-                    k finálnímu videu
-                  </span>
-                </h2>
-                <p className="text-gray-400 text-lg">
-                  Víme, co děláme — a takhle to u nás vypadá krok za krokem.
-                </p>
-              </motion.div>
-
-              {/* Timeline / had */}
-              <div className="relative max-w-3xl mx-auto">
-                {/* Středová čára (na mobilu vlevo) */}
-                <div
-                  aria-hidden="true"
-                  className="absolute left-6 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-cyan-400 via-purple-500 to-pink-500 opacity-60"
-                />
-
-                <ol className="space-y-12">
-                  {PROCESS_STEPS.map((step, index) => {
-                    const Icon = step.icon;
-                    const isLeft = index % 2 === 0;
-                    return (
-                      <motion.li
-                        key={step.title}
-                        className="relative"
-                        initial={{ opacity: 0, x: isLeft ? -30 : 30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true, margin: '-60px' }}
-                        transition={{ duration: 0.5 }}
-                      >
-                        {/* Bod na čáře */}
-                        <div
-                          aria-hidden="true"
-                          className={`absolute left-6 md:left-1/2 top-6 -translate-x-1/2 w-4 h-4 rounded-full bg-gradient-to-br ${step.dot} shadow-lg ring-4 ring-dark`}
-                        />
-
-                        {/* Karta kroku – střídá strany (had) */}
-                        <div
-                          className={`ml-14 md:ml-0 md:w-[calc(50%-2.5rem)] ${
-                            isLeft ? 'md:mr-auto md:text-right' : 'md:ml-auto md:text-left'
-                          }`}
-                        >
-                          <div className="p-5 md:p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-colors">
-                            <div
-                              className={`flex items-center gap-3 mb-2 ${
-                                isLeft ? 'md:flex-row-reverse' : ''
-                              }`}
-                            >
-                              <Icon className={`w-6 h-6 shrink-0 ${step.color}`} />
-                              <h3 className="text-lg md:text-xl font-bold font-display">
-                                <span className={`${step.color} mr-2`}>{index + 1}.</span>
-                                {step.title}
-                              </h3>
-                            </div>
-                            <p className="text-gray-200 text-base md:text-lg leading-relaxed">{step.desc}</p>
-                          </div>
-                        </div>
-                      </motion.li>
-                    );
-                  })}
-                </ol>
-              </div>
-
-              {/* CTA pod hadem */}
-              <motion.div
-                className="text-center mt-16"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <p className="text-gray-300 mb-5">
-                  Krok 1 je na vás. O zbytek se postaráme my.
-                </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <Link
-                    to="/kontakt"
-                    className="w-full sm:w-72 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-lg text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:shadow-xl hover:shadow-pink-500/30 hover:brightness-110 active:scale-[0.98] transition-all"
-                  >
-                    Pojďme na to
-                    <ArrowRightIcon className="w-5 h-5" />
-                  </Link>
-                  <Link
-                    to="/cenik"
-                    className="w-full sm:w-72 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl font-semibold text-lg border-2 border-white/20 text-white hover:border-purple-400 hover:text-purple-400 active:scale-[0.98] transition-all"
-                  >
-                    <CalculatorIcon className="w-5 h-5" />
-                    Spočítat cenu
-                  </Link>
-                </div>
-              </motion.div>
-            </Container>
-          </section>
-
-          {/* ====== KAŽDÝ BRAND MÁ JINÝ PŘÍBĚH ====== */}
-          <section className="py-20 md:py-28">
-            <Container>
-              <motion.h2
-                className="text-3xl md:text-5xl font-bold font-display text-center mb-14"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-80px' }}
-                transition={{ duration: 0.6 }}
-              >
-                Každý brand má{' '}
-                <span className="bg-gradient-to-r from-cyan-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
-                  jiný příběh
-                </span>
-              </motion.h2>
-
-              <div className="max-w-2xl mx-auto space-y-4">
-                {[
-                  'Máte co říct, ale vaše značka není vidět?',
-                  'Tvoříte obsah, ale výsledky pořád nepřicházejí?',
-                  'Cítíte, že váš obsah má větší potenciál?',
-                  'Začínáte na sociálních sítích a nevíte, jak na to?',
-                  'Hledáte tým, který zná algoritmy a rozumí lidem?',
-                ].map((question, index) => (
-                  <motion.div
-                    key={question}
-                    className="group flex items-center gap-4 p-4 md:p-5 rounded-xl bg-white/5 border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 hover:shadow-lg hover:shadow-cyan-500/10 transition-all duration-300 cursor-default"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true, margin: '-40px' }}
-                    transition={{ duration: 0.45, delay: index * 0.08 }}
-                    whileHover={{ x: 10, scale: 1.02 }}
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="w-2 h-2 shrink-0 rounded-full bg-gradient-to-r from-cyan-400 to-pink-500 transition-all duration-300 group-hover:scale-[2] group-hover:shadow-[0_0_14px_rgba(236,72,153,0.9)]"
-                    />
-                    <p className="text-gray-100 text-base md:text-lg transition-colors duration-300 group-hover:text-white">
-                      {question}
-                    </p>
-                    <ArrowRightIcon className="w-5 h-5 ml-auto shrink-0 text-pink-400 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
-                  </motion.div>
-                ))}
-              </div>
-
-              <motion.p
-                className="text-center text-xl md:text-2xl font-display font-semibold mt-12"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                Chcete zjistit, jestli to{' '}
-                <span className="bg-gradient-to-r from-cyan-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
-                  zvládneme i u vás?
-                </span>
-              </motion.p>
-
-              <motion.div
-                className="text-center mt-8"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-              >
-                <Link
-                  to="/o-nas"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-lg border-2 border-white/20 text-white hover:border-pink-400 hover:text-pink-400 active:scale-[0.98] transition-all"
-                >
-                  Poznejte nás blíž
-                  <ArrowRightIcon className="w-5 h-5" />
-                </Link>
-              </motion.div>
-            </Container>
-          </section>
-
-          {/* ====== KONZULTACE ZDARMA ====== */}
-          <section className="py-20 md:py-28">
-            <Container>
-              <motion.div
-                className="max-w-3xl mx-auto rounded-3xl bg-white/5 border border-white/10 p-8 md:p-12 text-center relative overflow-hidden"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-80px' }}
-                transition={{ duration: 0.6 }}
-              >
-                {/* Jemná záře uvnitř karty */}
-                <div
-                  aria-hidden="true"
-                  className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-gradient-to-br from-cyan-500/20 to-pink-500/20 blur-3xl pointer-events-none"
-                />
-
-                <div className="relative">
-                  <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-cyan-400 to-pink-500 mb-5">
-                    <SparklesIcon className="w-4 h-4" />
-                    100 % zdarma a nezávazně
-                  </span>
-
-                  <h2 className="text-3xl md:text-4xl font-bold font-display mb-4">
-                    Konzultace zdarma
-                  </h2>
-                  <p className="text-gray-200 text-base md:text-lg max-w-xl mx-auto mb-8">
-                    Než se pro cokoliv rozhodnete, sedneme si k vašemu projektu
-                    a řekneme vám na rovinu, co dává smysl. Neplatíte vůbec nic.
-                  </p>
-
-                  <p className="text-sm uppercase tracking-widest text-gray-400 mb-4">
-                    Co si z konzultace odnesete
-                  </p>
-
-                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mx-auto text-left mb-9">
-                    {[
-                      'Analýzu vašeho současného obsahu',
-                      'Konkrétní možnosti, jak růst',
-                      'Vlastní návrhy na míru vaší značce',
-                      'Upřímné doporučení dalších kroků',
-                    ].map((item) => (
-                      <li key={item} className="flex items-start gap-2.5">
-                        <CheckCircleIcon className="w-5 h-5 mt-0.5 shrink-0 text-cyan-400" />
-                        <span className="text-gray-100">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Link
-                    to="/kontakt"
-                    className="inline-flex items-center gap-2 px-9 py-4 rounded-xl font-semibold text-lg text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:shadow-xl hover:shadow-pink-500/30 hover:brightness-110 active:scale-[0.98] transition-all"
-                  >
-                    Chci konzultaci zdarma
-                    <ArrowRightIcon className="w-5 h-5" />
-                  </Link>
-                  <p className="text-gray-400 text-sm mt-4">
-                    Žádné závazky, žádné skryté poplatky. Odpovídáme co nejdříve.
-                  </p>
-                </div>
-              </motion.div>
-            </Container>
-          </section>
-
-          {/* ====== NATÁČÍME KDEKOLIV: KAMERA + DRON ====== */}
-          <section className="py-20 md:py-28">
-            <Container>
-              <motion.div
-                className="text-center max-w-2xl mx-auto mb-12"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-80px' }}
-                transition={{ duration: 0.6 }}
-              >
-                <h2 className="text-3xl md:text-5xl font-bold font-display mb-4">
-                  Natáčíme{' '}
-                  <span className="bg-gradient-to-r from-cyan-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
-                    kdekoliv
-                  </span>
-                </h2>
-                <p className="text-gray-400 text-lg">
-                  Nečekáme, až nám pošlete materiál. Za zajímavým projektem
-                  vyrazíme s technikou prakticky kamkoliv.
-                </p>
-              </motion.div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-3xl mx-auto">
-                <motion.div
-                  className="p-7 rounded-2xl bg-white/5 border border-white/10 hover:border-cyan-400/50 hover:bg-white/10 transition-all duration-300"
-                  initial={{ opacity: 0, x: -24 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: '-60px' }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <div className="w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center text-white shadow-lg shadow-cyan-500/25">
-                    <VideoCameraIcon className="w-7 h-7" />
-                  </div>
-                  <h3 className="text-xl font-bold font-display mb-2">
-                    Natáčení kamerou
-                  </h3>
-                  <p className="text-gray-300">
-                    Stabilní záběry na bezzrcadlovku — rozhovory, produkty,
-                    eventy i atmosféra vašeho provozu. Profesionální technika
-                    a cit pro kompozici v každém záběru.
-                  </p>
-                </motion.div>
-
-                <motion.div
-                  className="p-7 rounded-2xl bg-white/5 border border-white/10 hover:border-pink-400/50 hover:bg-white/10 transition-all duration-300"
-                  initial={{ opacity: 0, x: 24 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: '-60px' }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <div className="w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center text-white shadow-lg shadow-pink-500/25">
-                    <PaperAirplaneIcon className="w-7 h-7 -rotate-45" />
-                  </div>
-                  <h3 className="text-xl font-bold font-display mb-2">
-                    Záběry z dronu
-                  </h3>
-                  <p className="text-gray-300">
-                    Letecké záběry, které dodají videu velkolepost — areály,
-                    krajina, svatby i dynamické průlety. Perspektiva, kterou
-                    ze země nezachytíte.
-                  </p>
-                </motion.div>
-              </div>
-
-              <motion.div
-                className="text-center mt-10"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <Link
-                  to="/kontakt"
-                  className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold text-lg text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:shadow-xl hover:shadow-pink-500/30 hover:brightness-110 active:scale-[0.98] transition-all"
-                >
-                  Domluvit natáčení
-                  <ArrowRightIcon className="w-5 h-5" />
-                </Link>
-              </motion.div>
-            </Container>
-          </section>
-
-          {/* ====== AI: JDEME S DOBOU, ALE STŘIH JE ŘEMESLO ====== */}
-          <section className="py-20 md:py-28">
-            <Container>
-              <motion.div
-                className="text-center max-w-2xl mx-auto mb-12"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-80px' }}
-                transition={{ duration: 0.6 }}
-              >
-                <h2 className="text-3xl md:text-5xl font-bold font-display mb-4">
-                  Jdeme s dobou.{' '}
-                  <span className="bg-gradient-to-r from-cyan-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
-                    Ale střih je řemeslo.
-                  </span>
-                </h2>
-                <p className="text-gray-400 text-lg">
-                  K umělé inteligenci máme jasný postoj — a rádi ho říkáme nahlas.
-                </p>
-              </motion.div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto">
-                <motion.div
-                  className="p-7 md:p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-cyan-400/40 transition-all duration-300"
-                  initial={{ opacity: 0, x: -24 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: '-60px' }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <div className="w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-cyan-400 to-cyan-600 flex items-center justify-center text-white shadow-lg shadow-cyan-500/25">
-                    <CpuChipIcon className="w-7 h-7" />
-                  </div>
-                  <h3 className="text-xl font-bold font-display mb-2">
-                    AI využíváme tam, kde dává smysl
-                  </h3>
-                  <p className="text-gray-300">
-                    Sledujeme nové technologie a nebojíme se jich. Umělá
-                    inteligence nám pomáhá s organizací, přípravou a rutinou —
-                    díky tomu máme víc času na to podstatné: vaši tvorbu.
-                  </p>
-                </motion.div>
-
-                <motion.div
-                  className="p-7 md:p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-pink-400/40 transition-all duration-300"
-                  initial={{ opacity: 0, x: 24 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: '-60px' }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <div className="w-14 h-14 mb-4 rounded-xl bg-gradient-to-br from-pink-400 to-pink-600 flex items-center justify-center text-white shadow-lg shadow-pink-500/25">
-                    <FingerPrintIcon className="w-7 h-7" />
-                  </div>
-                  <h3 className="text-xl font-bold font-display mb-2">
-                    Vaše video je ale čistě naše práce
-                  </h3>
-                  <p className="text-gray-300">
-                    Střih, color grading, VFX i zvuk tvoříme vlastníma rukama
-                    v DaVinci Resolve — žádné AI zkratky. Každé video je naší
-                    vizitkou, a tu za nás žádná umělá inteligence neudělá.
-                  </p>
-                </motion.div>
-              </div>
-            </Container>
-          </section>
+      {/* Nápověda ke scrollu (mizí po prvním posunu) */}
+      {!lowPerf && (
+        <div className="topbar" aria-hidden="true">
+          <div />
+          <div id="tip">Scroll posouvá playhead — timeline dole jde i táhnout</div>
         </div>
-      </div>
+      )}
+
+      {/* Popisky promítané z 3D scény */}
+      {!lowPerf && (
+        <div className="callouts" id="callouts" aria-hidden="true">
+          <div className="callout" data-anchor="hood"><b>Sluneční clona</b></div>
+          <div className="callout" data-anchor="focus"><b>Ostřicí kroužek</b></div>
+          <div className="callout" data-anchor="glass"><b>Přední čočka</b></div>
+        </div>
+      )}
+
+      {/* Akty příběhu – jedou přes celý scroll */}
+      <main className="track" id="track">
+        <section className="act" data-from="0" data-to="0.17">
+          <div className="inner">
+            <p className="eyebrow">Profesionální videotvorba</p>
+            <h1>
+              Videa, která<br />
+              <span className="grad">prodávají váš brand</span>
+            </h1>
+            <p className="lede">
+              Střih, postprodukce a obsah od týmu, který ví, co diváky zastaví
+              uprostřed scrollování.
+            </p>
+          </div>
+        </section>
+
+        <section className="act right" data-from="0.19" data-to="0.39">
+          <div className="inner">
+            <p className="eyebrow purple">01 — Kompozice</p>
+            <h2>
+              Každý záběr<br />má důvod
+            </h2>
+            <p className="lede">
+              Rámování, pohyb kamery a rytmus střihu neřešíme až v postprodukci.
+              Plánujeme je od scénáře, aby výsledek držel pozornost celou stopáž.
+            </p>
+          </div>
+        </section>
+
+        <section className="act" data-from="0.43" data-to="0.60">
+          <div className="inner">
+            <p className="eyebrow">02 — Optika</p>
+            <h2>
+              Barva jako<br />součást sdělení
+            </h2>
+            <p className="lede">
+              Color grading v DaVinci Resolve, konzistentní paleta napříč
+              kampaní a formáty připravené pro každý kanál zvlášť.
+            </p>
+          </div>
+        </section>
+
+        <section className="act right" data-from="0.63" data-to="0.85">
+          <div className="inner">
+            <p className="eyebrow pink">03 — Rozklad</p>
+            <h2>
+              Rozložíme to<br />na jednotlivé díly
+            </h2>
+            <p className="lede">
+              Natáčení, střih, zvuk, grafika i distribuce. Můžete si vzít celý
+              proces, nebo jen tu část, která vám doma chybí.
+            </p>
+          </div>
+        </section>
+
+        <section className="act center" data-from="0.88" data-to="1">
+          <div className="inner">
+            <p className="eyebrow">Konzultace zdarma</p>
+            <h2>
+              Pojďme natočit<br />něco vašeho
+            </h2>
+            <p className="lede">
+              Řekněte nám záměr — my dodáme scénář, natáčení i finální grade.
+            </p>
+            <div className="cta">
+              <Link className="btn primary" to="/kontakt">Nezávazná poptávka</Link>
+              <Link className="btn" to="/cenik">Ceník od 250 Kč</Link>
+              <Link className="btn" to="/o-nas">Poznat nás</Link>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Epilog – AsperroStudio v kostce (překrývá 3D plátno) */}
+      <section className="epilogue" id="studio">
+        <h3>AsperroStudio v kostce</h3>
+        <p>
+          Tvůrčí studio tří lidí, které natáčí, stříhá a dodává videa
+          připravená prodávat. Profesionální přístup, poctivé řemeslo
+          a ceny, které dávají smysl.
+        </p>
+        <dl className="notes">
+          <div className="note">
+            <dt>Konzultace zdarma</dt>
+            <dd>
+              Každý projekt začíná <b>nezávaznou konzultací</b> — probereme
+              záměr, možnosti i cenu. Neplatíte nic.
+              <br />
+              <Link className="note-link" to="/kontakt">Chci konzultaci →</Link>
+            </dd>
+          </div>
+          <div className="note">
+            <dt>Ceník od 250 Kč</dt>
+            <dd>
+              Orientační cenu si naklikáte <b>za minutu</b> v kalkulačce.
+              Reels už od 250 Kč za video.
+              <br />
+              <Link className="note-link" to="/cenik">Spočítat cenu →</Link>
+            </dd>
+          </div>
+          <div className="note">
+            <dt>Kamera &amp; dron</dt>
+            <dd>
+              Vyjedeme prakticky kamkoliv — <b>stabilní záběry</b> z ruky
+              i <b>letecké průlety</b> dronem, které videu dodají velkolepost.
+            </dd>
+          </div>
+          <div className="note">
+            <dt>DaVinci Resolve</dt>
+            <dd>
+              Střih, color grading, VFX i zvuk vzniká <b>ručně</b> v DaVinci
+              Resolve Studio — hollywoodském standardu postprodukce.
+              <br />
+              <Link className="note-link" to="/o-nas">Jak pracujeme →</Link>
+            </dd>
+          </div>
+          <div className="note">
+            <dt>AI s rozumem</dt>
+            <dd>
+              Jdeme s dobou — AI nám pomáhá s rutinou a organizací.
+              <b> Vaše video je ale čistě naše práce.</b> Je to naše vizitka.
+            </dd>
+          </div>
+          <div className="note">
+            <dt>Tým &amp; portfolio</dt>
+            <dd>
+              Za každým videem stojí konkrétní člověk se svým stylem.
+              Prohlédněte si ukázky editorů.
+              <br />
+              <Link className="note-link" to="/portfolio">Otevřít portfolio →</Link>
+            </dd>
+          </div>
+        </dl>
+      </section>
+
+      {/* Resolve timeline dole – scrubbing scrollu */}
+      {!lowPerf && (
+        <section className="timeline" id="timeline" aria-label="Timeline hero animace">
+          <div className="tl-bar">
+            <div className="tl-tc" id="tc">00:00:00:<b>00</b></div>
+            <div className="tl-clipname" id="clipname">01 — Intro</div>
+            <div className="tl-dur">00:00:12:00 · 25 fps</div>
+          </div>
+          <div
+            className="tl-lanes"
+            id="lanes"
+            tabIndex={0}
+            role="slider"
+            aria-label="Playhead"
+            aria-valuemin={0}
+            aria-valuemax={100}
+            aria-valuenow={0}
+          >
+            <div className="tl-track" id="tlTrack">
+              <div className="tl-ruler" id="ruler" />
+              <div className="lane" id="laneV1" />
+              <div className="playhead" id="playhead" style={{ left: 0 }} />
+            </div>
+          </div>
+        </section>
+      )}
     </>
   );
 };

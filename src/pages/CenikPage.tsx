@@ -9,7 +9,6 @@ import {
   DevicePhoneMobileIcon,
   MegaphoneIcon,
   HeartIcon,
-  BuildingOfficeIcon,
   ScissorsIcon,
   PuzzlePieceIcon,
   CalculatorIcon,
@@ -31,8 +30,7 @@ import {
 // Ikony kategorií
 const CATEGORY_ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
   shorts: DevicePhoneMobileIcon,
-  reklama: MegaphoneIcon,
-  firemni: BuildingOfficeIcon,
+  firemni: MegaphoneIcon,
   svatba: HeartIcon,
   postprodukce: ScissorsIcon,
   namiru: PuzzlePieceIcon,
