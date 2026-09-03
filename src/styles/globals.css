@@ -182,3 +182,27 @@ html.low-perf .aurora-blob,
 html.low-perf .aurora-hue {
   display: none !important;
 }
+
+
+/* ============================================================
+   Okénka v pozadí – pomalé plutí (na způsob hlavní stránky).
+   V úsporném režimu se animace globálně vypínají, okénka
+   zůstanou stát na místě.
+   ============================================================ */
+.backdrop-frame {
+  transform: rotate(var(--rot, 0deg));
+  animation-name: frame-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  will-change: transform;
+}
+
+@keyframes frame-float {
+  from {
+    transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg));
+  }
+  to {
+    transform: translate3d(6px, -16px, 0) rotate(calc(var(--rot, 0deg) + 2.5deg));
+  }
+}

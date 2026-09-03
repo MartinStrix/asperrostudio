@@ -33,19 +33,81 @@ export const Home = () => {
       <div className="ambient" aria-hidden="true" />
       {lowPerf && (
         <div className="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
+          {/* Statické záře navíc, ať je scéna plná i bez 3D */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'radial-gradient(50vw 50vw at 15% 25%, rgba(34,211,238,0.10), transparent 60%), radial-gradient(45vw 45vw at 85% 70%, rgba(244,114,182,0.10), transparent 60%), radial-gradient(40vw 40vw at 55% 95%, rgba(192,132,252,0.07), transparent 60%)',
+            }}
+          />
           <BackdropFrames />
-          {/* Jeden node uprostřed vpravo, ať stránka nepůsobí prázdně */}
-          <div className="hidden sm:block absolute top-[34%] right-[8%] lg:right-[14%] opacity-80">
-            <div className="w-64 rounded-xl border-2 border-cyan-400/40 bg-dark-100/70 shadow-2xl shadow-cyan-500/10 rotate-[-3deg]">
+
+          {/* Statický Fusion strom po pravé straně */}
+          <div className="hidden sm:flex absolute top-28 bottom-16 right-[5%] lg:right-[9%] flex-col items-center justify-between opacity-90">
+            {/* MediaIn1 – s náhledem */}
+            <div className="w-56 lg:w-64 rounded-xl border-2 border-cyan-400/45 bg-dark-100/75 shadow-2xl shadow-cyan-500/10 rotate-[-2deg] self-end">
               <div className="flex items-center gap-1.5 px-3 py-2 border-b border-white/10">
                 <span className="w-1.5 h-1.5 rounded-full bg-red-400/80" />
                 <span className="w-1.5 h-1.5 rounded-full bg-yellow-400/80" />
                 <span className="w-1.5 h-1.5 rounded-full bg-green-400/80" />
                 <span className="ml-2 font-mono text-[11px] tracking-widest text-gray-400 uppercase">MediaIn1</span>
+                <span className="ml-auto font-mono text-[10px] text-gray-600">01/08</span>
               </div>
-              <div className="h-28 m-3 rounded-md bg-gradient-to-br from-cyan-500/10 via-transparent to-pink-500/10 border border-white/5" />
+              <div className="h-24 m-3 rounded-md bg-gradient-to-br from-cyan-500/12 via-transparent to-pink-500/12 border border-white/5" />
             </div>
-            <div className="mx-auto w-0.5 h-8 bg-gradient-to-b from-cyan-400/60 to-transparent" />
+            <span className="w-0.5 flex-1 min-h-[1.25rem] bg-gradient-to-b from-cyan-400/50 via-purple-400/40 to-purple-400/50" />
+
+            {/* ColorCor1 – parametry */}
+            <div className="w-48 lg:w-56 rounded-xl border-2 border-purple-400/45 bg-dark-100/75 shadow-2xl shadow-purple-500/10 rotate-[2deg] self-start">
+              <div className="flex items-center gap-1.5 px-3 py-2 border-b border-white/10">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-400/80" />
+                <span className="w-1.5 h-1.5 rounded-full bg-yellow-400/80" />
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400/80" />
+                <span className="ml-2 font-mono text-[11px] tracking-widest text-gray-400 uppercase">ColorCor1</span>
+              </div>
+              <div className="px-3 py-2.5 space-y-2">
+                <span className="block h-1 rounded-full bg-gradient-to-r from-cyan-400/50 to-transparent w-4/5" />
+                <span className="block h-1 rounded-full bg-gradient-to-r from-purple-400/50 to-transparent w-3/5" />
+                <span className="block h-1 rounded-full bg-gradient-to-r from-pink-400/50 to-transparent w-2/3" />
+              </div>
+            </div>
+            <span className="w-0.5 flex-1 min-h-[1.25rem] bg-gradient-to-b from-purple-400/50 via-pink-400/40 to-pink-400/50" />
+
+            {/* Merge1 – porty */}
+            <div className="relative w-44 lg:w-52 rounded-xl border-2 border-pink-400/45 bg-dark-100/75 shadow-2xl shadow-pink-500/10 rotate-[-1.5deg] self-end">
+              <div className="flex items-center gap-1.5 px-3 py-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-400/80" />
+                <span className="w-1.5 h-1.5 rounded-full bg-yellow-400/80" />
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400/80" />
+                <span className="ml-2 font-mono text-[11px] tracking-widest text-gray-400 uppercase">Merge1</span>
+              </div>
+              <span className="absolute -left-[7px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-pink-400/80 ring-4 ring-dark" />
+              <span className="absolute -right-[7px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-pink-400/80 ring-4 ring-dark" />
+            </div>
+            <span className="w-0.5 flex-1 min-h-[1.25rem] bg-gradient-to-b from-pink-400/50 to-cyan-400/50" />
+
+            {/* MediaOut1 */}
+            <div className="w-40 lg:w-48 rounded-xl border-2 border-cyan-400/45 bg-dark-100/75 shadow-2xl shadow-cyan-500/10 rotate-[1.5deg] self-start">
+              <div className="flex items-center gap-1.5 px-3 py-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-400/80" />
+                <span className="w-1.5 h-1.5 rounded-full bg-yellow-400/80" />
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400/80" />
+                <span className="ml-2 font-mono text-[11px] tracking-widest text-gray-400 uppercase">MediaOut1</span>
+                <span className="ml-auto font-mono text-[10px] text-gray-600">✓</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Mobil: menší dvojice nodů dole */}
+          <div className="sm:hidden absolute bottom-10 inset-x-6 flex items-center justify-center gap-0 opacity-80">
+            <div className="w-32 rounded-lg border-2 border-cyan-400/45 bg-dark-100/75 px-2.5 py-1.5 rotate-[-2deg]">
+              <span className="font-mono text-[10px] tracking-widest text-gray-400 uppercase">MediaIn1</span>
+            </div>
+            <span className="h-0.5 w-8 bg-gradient-to-r from-cyan-400/50 to-pink-400/50" />
+            <div className="w-32 rounded-lg border-2 border-pink-400/45 bg-dark-100/75 px-2.5 py-1.5 rotate-[2deg]">
+              <span className="font-mono text-[10px] tracking-widest text-gray-400 uppercase">MediaOut1</span>
+            </div>
           </div>
         </div>
       )}

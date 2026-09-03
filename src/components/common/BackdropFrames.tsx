@@ -36,17 +36,21 @@ export const BackdropFrames = () => (
     {FRAMES.map((f, i) => (
       <div
         key={i}
-        className={`absolute rounded-lg border ${TONE_BORDER[f.tone]} ${
+        className={`backdrop-frame absolute rounded-lg border ${TONE_BORDER[f.tone]} ${
           f.hideMobile ? 'hidden md:block' : ''
         }`}
-        style={{
-          top: f.top,
-          left: f.left,
-          width: `${f.w}rem`,
-          height: `${f.w * f.ratio}rem`,
-          transform: `rotate(${f.rot}deg)`,
-          opacity: f.opacity,
-        }}
+        style={
+          {
+            top: f.top,
+            left: f.left,
+            width: `${f.w}rem`,
+            height: `${f.w * f.ratio}rem`,
+            opacity: f.opacity,
+            '--rot': `${f.rot}deg`,
+            animationDuration: `${22 + i * 3.5}s`,
+            animationDelay: `${-i * 4}s`,
+          } as React.CSSProperties
+        }
       >
         {f.bar && (
           <div className="absolute top-0 inset-x-0 h-4 border-b border-inherit flex items-center gap-1 px-2">
