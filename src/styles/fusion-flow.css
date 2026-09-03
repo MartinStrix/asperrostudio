@@ -378,3 +378,18 @@
 .note-link:hover{color:#fff}
 /* v úsporném režimu jsou akty čitelné bez skriptu */
 html.low-perf .act .inner{opacity:1 !important;transform:none !important}
+
+/* --- poznámky rozprostřené v aktech (dřívější "v kostce") --- */
+.act-note{
+  margin:1.15rem 0 0;
+  padding-top:.9rem;
+  border-top:1px solid var(--line-soft);
+  max-width:26rem;
+  font-size:.82rem;
+  line-height:1.55;
+  color:var(--fg-mute);
+}
+.act-note b{color:var(--fg-dim); font-weight:600}
+.act-note .note-link{pointer-events:auto; margin-top:.35rem}
+.act.right .act-note{margin-left:auto}
+.act.center .act-note{margin-left:auto; margin-right:auto}

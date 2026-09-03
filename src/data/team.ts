@@ -40,7 +40,7 @@ export const teamMembers: TeamMember[] = [
     id: 'martin-polacek',
     name: 'Martin Poláček',
     age: 24,
-    role: 'Founder · Kameraman · Editor · AI workflow',
+    role: 'Founder · Kameraman · Editor · Web designer · AI workflow',
     bio: 'Ahoj, jmenuji se Martin. Pocházím z Plzeňského kraje a v současné době působím přímo v Plzni. Už řadu let se naplno věnuji grafickému designu a video editu pod hlavičkou AsperroStudio. Vzhledem k tomu, že do mé kompetence spadá i samotné natáčení, není pro mě problém za zajímavým projektem s kamerou nebo dronem vycestovat v podstatě kamkoliv.',
     photo: '/team/martin.jpg',
     accent: 'cyan',
@@ -69,9 +69,19 @@ export const teamMembers: TeamMember[] = [
     name: 'Eva Havrdová',
     age: 22,
     role: 'Editorka',
-    bio: 'Sem doplň Evino představení — specializace, styl, co ji na tvorbě baví.',
+    bio: 'Ahoj, jmenuji se Evča. Působím v Plzni pod AsperroStudiem. Jsem editorka videí a nejvíce mě baví vytvářet videa pro udržení pozornosti.',
     photo: null,
     accent: 'pink',
+    story: [
+      {
+        title: 'Edit a můj styl',
+        text: 'Vytvářím videa, která umí udržet diváky v napětí, jsou kreativní, zábavná a posunou váš obsah na vyšší úroveň. Vynikám v porozumění platformě YouTube, jejím algoritmům a nejnovějším trendům. Ráda ale vytvářím i jiné typy videí — shorty na TikTok a Instagram i long form videa a podcasty. Edituji v DaVinci Resolve už rok; vytvořím hrubý střih, ale také 3D objekty ve Fusionu. Stále se učím novým věcem, proto přijmu jakoukoliv kritiku a ráda se všem vyjdu vstříc k vaší úplné spokojenosti.',
+      },
+      {
+        title: 'Osobní život',
+        text: 'V osobním životě se ráda učím novým věcem, především v oblasti sportu a pohybu. Pravidelně chodím do fitka a věnuji se pole dance, které mě baví svou kombinací síly, elegance a disciplíny — celkově mám ráda aktivní životní styl. Kromě toho se starám o dvě chlupaté koule, které mi dělají společnost a přinášejí do každodenního života radost. Ve volném čase také velmi ráda cestuji, poznávám nová místa a kultury a sbírám nové zážitky i inspiraci.',
+      },
+    ],
     instagram: 'https://www.instagram.com/asperro.studio', // ← nahraď Eviným IG
     ico: '29561876',
     videos: [
@@ -85,9 +95,23 @@ export const teamMembers: TeamMember[] = [
     name: 'Václav Ivančo',
     age: 22,
     role: 'Editor · AI workflow',
-    bio: 'Sem doplň Václavovo představení — specializace, styl, co ho na tvorbě baví.',
+    bio: 'Ahoj, jsem Václav. Pocházím ze Středočeského kraje, kousek od Prahy, a v AsperroStudiu se věnuju střihu videí — s důrazem na to, jak dnešní práci s obrazem umí posunout AI. Nejsem člověk jednoho stylu — baví mě editovat prostě všechno a v každém projektu hledám rovnováhu mezi pečlivostí a rychlostí.',
     photo: null,
     accent: 'purple',
+    story: [
+      {
+        title: 'Jak jsem se do toho dostal',
+        text: 'Ke střihu mě přivedl Martin — ukázal mi, o co v tom jde, a chytlo mě to natolik, že jsem se do toho pustil naplno. Naučil jsem se pracovat v DaVinci Resolve a od té doby se v něm zdokonaluju dál. Jsem součástí komunity The 1%.',
+      },
+      {
+        title: 'AI jako součást řemesla',
+        text: 'AI beru jako přirozenou součást dnešní postprodukce, ne jako zkratku. Obor se v téhle oblasti posouvá extrémně rychle, a tak i teď aktivně makám na tom, abych v AI workflow držel krok — vždycky je co objevovat a co se naučit nového.',
+      },
+      {
+        title: 'Kam to směřuji',
+        text: 'Mám v tomhle oboru velké ambice. Nechci zůstat u drobných zakázek — cílím na to, abych si časem troufl i na fakt velké projekty, které mě posunou dál jako editora i jako kreativce.',
+      },
+    ],
     instagram: 'https://www.instagram.com/asperro.studio', // ← nahraď Václavovým IG
     ico: '24401013',
     videos: [

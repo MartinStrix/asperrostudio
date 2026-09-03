@@ -7,6 +7,7 @@
 // ============================================================
 import { useEffect, useRef } from 'react';
 import { useLowPerf } from '../../utils/performanceMode';
+import { BackdropFrames } from './BackdropFrames';
 
 export const AnimatedBackground = () => {
   const lowPerf = useLowPerf();
@@ -64,6 +65,7 @@ export const AnimatedBackground = () => {
         aria-hidden="true"
         role="presentation"
       >
+        <BackdropFrames />
         <div
           className="absolute inset-0"
           style={{
@@ -81,6 +83,7 @@ export const AnimatedBackground = () => {
       aria-hidden="true"
       role="presentation"
     >
+      <BackdropFrames />
       <div ref={hueLayer} className="absolute inset-0 will-change-[filter]">
         <div className="aurora-hue absolute inset-0">
         {/* Vrstvy s parallaxem – uvnitř každé pluje záře sama od sebe */}

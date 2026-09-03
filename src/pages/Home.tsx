@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { SEO } from '../components/common/SEO';
 import { useLowPerf } from '../utils/performanceMode';
 import { initFusionFlow } from '../lib/fusionFlowCore';
+import { BackdropFrames } from '../components/common/BackdropFrames';
 import '../styles/fusion-flow.css';
 
 // ============================================================
@@ -30,6 +31,24 @@ export const Home = () => {
 
       {/* Podklad + 3D plátno + zrno */}
       <div className="ambient" aria-hidden="true" />
+      {lowPerf && (
+        <div className="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
+          <BackdropFrames />
+          {/* Jeden node uprostřed vpravo, ať stránka nepůsobí prázdně */}
+          <div className="hidden sm:block absolute top-[34%] right-[8%] lg:right-[14%] opacity-80">
+            <div className="w-64 rounded-xl border-2 border-cyan-400/40 bg-dark-100/70 shadow-2xl shadow-cyan-500/10 rotate-[-3deg]">
+              <div className="flex items-center gap-1.5 px-3 py-2 border-b border-white/10">
+                <span className="w-1.5 h-1.5 rounded-full bg-red-400/80" />
+                <span className="w-1.5 h-1.5 rounded-full bg-yellow-400/80" />
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400/80" />
+                <span className="ml-2 font-mono text-[11px] tracking-widest text-gray-400 uppercase">MediaIn1</span>
+              </div>
+              <div className="h-28 m-3 rounded-md bg-gradient-to-br from-cyan-500/10 via-transparent to-pink-500/10 border border-white/5" />
+            </div>
+            <div className="mx-auto w-0.5 h-8 bg-gradient-to-b from-cyan-400/60 to-transparent" />
+          </div>
+        </div>
+      )}
       {!lowPerf && <canvas id="stage" />}
       {!lowPerf && <div className="grain" aria-hidden="true" />}
       {!lowPerf && (
@@ -82,6 +101,10 @@ export const Home = () => {
               Každý záběr, který od nás odchází, prošel stromem uzlů. Tohle je
               jeden z nich — projděte si ho scrollem.
             </p>
+            <p className="act-note">
+              Každý projekt začíná <b>konzultací zdarma</b> — a reels už od
+              250 Kč za video.
+            </p>
           </div>
         </section>
 
@@ -94,6 +117,11 @@ export const Home = () => {
             <p className="lede">
               Barvu řešíme na začátku stromu, ne na konci. Balance, křivky
               a sytost sedí dřív, než se do kompozitu pustí cokoliv dalšího.
+            </p>
+            <p className="act-note">
+              Střih, grading, VFX i zvuk vzniká <b>ručně</b> v DaVinci Resolve
+              Studio — hollywoodském standardu postprodukce.{' '}
+              <Link className="note-link" to="/o-nas">Jak pracujeme →</Link>
             </p>
           </div>
         </section>
@@ -108,6 +136,10 @@ export const Home = () => {
               Delta Keyer, čistá matte a plát vygenerovaný pod ním. Když se
               pozadí musí změnit den před odevzdáním, měníme jeden uzel.
             </p>
+            <p className="act-note">
+              Materiál si natočíme sami — <b>kamera i dron</b>. Vyjedeme
+              prakticky kamkoliv.
+            </p>
           </div>
         </section>
 
@@ -120,6 +152,10 @@ export const Home = () => {
             <p className="lede">
               Vrstvy se skládají v jednom uzlu, glow se počítá až nad
               výsledkem. Proto jde světlo doladit, aniž bychom sahali na klíč.
+            </p>
+            <p className="act-note">
+              Jdeme s dobou — AI nám pomáhá s rutinou a organizací.
+              <b> Vaše video je ale čistě naše práce.</b>
             </p>
           </div>
         </section>
@@ -134,6 +170,10 @@ export const Home = () => {
               Ne do střihu na poslední chvíli. Text sedí ve stejném prostoru
               jako záběr, takže reaguje na světlo i rozostření.
             </p>
+            <p className="act-note">
+              Za každým videem stojí <b>konkrétní člověk</b> se svým stylem.{' '}
+              <Link className="note-link" to="/portfolio">Otevřít portfolio →</Link>
+            </p>
           </div>
         </section>
 
@@ -145,7 +185,8 @@ export const Home = () => {
             </h2>
             <p className="lede">
               Přineste záběry, nebo je natočíme. Odejde vám hotový kompozit,
-              ne rendery k dodělání.
+              ne rendery k dodělání. Konzultace je zdarma a nezávazná —
+              neplatíte nic.
             </p>
             <div className="cta">
               <Link className="btn primary" to="/kontakt">Nezávazná poptávka</Link>
@@ -155,68 +196,6 @@ export const Home = () => {
           </div>
         </section>
       </main>
-
-      {/* Epilog – AsperroStudio v kostce */}
-      <section className="epilogue" id="studio">
-        <h3>AsperroStudio v kostce</h3>
-        <p>
-          Tvůrčí studio tří lidí, které natáčí, stříhá a dodává videa
-          připravená prodávat. Profesionální přístup, poctivé řemeslo
-          a ceny, které dávají smysl.
-        </p>
-        <dl className="notes">
-          <div className="note">
-            <dt>Konzultace zdarma</dt>
-            <dd>
-              Každý projekt začíná <b>nezávaznou konzultací</b> — probereme
-              záměr, možnosti i cenu. Neplatíte nic.
-              <br />
-              <Link className="note-link" to="/kontakt">Chci konzultaci →</Link>
-            </dd>
-          </div>
-          <div className="note">
-            <dt>Ceník od 250 Kč</dt>
-            <dd>
-              Orientační cenu si naklikáte <b>za minutu</b> v kalkulačce.
-              Reels už od 250 Kč za video.
-              <br />
-              <Link className="note-link" to="/cenik">Spočítat cenu →</Link>
-            </dd>
-          </div>
-          <div className="note">
-            <dt>Kamera &amp; dron</dt>
-            <dd>
-              Vyjedeme prakticky kamkoliv — <b>stabilní záběry</b> z ruky
-              i <b>letecké průlety</b> dronem, které videu dodají velkolepost.
-            </dd>
-          </div>
-          <div className="note">
-            <dt>DaVinci Resolve</dt>
-            <dd>
-              Střih, color grading, VFX i zvuk vzniká <b>ručně</b> v DaVinci
-              Resolve Studio — hollywoodském standardu postprodukce.
-              <br />
-              <Link className="note-link" to="/o-nas">Jak pracujeme →</Link>
-            </dd>
-          </div>
-          <div className="note">
-            <dt>AI s rozumem</dt>
-            <dd>
-              Jdeme s dobou — AI nám pomáhá s rutinou a organizací.
-              <b> Vaše video je ale čistě naše práce.</b> Je to naše vizitka.
-            </dd>
-          </div>
-          <div className="note">
-            <dt>Tým &amp; portfolio</dt>
-            <dd>
-              Za každým videem stojí konkrétní člověk se svým stylem.
-              Prohlédněte si služby i ukázky editorů.
-              <br />
-              <Link className="note-link" to="/portfolio">Otevřít portfolio →</Link>
-            </dd>
-          </div>
-        </dl>
-      </section>
 
       {/* Node graf dole – scrubbing scrollu */}
       {!lowPerf && (
