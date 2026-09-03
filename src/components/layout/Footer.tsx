@@ -11,7 +11,7 @@ export const Footer = () => {
   return (
     <footer className="relative z-10 bg-dark-50 border-t border-white/10">
       <Container>
-        <div className="py-6 md:py-8">
+        <div className="py-5 md:py-6">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-6 md:gap-8">
             {/* Brand */}
             <div className="col-span-2 md:col-span-1">
@@ -30,7 +30,7 @@ export const Footer = () => {
             {/* Quick Links */}
             <div>
               <h4 className="font-semibold text-white mb-2 text-sm">Rychlé odkazy</h4>
-              <ul className="space-y-1.5">
+              <ul className="grid grid-cols-3 gap-x-4 gap-y-1.5">
                 {NAV_LINKS.map((link) => (
                   <li key={link.href}>
                     <a
@@ -98,7 +98,7 @@ export const Footer = () => {
           </div>
 
           {/* Copyright */}
-          <div className="mt-6 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-sm text-gray-500 text-center">
+          <div className="mt-5 pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-sm text-gray-500 text-center">
             <p>&copy; {currentYear} AsperroStudio. Všechna práva vyhrazena.</p>
             <span className="hidden sm:inline text-gray-700">•</span>
             <Link to="/cookies" className="hover:text-white transition-colors">
@@ -120,6 +120,10 @@ export const Footer = () => {
             >
               {lowPerf ? 'Zapnout animace' : 'Verze bez animací'}
             </button>
+            <span className="hidden sm:inline text-gray-700">•</span>
+            <Link to="/asperrolabs" className="hover:text-cyan-400 transition-colors">
+              AsperroLabs
+            </Link>
           </div>
         </div>
       </Container>

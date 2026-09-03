@@ -1,6 +1,5 @@
 export const NAV_LINKS = [
   { label: 'Domů', href: '/' },
-  { label: 'Videotvorba', href: '/video' },
   { label: 'Portfolio', href: '/portfolio' },
   { label: 'O nás', href: '/o-nas' },
   { label: 'Ceník', href: '/cenik' },

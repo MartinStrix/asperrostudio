@@ -1,6 +1,15 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRightIcon, FilmIcon, UserIcon } from '@heroicons/react/24/outline';
+import {
+  ArrowRightIcon,
+  FilmIcon,
+  UserIcon,
+  BuildingOfficeIcon,
+  HeartIcon,
+  VideoCameraIcon,
+  CalendarIcon,
+  ShareIcon,
+} from '@heroicons/react/24/outline';
 import { Container } from '../components/common/Container';
 import { AnimatedBackground } from '../components/common/AnimatedBackground';
 import { SEO } from '../components/common/SEO';
@@ -10,6 +19,91 @@ import { teamMembers } from '../data/team';
 // ============================================================
 //  PORTFOLIO – přehled editorů, proklik na jejich videa
 // ============================================================
+
+const services = [
+  {
+    icon: <FilmIcon className="w-6 h-6" />,
+    title: 'Reklamní spoty',
+    description: 'Profesionální reklamní videa pro televizní a online kampaně, která zaujmou a prodávají.',
+    accent: 'cyan',
+  },
+  {
+    icon: <BuildingOfficeIcon className="w-6 h-6" />,
+    title: 'Firemní videa',
+    description: 'Prezentační a školicí videa pro vaši firmu. Představte svůj tým a služby profesionálně.',
+    accent: 'purple',
+  },
+  {
+    icon: <HeartIcon className="w-6 h-6" />,
+    title: 'Svatební video',
+    description: 'Zachytíme váš nejkrásnější den v životě. Vzpomínky, které vydrží navždy.',
+    accent: 'pink',
+  },
+  {
+    icon: <VideoCameraIcon className="w-6 h-6" />,
+    title: 'Dokumenty',
+    description: 'Dokumentární filmy a reportáže. Příběhy, které stojí za vyprávění.',
+    accent: 'pink',
+  },
+  {
+    icon: <CalendarIcon className="w-6 h-6" />,
+    title: 'Eventová videa',
+    description: 'Záznamy z konferencí, koncertů a firemních akcí v nejvyšší kvalitě.',
+    accent: 'purple',
+  },
+  {
+    icon: <ShareIcon className="w-6 h-6" />,
+    title: 'Sociální sítě',
+    description: 'Krátká videa optimalizovaná pro Instagram, TikTok a YouTube Shorts.',
+    accent: 'cyan',
+  },
+];
+
+// Styl "nodů" jako ve Fusion page DaVinci Resolve
+const nodeStyles = {
+  cyan: {
+    node: 'border-cyan-400/60 hover:border-cyan-300 shadow-cyan-500/15 hover:shadow-cyan-500/30',
+    iconBox: 'from-cyan-400 to-cyan-600',
+    port: 'bg-cyan-400',
+  },
+  purple: {
+    node: 'border-purple-400/60 hover:border-purple-300 shadow-purple-500/15 hover:shadow-purple-500/30',
+    iconBox: 'from-purple-400 to-purple-600',
+    port: 'bg-purple-400',
+  },
+  pink: {
+    node: 'border-pink-400/60 hover:border-pink-300 shadow-pink-500/15 hover:shadow-pink-500/30',
+    iconBox: 'from-pink-400 to-pink-600',
+    port: 'bg-pink-400',
+  },
+} as const;
+
+// Vodicí prvky "node grafu"
+const NodeWire = ({ vertical = false }: { vertical?: boolean }) => (
+  <div aria-hidden="true" className="flex items-center justify-center shrink-0">
+    <span
+      className={`rounded-full bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 opacity-60 ${
+        vertical ? 'w-0.5 h-7' : 'w-0.5 h-7 md:w-9 md:h-0.5'
+      }`}
+    />
+  </div>
+);
+
+const MiniNode = ({ label, accent }: { label: string; accent: 'cyan' | 'pink' }) => (
+  <div
+    aria-hidden="true"
+    className={`inline-flex items-center gap-2.5 px-5 py-2 rounded-lg bg-dark-100/80 backdrop-blur border-2 ${
+      accent === 'cyan' ? 'border-cyan-400/60 shadow-cyan-500/20' : 'border-pink-400/60 shadow-pink-500/20'
+    } shadow-lg`}
+  >
+    <span className="flex gap-1">
+      <span className="w-1.5 h-1.5 rounded-full bg-red-400/80" />
+      <span className="w-1.5 h-1.5 rounded-full bg-yellow-400/80" />
+      <span className="w-1.5 h-1.5 rounded-full bg-green-400/80" />
+    </span>
+    <span className="font-mono text-sm text-gray-200">{label}</span>
+  </div>
+);
 
 const accentStyles = {
   cyan: {
@@ -134,6 +228,102 @@ export const PortfolioPage = () => {
               );
             })}
           </div>
+
+        {/* Services Grid – jako nody ve Fusion */}
+        <section className="relative z-10 py-16">
+          <Container>
+            <motion.div
+              className="text-center mb-12"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold font-display mb-4">
+                Naše{' '}
+                <span className="bg-gradient-to-r from-cyan-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+                  služby
+                </span>
+              </h2>
+              <p className="text-gray-300 max-w-2xl mx-auto">
+                Co všechno umíme natočit a zpracovat — propojené jako nody ve Fusion.
+              </p>
+            </motion.div>
+
+            <div className="flex flex-col items-center">
+              {/* MediaIn */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <MiniNode label="MediaIn" accent="cyan" />
+              </motion.div>
+              <NodeWire vertical />
+
+              {/* Dvě řady nodů */}
+              {[services.slice(0, 3), services.slice(3, 6)].map((row, rowIndex) => (
+                <div key={rowIndex} className="contents">
+                  <div className="flex flex-col md:flex-row items-center md:items-stretch justify-center w-full">
+                    {row.map((service, index) => {
+                      const accent = nodeStyles[service.accent as keyof typeof nodeStyles];
+                      return (
+                        <div key={service.title} className="contents">
+                          {index > 0 && <NodeWire />}
+                          <motion.div
+                            className={`relative w-full max-w-sm md:w-72 rounded-xl bg-dark-100/80 backdrop-blur border-2 ${accent.node} p-5 shadow-lg transition-all duration-300`}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: '-40px' }}
+                            transition={{ duration: 0.45, delay: Math.min(index * 0.08, 0.25) }}
+                            whileHover={{ y: -4 }}
+                          >
+                            {/* Kontrolky nodu */}
+                            <div className="flex gap-1.5 mb-3" aria-hidden="true">
+                              <span className="w-2 h-2 rounded-full bg-red-400/80" />
+                              <span className="w-2 h-2 rounded-full bg-yellow-400/80" />
+                              <span className="w-2 h-2 rounded-full bg-green-400/80" />
+                            </div>
+
+                            <div className="flex items-center gap-3 mb-2">
+                              <div
+                                className={`w-9 h-9 shrink-0 rounded-lg bg-gradient-to-br ${accent.iconBox} flex items-center justify-center text-white`}
+                              >
+                                {service.icon}
+                              </div>
+                              <h3 className="font-bold font-display">{service.title}</h3>
+                            </div>
+                            <p className="text-gray-400 text-sm">{service.description}</p>
+
+                            {/* Porty nodu */}
+                            <span
+                              aria-hidden="true"
+                              className={`hidden md:block absolute -left-[7px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full ${accent.port} ring-4 ring-dark`}
+                            />
+                            <span
+                              aria-hidden="true"
+                              className={`hidden md:block absolute -right-[7px] top-1/2 -translate-y-1/2 w-3 h-3 rounded-full ${accent.port} ring-4 ring-dark`}
+                            />
+                          </motion.div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                  <NodeWire vertical />
+                </div>
+              ))}
+
+              {/* MediaOut */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <MiniNode label="MediaOut" accent="pink" />
+              </motion.div>
+            </div>
+          </Container>
+        </section>
+
 
           {/* CTA */}
           <motion.div

@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Stabilní prostor pro scrollbar – stránky při přepínání neuskakují do stran */
+html {
+  scrollbar-gutter: stable;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;

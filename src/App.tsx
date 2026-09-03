@@ -15,9 +15,9 @@ import { ScrollTimeline } from './components/common/ScrollTimeline';
 
 // Lazy load all page components for code splitting
 const Home = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
-const VideoPage = lazy(() => import('./pages/VideoPage').then(m => ({ default: m.VideoPage })));
 const KontaktPage = lazy(() => import('./pages/KontaktPage').then(m => ({ default: m.KontaktPage })));
 const EditorPortfolioPage = lazy(() => import('./pages/EditorPortfolioPage').then(m => ({ default: m.EditorPortfolioPage })));
+const AsperroLabsPage = lazy(() => import('./pages/AsperroLabsPage').then(m => ({ default: m.AsperroLabsPage })));
 const PortfolioPage = lazy(() => import('./pages/PortfolioPage').then(m => ({ default: m.PortfolioPage })));
 const AboutPage = lazy(() => import('./pages/AboutPage').then(m => ({ default: m.AboutPage })));
 const TeamMemberPage = lazy(() => import('./pages/TeamMemberPage').then(m => ({ default: m.TeamMemberPage })));
@@ -47,26 +47,9 @@ const pageVariants = prefersReducedMotion
       exit: {},
     }
   : {
-      initial: {
-        opacity: 0,
-        y: 20,
-      },
-      animate: {
-        opacity: 1,
-        y: 0,
-        transition: {
-          duration: 0.3,
-          ease: 'easeOut',
-        },
-      },
-      exit: {
-        opacity: 0,
-        y: -10,
-        transition: {
-          duration: 0.2,
-          ease: 'easeIn',
-        },
-      },
+      initial: { opacity: 0 },
+      animate: { opacity: 1, transition: { duration: 0.25, ease: 'easeOut' } },
+      exit: { opacity: 0, transition: { duration: 0.15, ease: 'easeIn' } },
     };
 
 const PageWrapper = ({ children }: { children: React.ReactNode }) => (
@@ -112,7 +95,8 @@ const AnimatedRoutes = () => {
           <AnimatePresence mode="wait">
             <Routes location={location} key={location.pathname}>
               <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
-              <Route path="/video" element={<PageWrapper><VideoPage /></PageWrapper>} />
+              <Route path="/video" element={<Navigate to="/portfolio" replace />} />
+              <Route path="/asperrolabs" element={<PageWrapper><AsperroLabsPage /></PageWrapper>} />
               <Route path="/portfolio" element={<PageWrapper><PortfolioPage /></PageWrapper>} />
               <Route path="/portfolio/:memberId" element={<PageWrapper><EditorPortfolioPage /></PageWrapper>} />
               <Route path="/o-nas" element={<PageWrapper><AboutPage /></PageWrapper>} />

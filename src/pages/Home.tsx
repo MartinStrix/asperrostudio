@@ -2,14 +2,14 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/common/SEO';
 import { useLowPerf } from '../utils/performanceMode';
-import { initHeroRig } from '../lib/heroRigCore';
-import '../styles/hero-rig.css';
+import { initFusionFlow } from '../lib/fusionFlowCore';
+import '../styles/fusion-flow.css';
 
 // ============================================================
-//  HLAVNÍ STRÁNKA – 3D hero řízené scrollem
-//  Texty aktů upravíš přímo tady; choreografii řídí
-//  src/lib/heroRigCore.js. V úsporném režimu se 3D vrstva
-//  vůbec nespouští a texty zůstávají čitelné pod sebou.
+//  HLAVNÍ STRÁNKA – průchod Fusion node stromem (scroll)
+//  Texty aktů upravíš tady; choreografii, 3D scénu, inspektor
+//  a node graf dole řídí src/lib/fusionFlowCore.js.
+//  V úsporném režimu se 3D nespouští a texty jsou čitelné.
 // ============================================================
 
 export const Home = () => {
@@ -17,7 +17,7 @@ export const Home = () => {
 
   useEffect(() => {
     if (lowPerf) return;
-    const cleanup = initHeroRig();
+    const cleanup = initFusionFlow();
     return cleanup;
   }, [lowPerf]);
 
@@ -25,10 +25,10 @@ export const Home = () => {
     <>
       <SEO
         title="AsperroStudio – videa, která prodávají váš brand"
-        description="Profesionální videotvorba: střih, postprodukce a obsah pro sociální sítě, firmy i svatby. Konzultace zdarma, reels už od 250 Kč."
+        description="Profesionální videotvorba a postprodukce v DaVinci Resolve. Projděte si náš Fusion strom — od materiálu po finální kompozit. Konzultace zdarma, reels od 250 Kč."
       />
 
-      {/* Podklad + zrno + 3D plátno */}
+      {/* Podklad + 3D plátno + zrno */}
       <div className="ambient" aria-hidden="true" />
       {!lowPerf && <canvas id="stage" />}
       {!lowPerf && <div className="grain" aria-hidden="true" />}
@@ -36,97 +36,127 @@ export const Home = () => {
         <div className="fallback">3D vrstva se nenačetla — obsah zůstává čitelný</div>
       )}
 
-      {/* Nápověda ke scrollu (mizí po prvním posunu) */}
+      {/* Nápověda (mizí po prvním scrollu) */}
       {!lowPerf && (
         <div className="topbar" aria-hidden="true">
           <div />
-          <div id="tip">Scroll posouvá playhead — timeline dole jde i táhnout</div>
+          <div id="tip">Scroll prochází node stromem — uzly dole jde chytit a táhnout</div>
         </div>
       )}
 
-      {/* Popisky promítané z 3D scény */}
+      {/* Fusion viewer – aktuální uzel */}
       {!lowPerf && (
-        <div className="callouts" id="callouts" aria-hidden="true">
-          <div className="callout" data-anchor="hood"><b>Sluneční clona</b></div>
-          <div className="callout" data-anchor="focus"><b>Ostřicí kroužek</b></div>
-          <div className="callout" data-anchor="glass"><b>Přední čočka</b></div>
+        <div className="viewer" aria-hidden="true">
+          <s />
+          <b id="vwNode">MediaIn1</b>
+          <span id="vwState">RGB · 1:1</span>
         </div>
       )}
 
-      {/* Akty příběhu – jedou přes celý scroll */}
+      {/* Inspektor kroku */}
+      {!lowPerf && (
+        <aside className="inspector" id="inspector" aria-hidden="true">
+          <div className="ins-head">
+            <span className="step" id="insStep">Krok 01/08</span>
+            <span id="insNode">MediaIn1</span>
+          </div>
+          <h4 className="ins-title" id="insTitle">Příprava materiálu</h4>
+          <p className="ins-desc" id="insDesc" />
+          <p className="ins-fact">
+            <b>Zajímavost z praxe</b>
+            <span id="insFact" />
+          </p>
+        </aside>
+      )}
+
+      {/* Akty příběhu */}
       <main className="track" id="track">
-        <section className="act" data-from="0" data-to="0.17">
+        <section className="act" data-from="-0.02" data-to="0.085">
           <div className="inner">
-            <p className="eyebrow">Profesionální videotvorba</p>
+            <p className="eyebrow">Fusion · Compositing</p>
             <h1>
-              Videa, která<br />
-              <span className="grad">prodávají váš brand</span>
+              Obraz se nestaví<br />
+              <span className="grad">jedním tahem</span>
             </h1>
             <p className="lede">
-              Střih, postprodukce a obsah od týmu, který ví, co diváky zastaví
-              uprostřed scrollování.
+              Každý záběr, který od nás odchází, prošel stromem uzlů. Tohle je
+              jeden z nich — projděte si ho scrollem.
             </p>
           </div>
         </section>
 
-        <section className="act right" data-from="0.19" data-to="0.39">
+        <section className="act right" data-from="0.115" data-to="0.285">
           <div className="inner">
-            <p className="eyebrow purple">01 — Kompozice</p>
+            <p className="eyebrow purple">ColorCorrector1</p>
             <h2>
-              Každý záběr<br />má důvod
+              Grade není filtr<br />přes hotové video
             </h2>
             <p className="lede">
-              Rámování, pohyb kamery a rytmus střihu neřešíme až v postprodukci.
-              Plánujeme je od scénáře, aby výsledek držel pozornost celou stopáž.
+              Barvu řešíme na začátku stromu, ne na konci. Balance, křivky
+              a sytost sedí dřív, než se do kompozitu pustí cokoliv dalšího.
             </p>
           </div>
         </section>
 
-        <section className="act" data-from="0.43" data-to="0.60">
+        <section className="act" data-from="0.315" data-to="0.485">
           <div className="inner">
-            <p className="eyebrow">02 — Optika</p>
+            <p className="eyebrow">DeltaKeyer1 · Background1</p>
             <h2>
-              Barva jako<br />součást sdělení
+              Klíč, který<br />drží i na vlasech
             </h2>
             <p className="lede">
-              Color grading v DaVinci Resolve, konzistentní paleta napříč
-              kampaní a formáty připravené pro každý kanál zvlášť.
+              Delta Keyer, čistá matte a plát vygenerovaný pod ním. Když se
+              pozadí musí změnit den před odevzdáním, měníme jeden uzel.
             </p>
           </div>
         </section>
 
-        <section className="act right" data-from="0.63" data-to="0.85">
+        <section className="act right" data-from="0.515" data-to="0.685">
           <div className="inner">
-            <p className="eyebrow pink">03 — Rozklad</p>
+            <p className="eyebrow pink">Merge1 · Glow1</p>
             <h2>
-              Rozložíme to<br />na jednotlivé díly
+              Merge drží<br />celý strom
             </h2>
             <p className="lede">
-              Natáčení, střih, zvuk, grafika i distribuce. Můžete si vzít celý
-              proces, nebo jen tu část, která vám doma chybí.
+              Vrstvy se skládají v jednom uzlu, glow se počítá až nad
+              výsledkem. Proto jde světlo doladit, aniž bychom sahali na klíč.
             </p>
           </div>
         </section>
 
-        <section className="act center" data-from="0.88" data-to="1">
+        <section className="act" data-from="0.715" data-to="0.885">
           <div className="inner">
-            <p className="eyebrow">Konzultace zdarma</p>
+            <p className="eyebrow purple">Text+1</p>
             <h2>
-              Pojďme natočit<br />něco vašeho
+              Titulky patří<br />do kompozitu
             </h2>
             <p className="lede">
-              Řekněte nám záměr — my dodáme scénář, natáčení i finální grade.
+              Ne do střihu na poslední chvíli. Text sedí ve stejném prostoru
+              jako záběr, takže reaguje na světlo i rozostření.
+            </p>
+          </div>
+        </section>
+
+        <section className="act center" data-from="0.915" data-to="1.02">
+          <div className="inner">
+            <p className="eyebrow">MediaOut1</p>
+            <h2>
+              Pojďme postavit<br />váš strom
+            </h2>
+            <p className="lede">
+              Přineste záběry, nebo je natočíme. Odejde vám hotový kompozit,
+              ne rendery k dodělání.
             </p>
             <div className="cta">
               <Link className="btn primary" to="/kontakt">Nezávazná poptávka</Link>
               <Link className="btn" to="/cenik">Ceník od 250 Kč</Link>
-              <Link className="btn" to="/o-nas">Poznat nás</Link>
+              <Link className="btn" to="/o-nas">Jak pracujeme</Link>
             </div>
           </div>
         </section>
       </main>
 
-      {/* Epilog – AsperroStudio v kostce (překrývá 3D plátno) */}
+      {/* Epilog – AsperroStudio v kostce */}
       <section className="epilogue" id="studio">
         <h3>AsperroStudio v kostce</h3>
         <p>
@@ -180,7 +210,7 @@ export const Home = () => {
             <dt>Tým &amp; portfolio</dt>
             <dd>
               Za každým videem stojí konkrétní člověk se svým stylem.
-              Prohlédněte si ukázky editorů.
+              Prohlédněte si služby i ukázky editorů.
               <br />
               <Link className="note-link" to="/portfolio">Otevřít portfolio →</Link>
             </dd>
@@ -188,27 +218,25 @@ export const Home = () => {
         </dl>
       </section>
 
-      {/* Resolve timeline dole – scrubbing scrollu */}
+      {/* Node graf dole – scrubbing scrollu */}
       {!lowPerf && (
-        <section className="timeline" id="timeline" aria-label="Timeline hero animace">
-          <div className="tl-bar">
-            <div className="tl-tc" id="tc">00:00:00:<b>00</b></div>
-            <div className="tl-clipname" id="clipname">01 — Intro</div>
-            <div className="tl-dur">00:00:12:00 · 25 fps</div>
+        <section className="strip" id="strip" aria-label="Node graph">
+          <div className="strip-bar">
+            <div className="now" id="nowNode">MediaIn<b>1</b></div>
+            <div className="role" id="nowRole">Zdrojový plát</div>
+            <div className="meta">8 nodes · Fusion comp</div>
           </div>
           <div
-            className="tl-lanes"
-            id="lanes"
+            className="graph"
+            id="graph"
             tabIndex={0}
             role="slider"
-            aria-label="Playhead"
+            aria-label="Pozice ve stromu"
             aria-valuemin={0}
             aria-valuemax={100}
             aria-valuenow={0}
           >
-            <div className="tl-track" id="tlTrack">
-              <div className="tl-ruler" id="ruler" />
-              <div className="lane" id="laneV1" />
+            <div className="gwrap" id="gwrap">
               <div className="playhead" id="playhead" style={{ left: 0 }} />
             </div>
           </div>
