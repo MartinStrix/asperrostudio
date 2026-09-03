@@ -264,7 +264,7 @@ export const Home = () => {
 
       {/* Úsporný režim: obsah poskládaný kompaktně pod sebou */}
       {lowPerf && (
-        <div className="relative z-10 pt-28 pb-16 px-5">
+        <div className="relative z-10 pt-32 pb-28 px-5">
           <div className="max-w-4xl mx-auto xl:mr-[24rem] 2xl:mx-auto">
             {/* Hero */}
             <p className="font-mono text-xs tracking-[0.22em] uppercase text-cyan-400 mb-4">
@@ -276,15 +276,15 @@ export const Home = () => {
                 jedním tahem
               </span>
             </h1>
-            <p className="text-gray-300 text-lg max-w-xl mb-3">
+            <p className="text-gray-300 text-lg max-w-xl mb-4">
               Každý záběr, který od nás odchází, prošel stromem uzlů —
               od materiálu přes grade a klíč až po finální kompozit.
             </p>
-            <p className="text-gray-500 text-sm max-w-xl mb-7">
+            <p className="text-gray-500 text-sm max-w-xl mb-9">
               Každý projekt začíná <b className="text-gray-300">konzultací zdarma</b> —
               a reels už od 250 Kč za video.
             </p>
-            <div className="flex flex-wrap gap-3 mb-14">
+            <div className="flex flex-wrap gap-3 mb-24">
               <Link
                 to="/kontakt"
                 className="px-6 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:brightness-110 transition-all"
@@ -306,8 +306,8 @@ export const Home = () => {
             </div>
 
             {/* Kroky stromu jako karty */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-9 md:gap-y-12">
+              <div className="p-6 md:p-7 rounded-2xl bg-white/5 border border-white/10">
                 <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-purple-400 mb-2">ColorCorrector1</p>
                 <h2 className="text-xl font-bold font-display mb-2">Grade není filtr přes hotové video</h2>
                 <p className="text-gray-400 text-sm mb-3">
@@ -321,7 +321,7 @@ export const Home = () => {
                 </p>
               </div>
 
-              <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+              <div className="p-6 md:p-7 rounded-2xl bg-white/5 border border-white/10 md:translate-y-10">
                 <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-cyan-400 mb-2">DeltaKeyer1 · Background1</p>
                 <h2 className="text-xl font-bold font-display mb-2">Klíč, který drží i na vlasech</h2>
                 <p className="text-gray-400 text-sm mb-3">
@@ -334,7 +334,7 @@ export const Home = () => {
                 </p>
               </div>
 
-              <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+              <div className="p-6 md:p-7 rounded-2xl bg-white/5 border border-white/10 md:-translate-y-2">
                 <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-pink-400 mb-2">Merge1 · Glow1</p>
                 <h2 className="text-xl font-bold font-display mb-2">Merge drží celý strom</h2>
                 <p className="text-gray-400 text-sm mb-3">
@@ -347,7 +347,7 @@ export const Home = () => {
                 </p>
               </div>
 
-              <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+              <div className="p-6 md:p-7 rounded-2xl bg-white/5 border border-white/10 md:translate-y-8">
                 <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-purple-400 mb-2">Text+1</p>
                 <h2 className="text-xl font-bold font-display mb-2">Titulky patří do kompozitu</h2>
                 <p className="text-gray-400 text-sm mb-3">
@@ -362,7 +362,7 @@ export const Home = () => {
             </div>
 
             {/* Závěr */}
-            <div className="mt-12 p-7 rounded-2xl bg-white/5 border border-white/10 text-center">
+            <div className="mt-24 md:mt-32 p-8 md:p-10 rounded-2xl bg-white/5 border border-white/10 text-center">
               <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-cyan-400 mb-2">MediaOut1</p>
               <h2 className="text-2xl md:text-3xl font-bold font-display mb-3">Pojďme postavit váš strom</h2>
               <p className="text-gray-400 max-w-lg mx-auto mb-6">
