@@ -44,7 +44,7 @@ export const Home = () => {
           <BackdropFrames />
 
           {/* Statický Fusion strom po pravé straně */}
-          <div className="hidden sm:flex absolute top-28 bottom-16 right-[5%] lg:right-[9%] flex-col items-center justify-between opacity-90">
+          <div className="hidden xl:flex absolute top-28 bottom-16 right-[4%] flex-col items-center justify-between opacity-60">
             {/* MediaIn1 – s náhledem */}
             <div className="w-56 lg:w-64 rounded-xl border-2 border-cyan-400/45 bg-dark-100/75 shadow-2xl shadow-cyan-500/10 rotate-[-2deg] self-end">
               <div className="flex items-center gap-1.5 px-3 py-2 border-b border-white/10">
@@ -150,7 +150,8 @@ export const Home = () => {
         </aside>
       )}
 
-      {/* Akty příběhu */}
+      {/* Akty příběhu (jen s animacemi — v úsporném režimu je níže kompaktní verze) */}
+      {!lowPerf && (
       <main className="track" id="track">
         <section className="act" data-from="-0.02" data-to="0.085">
           <div className="inner">
@@ -258,6 +259,126 @@ export const Home = () => {
           </div>
         </section>
       </main>
+      )}
+
+
+      {/* Úsporný režim: obsah poskládaný kompaktně pod sebou */}
+      {lowPerf && (
+        <div className="relative z-10 pt-28 pb-16 px-5">
+          <div className="max-w-4xl mx-auto xl:mr-[24rem] 2xl:mx-auto">
+            {/* Hero */}
+            <p className="font-mono text-xs tracking-[0.22em] uppercase text-cyan-400 mb-4">
+              Fusion · Compositing
+            </p>
+            <h1 className="text-4xl md:text-6xl font-bold font-display leading-tight mb-5">
+              Obraz se nestaví{' '}
+              <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500 bg-clip-text text-transparent">
+                jedním tahem
+              </span>
+            </h1>
+            <p className="text-gray-300 text-lg max-w-xl mb-3">
+              Každý záběr, který od nás odchází, prošel stromem uzlů —
+              od materiálu přes grade a klíč až po finální kompozit.
+            </p>
+            <p className="text-gray-500 text-sm max-w-xl mb-7">
+              Každý projekt začíná <b className="text-gray-300">konzultací zdarma</b> —
+              a reels už od 250 Kč za video.
+            </p>
+            <div className="flex flex-wrap gap-3 mb-14">
+              <Link
+                to="/kontakt"
+                className="px-6 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:brightness-110 transition-all"
+              >
+                Nezávazná poptávka
+              </Link>
+              <Link
+                to="/cenik"
+                className="px-6 py-3 rounded-xl font-semibold border-2 border-white/20 text-white hover:border-cyan-400 hover:text-cyan-400 transition-all"
+              >
+                Ceník od 250 Kč
+              </Link>
+              <Link
+                to="/o-nas"
+                className="px-6 py-3 rounded-xl font-semibold border-2 border-white/20 text-white hover:border-cyan-400 hover:text-cyan-400 transition-all"
+              >
+                Jak pracujeme
+              </Link>
+            </div>
+
+            {/* Kroky stromu jako karty */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+                <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-purple-400 mb-2">ColorCorrector1</p>
+                <h2 className="text-xl font-bold font-display mb-2">Grade není filtr přes hotové video</h2>
+                <p className="text-gray-400 text-sm mb-3">
+                  Barvu řešíme na začátku stromu, ne na konci. Balance, křivky
+                  a sytost sedí dřív, než se do kompozitu pustí cokoliv dalšího.
+                </p>
+                <p className="text-gray-500 text-xs">
+                  Střih, grading, VFX i zvuk vzniká <b className="text-gray-400">ručně</b> v DaVinci
+                  Resolve Studio.{' '}
+                  <Link className="text-cyan-400 hover:text-white transition-colors" to="/o-nas">Jak pracujeme →</Link>
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+                <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-cyan-400 mb-2">DeltaKeyer1 · Background1</p>
+                <h2 className="text-xl font-bold font-display mb-2">Klíč, který drží i na vlasech</h2>
+                <p className="text-gray-400 text-sm mb-3">
+                  Delta Keyer, čistá matte a plát vygenerovaný pod ním. Když se
+                  pozadí musí změnit den před odevzdáním, měníme jeden uzel.
+                </p>
+                <p className="text-gray-500 text-xs">
+                  Materiál si natočíme sami — <b className="text-gray-400">kamera i dron</b>.
+                  Vyjedeme prakticky kamkoliv.
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+                <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-pink-400 mb-2">Merge1 · Glow1</p>
+                <h2 className="text-xl font-bold font-display mb-2">Merge drží celý strom</h2>
+                <p className="text-gray-400 text-sm mb-3">
+                  Vrstvy se skládají v jednom uzlu, glow se počítá až nad
+                  výsledkem. Světlo jde doladit, aniž bychom sahali na klíč.
+                </p>
+                <p className="text-gray-500 text-xs">
+                  Jdeme s dobou — AI pomáhá s rutinou.
+                  <b className="text-gray-400"> Vaše video je ale čistě naše práce.</b>
+                </p>
+              </div>
+
+              <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+                <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-purple-400 mb-2">Text+1</p>
+                <h2 className="text-xl font-bold font-display mb-2">Titulky patří do kompozitu</h2>
+                <p className="text-gray-400 text-sm mb-3">
+                  Ne do střihu na poslední chvíli. Text sedí ve stejném prostoru
+                  jako záběr, takže reaguje na světlo i rozostření.
+                </p>
+                <p className="text-gray-500 text-xs">
+                  Za každým videem stojí <b className="text-gray-400">konkrétní člověk</b>.{' '}
+                  <Link className="text-cyan-400 hover:text-white transition-colors" to="/portfolio">Otevřít portfolio →</Link>
+                </p>
+              </div>
+            </div>
+
+            {/* Závěr */}
+            <div className="mt-12 p-7 rounded-2xl bg-white/5 border border-white/10 text-center">
+              <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-cyan-400 mb-2">MediaOut1</p>
+              <h2 className="text-2xl md:text-3xl font-bold font-display mb-3">Pojďme postavit váš strom</h2>
+              <p className="text-gray-400 max-w-lg mx-auto mb-6">
+                Přineste záběry, nebo je natočíme. Odejde vám hotový kompozit,
+                ne rendery k dodělání. Konzultace je zdarma a nezávazná.
+              </p>
+              <Link
+                to="/kontakt"
+                className="inline-block px-8 py-4 rounded-xl font-semibold text-lg text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:brightness-110 transition-all"
+              >
+                Nezávazná poptávka
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Node graf dole – scrubbing scrollu */}
       {!lowPerf && (

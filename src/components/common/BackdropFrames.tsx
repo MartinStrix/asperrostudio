@@ -32,7 +32,11 @@ const TONE_BORDER = {
 } as const;
 
 export const BackdropFrames = () => (
-  <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+  <div
+    className="absolute inset-0 overflow-hidden"
+    aria-hidden="true"
+    style={{ perspective: '1100px' }}
+  >
     {FRAMES.map((f, i) => (
       <div
         key={i}

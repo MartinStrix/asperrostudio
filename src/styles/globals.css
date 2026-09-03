@@ -200,9 +200,11 @@ html.low-perf .aurora-hue {
 
 @keyframes frame-float {
   from {
-    transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg));
+    transform: translate3d(0, 0, 0) rotate(var(--rot, 0deg)) rotateX(9deg)
+      rotateY(-7deg);
   }
   to {
-    transform: translate3d(6px, -16px, 0) rotate(calc(var(--rot, 0deg) + 2.5deg));
+    transform: translate3d(8px, -18px, 0) rotate(calc(var(--rot, 0deg) + 2.5deg))
+      rotateX(-7deg) rotateY(9deg);
   }
 }
