@@ -71,7 +71,7 @@ export const Home = () => {
 
     <div className="acts">
       <div className="act act-1" id="act1">
-        <span className="eyebrow slate"><i className="dot"></i> Videoprodukce &nbsp;·&nbsp; <b>Praha a celá ČR</b></span>
+        <span className="eyebrow slate"><i className="dot"></i> Videoprodukce &nbsp;·&nbsp; <b>Plzeň a celá ČR</b></span>
         <h1>Videa, která<br /><span className="grad-text">prodávají.</span></h1>
         <p>Natočíme, sestříháme a odevzdáme video, po kterém se vám ozve zákazník. Ne jen hezké záběry do šuplíku.</p>
         <div className="cta-row">
@@ -215,7 +215,7 @@ export const Home = () => {
         <div className="price"><b>Cena na míru</b> podle rozsahu</div>
       </article>
       <article className="card">
-        <div className="ico"><svg viewBox="0 0 24 24"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5"/><path d="M10.5 9.5l4.5 2.5-4.5 2.5z"/></svg></div>
+        <div className="ico"><svg viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="3"/><path d="M10.2 8.6v6.8c0 .5.55.8.98.53l4.4-3.4a.62.62 0 0 0 0-1.06l-4.4-3.4a.62.62 0 0 0-.98.55z" fill="currentColor" stroke="none"/><path d="M10 21.5h4"/></svg></div>
         <h3>Reels &amp; social videa</h3>
         <p>Krátká vertikální videa v sérii. Titulky, rytmus, hook v prvních vteřinách. Ideální, když potřebujete obsah pravidelně.</p>
         <div className="tags"><span className="tag">9:16</span><span className="tag">titulky</span><span className="tag">série</span><span className="tag">hook</span></div>
@@ -292,7 +292,7 @@ export const Home = () => {
           <li><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg>Barevné sladění</li>
           <li><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg>Výhodnější při odběru série</li>
         </ul>
-        <Link className="btn btn-ghost" to="/kontakt">Mám zájem</Link>
+        <Link className="btn btn-ghost" to="/cenik">Mám zájem</Link>
       </article>
       <article className="plan hot">
         <span className="badge">Nejčastější volba</span>
@@ -316,7 +316,7 @@ export const Home = () => {
           <li><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg>Přednostní termíny</li>
           <li><svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg>Nižší cena za kus</li>
         </ul>
-        <Link className="btn btn-ghost" to="/kontakt">Domluvit podmínky</Link>
+        <Link className="btn btn-ghost" to="/cenik">Domluvit podmínky</Link>
       </article>
     </div>
     <p className="note">Všechny ceny jsou bez DPH · Konzultace a kalkulace je zdarma a nezávazná</p>
@@ -384,7 +384,7 @@ export const Home = () => {
 
 
 <div className="mcta" id="mcta">
-  <a className="btn btn-ghost" href="#cenik">Ceník</a>
+  <Link className="btn btn-ghost" to="/cenik">Ceník</Link>
   <Link className="btn btn-primary" to="/kontakt">Konzultace zdarma</Link>
 </div>
 

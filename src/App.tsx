@@ -9,6 +9,7 @@ import { CookieBanner } from './components/common/CookieBanner';
 import { PromoPopup } from './components/common/PromoPopup';
 import { Footer } from './components/layout/Footer';
 import { PerformanceToggle } from './components/common/PerformanceToggle';
+import { ScrollProgress } from './components/common/ScrollProgress';
 import { MotionConfig } from 'framer-motion';
 import { useLowPerf } from './utils/performanceMode';
 import { ScrollTimeline } from './components/common/ScrollTimeline';
@@ -111,6 +112,7 @@ const AnimatedRoutes = () => {
         </Suspense>
         <Footer />
         <SideTimeline />
+        <SiteProgress />
         <CookieBanner />
         <PromoPopup />
         <PerformanceToggle />
@@ -125,6 +127,13 @@ const SideTimeline = () => {
   const { pathname } = useLocation();
   if (pathname === '/') return null;
   return <ScrollTimeline />;
+};
+
+// Čára průběhu scrollu – hlavní stránka má svoji vlastní
+const SiteProgress = () => {
+  const { pathname } = useLocation();
+  if (pathname === '/') return null;
+  return <ScrollProgress />;
 };
 
 function App() {
