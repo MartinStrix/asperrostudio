@@ -211,7 +211,7 @@ export const AboutPage = () => {
               dynamických vertikálních formátů pro sociální sítě až po vizuálně
               promakaná promo videa s perfektním sound designem a VFX efekty.
               Nezáleží na tom, jestli zrovna letíme s dronem, chytáme stabilní
-              záběry na bezzrcadlovku, nebo sedíme u motion grafiky – náš cíl je
+              záběry s kamerou, nebo sedíme u motion grafiky – náš cíl je
               vždy stejný: odvyprávět příběh vaší značky tak, aby rezonoval a
               prodával.
             </p>
