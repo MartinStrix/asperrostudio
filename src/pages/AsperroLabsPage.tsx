@@ -57,21 +57,6 @@ export const AsperroLabsPage = () => {
       />
       <div className="labs">
 
-
-<div className="rail">
-  <div className="tc">00:00:00:00</div>
-  <div className="clips">
-    <div className="clip" style={{ height: '52px', background: '#5ff3ea' }}></div>
-    <div className="clip" style={{ height: '88px', background: '#7c6df0' }}></div>
-    <div className="clip" style={{ height: '30px', background: '#f45bf0' }}></div>
-    <div className="clip" style={{ height: '66px', background: '#a78bfa' }}></div>
-    <div className="clip" style={{ height: '40px', background: '#5ff3ea' }}></div>
-    <div className="clip" style={{ height: '104px', background: '#e8407e' }}></div>
-    <div className="clip" style={{ height: '34px', background: '#60a5fa' }}></div>
-    <div className="clip" style={{ height: '70px', background: '#5ff3ea' }}></div>
-  </div>
-</div>
-
 <svg width="0" height="0" style={{ position: 'absolute' }}><defs>
   <linearGradient id="lg" x1="0.05" y1="0" x2="0.95" y2="1">
     <stop offset="0%" stopColor="#5FF3EA"/><stop offset="52%" stopColor="#9E9CF2"/><stop offset="100%" stopColor="#F45BF0"/>
@@ -97,7 +82,6 @@ export const AsperroLabsPage = () => {
     <a href="#kurzy">Kurzy</a>
     <a href="#zdarma">Zdarma</a>
   </div>
-  <Link className="navcta" to="/kontakt">Chci video →</Link>
 </div></nav>
 
 <div className="inner">
