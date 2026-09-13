@@ -12,7 +12,6 @@ import { PerformanceToggle } from './components/common/PerformanceToggle';
 import { ScrollProgress } from './components/common/ScrollProgress';
 import { MotionConfig } from 'framer-motion';
 import { useLowPerf } from './utils/performanceMode';
-import { ScrollTimeline } from './components/common/ScrollTimeline';
 
 // Lazy load all page components for code splitting
 const Home = lazy(() => import('./pages/Home').then(m => ({ default: m.Home })));
@@ -111,7 +110,6 @@ const AnimatedRoutes = () => {
           </AnimatePresence>
         </Suspense>
         <Footer />
-        <SideTimeline />
         <SiteProgress />
         <CookieBanner />
         <PromoPopup />
@@ -119,14 +117,6 @@ const AnimatedRoutes = () => {
       </main>
     </>
   );
-};
-
-// Boční timeline nemá být na hlavní stránce – ta má vlastní
-// plnohodnotnou Resolve timeline dole (součást 3D hero sekce)
-const SideTimeline = () => {
-  const { pathname } = useLocation();
-  if (pathname === '/') return null;
-  return <ScrollTimeline />;
 };
 
 // Čára průběhu scrollu – hlavní stránka má svoji vlastní

@@ -46,16 +46,18 @@ const BUDGETS = [
   'ještě nevím',
 ];
 
-// Popisek sekce ve stylu předlohy
-const FieldLabel = ({ children }: { children: React.ReactNode }) => (
-  <p className="flex items-baseline gap-2 text-sm italic font-medium text-cyan-300 mb-3">
-    <span className="font-mono not-italic text-[10px] text-cyan-500/80">//</span>
+// Číslovaná hlavička sekce (moderní styl původní kalkulačky)
+const FieldLabel = ({ n, children }: { n: number; children: React.ReactNode }) => (
+  <h2 className="flex items-center gap-3 text-base md:text-lg font-bold font-display mb-4">
+    <span className="w-7 h-7 shrink-0 rounded-full bg-gradient-to-br from-cyan-400 to-pink-500 text-white text-xs font-bold flex items-center justify-center shadow-lg shadow-pink-500/25">
+      {n}
+    </span>
     {children}
-  </p>
+  </h2>
 );
 
 const inputCls =
-  'w-full bg-transparent border-0 border-b border-white/15 focus:border-cyan-400 focus:ring-0 focus:outline-none px-0 py-2.5 text-lg text-white placeholder-gray-600 transition-colors';
+  'w-full bg-white/5 border border-white/15 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400/70 transition-colors';
 
 export const CenikPage = () => {
   const navigate = useNavigate();
@@ -125,7 +127,7 @@ export const CenikPage = () => {
         title="Ceník"
         description="Poptávka bez bariér: naklikejte, co hledáte — video edit, reklamní i firemní videa, natáčení s dronem, web design nebo AI řešení. Orientační ceny od 250 Kč, konzultace zdarma."
       />
-      <div className="min-h-screen bg-dark text-white pt-28 pb-24">
+      <div className="min-h-screen bg-dark text-white pt-28 pb-28 lg:pb-24">
         <AnimatedBackground />
 
         <Container className="relative z-10">
@@ -139,8 +141,8 @@ export const CenikPage = () => {
             <PageBadge icon={<CalculatorIcon className="w-4 h-4" />} label="Ceník" />
             <h1 className="text-4xl md:text-5xl font-bold font-display mb-4">
               Poptávka{' '}
-              <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500 bg-clip-text text-transparent italic">
-                bez bariér.
+              <span className="bg-gradient-to-r from-cyan-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-gradient">
+                bez bariér
               </span>
             </h1>
             <p className="text-gray-400 text-lg">
@@ -150,16 +152,17 @@ export const CenikPage = () => {
             </p>
           </motion.div>
 
-          {/* Formulář */}
+          {/* Formulář + živý přehled */}
+          <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[minmax(0,1fr),300px] gap-8 items-start">
           <motion.div
-            className="max-w-2xl mx-auto rounded-3xl border border-cyan-400/25 bg-dark-100/60 backdrop-blur-xl shadow-2xl shadow-cyan-500/5 p-6 md:p-10"
+            className="space-y-5"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
             {/* Hledám */}
-            <div className="pb-7 border-b border-white/10">
-              <FieldLabel>hledám</FieldLabel>
+            <div className="p-6 md:p-7 rounded-2xl bg-white/5 border border-white/10">
+              <FieldLabel n={1}>Co hledáte?</FieldLabel>
               <div className="flex flex-wrap gap-2.5">
                 {SERVICES.map((s) => {
                   const selected = services.includes(s.id);
@@ -187,8 +190,8 @@ export const CenikPage = () => {
             </div>
 
             {/* Značka */}
-            <div className="py-6 border-b border-white/10">
-              <FieldLabel>pro moji značku / firmu</FieldLabel>
+            <div className="p-6 md:p-7 rounded-2xl bg-white/5 border border-white/10">
+              <FieldLabel n={2}>Pro jakou značku / firmu?</FieldLabel>
               <input
                 type="text"
                 value={brand}
@@ -200,8 +203,8 @@ export const CenikPage = () => {
             </div>
 
             {/* Jméno */}
-            <div className="py-6 border-b border-white/10">
-              <FieldLabel>a jsem</FieldLabel>
+            <div className="p-6 md:p-7 rounded-2xl bg-white/5 border border-white/10">
+              <FieldLabel n={3}>Vaše jméno</FieldLabel>
               <input
                 type="text"
                 value={name}
@@ -214,8 +217,8 @@ export const CenikPage = () => {
             </div>
 
             {/* Telefon */}
-            <div className="py-6 border-b border-white/10">
-              <FieldLabel>kontaktujte mě na</FieldLabel>
+            <div className="p-6 md:p-7 rounded-2xl bg-white/5 border border-white/10">
+              <FieldLabel n={4}>Telefon</FieldLabel>
               <input
                 type="tel"
                 value={phone}
@@ -228,8 +231,8 @@ export const CenikPage = () => {
             </div>
 
             {/* E-mail */}
-            <div className="py-6 border-b border-white/10">
-              <FieldLabel>pište mi na</FieldLabel>
+            <div className="p-6 md:p-7 rounded-2xl bg-white/5 border border-white/10">
+              <FieldLabel n={5}>E-mail</FieldLabel>
               <input
                 type="email"
                 value={email}
@@ -242,8 +245,8 @@ export const CenikPage = () => {
             </div>
 
             {/* Instagram */}
-            <div className="py-6 border-b border-white/10">
-              <FieldLabel>můj instagram (nepovinné)</FieldLabel>
+            <div className="p-6 md:p-7 rounded-2xl bg-white/5 border border-white/10">
+              <FieldLabel n={6}>Instagram (nepovinné)</FieldLabel>
               <input
                 type="text"
                 value={instagram}
@@ -255,8 +258,8 @@ export const CenikPage = () => {
             </div>
 
             {/* Rozpočet */}
-            <div className="py-6 border-b border-white/10">
-              <FieldLabel>rozpočet zhruba</FieldLabel>
+            <div className="p-6 md:p-7 rounded-2xl bg-white/5 border border-white/10">
+              <FieldLabel n={7}>Rozpočet zhruba</FieldLabel>
               <div className="flex flex-wrap gap-2.5">
                 {BUDGETS.map((b) => {
                   const selected = budget === b;
@@ -279,8 +282,8 @@ export const CenikPage = () => {
             </div>
 
             {/* Slevový kód */}
-            <div className="py-6 border-b border-white/10">
-              <FieldLabel>mám slevový kód (nepovinné)</FieldLabel>
+            <div className="p-6 md:p-7 rounded-2xl bg-white/5 border border-white/10">
+              <FieldLabel n={8}>Slevový kód (nepovinné)</FieldLabel>
               {promo ? (
                 <div className="flex items-center justify-between gap-3">
                   <span className="inline-flex items-center gap-2 text-green-400 font-medium">
@@ -338,8 +341,8 @@ export const CenikPage = () => {
             </div>
 
             {/* Zpráva */}
-            <div className="py-6">
-              <FieldLabel>a ještě pár slov</FieldLabel>
+            <div className="p-6 md:p-7 rounded-2xl bg-white/5 border border-white/10">
+              <FieldLabel n={9}>Ještě pár slov</FieldLabel>
               <textarea
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
@@ -355,10 +358,10 @@ export const CenikPage = () => {
               type="button"
               onClick={submit}
               disabled={services.length === 0}
-              className="w-full mt-2 inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl font-mono text-sm font-semibold tracking-[0.2em] uppercase text-white bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500 hover:shadow-xl hover:shadow-purple-500/30 hover:brightness-110 active:scale-[0.99] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="w-full inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-lg text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:shadow-xl hover:shadow-pink-500/30 hover:brightness-110 active:scale-[0.99] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
             >
               Odeslat poptávku
-              <ArrowRightIcon className="w-4 h-4" />
+              <ArrowRightIcon className="w-5 h-5" />
             </button>
             <p className="text-gray-600 text-xs text-center mt-4">
               {services.length === 0
@@ -366,7 +369,72 @@ export const CenikPage = () => {
                 : 'Vše se předvyplní do kontaktního formuláře — před odesláním si to ještě zkontrolujete.'}
             </p>
           </motion.div>
+
+          {/* ===== ŽIVÝ PŘEHLED (desktop) ===== */}
+          <aside className="hidden lg:block sticky top-28 rounded-2xl bg-white/5 border border-white/10 p-6">
+            <h3 className="text-sm uppercase tracking-widest text-gray-500 mb-3">
+              Vaše poptávka
+            </h3>
+            <div className="text-sm space-y-2 pb-4 border-b border-white/10">
+              {services.length === 0 ? (
+                <p className="text-gray-600">Zatím nic nevybráno</p>
+              ) : (
+                SERVICES.filter((sv) => services.includes(sv.id)).map((sv) => (
+                  <p key={sv.id} className="flex justify-between gap-2">
+                    <span className="text-white">{sv.label}</span>
+                    {sv.price && (
+                      <span className="shrink-0 text-cyan-400/90 text-xs font-medium whitespace-nowrap">
+                        {sv.price}
+                      </span>
+                    )}
+                  </p>
+                ))
+              )}
+            </div>
+            <div className="text-sm py-3 border-b border-white/10 flex justify-between gap-3">
+              <span className="text-gray-500">Rozpočet</span>
+              <span className={budget ? 'text-white font-medium text-right' : 'text-gray-600'}>
+                {budget || '—'}
+              </span>
+            </div>
+            <div className="text-sm py-3 flex justify-between gap-3">
+              <span className="text-gray-500">Sleva</span>
+              <span className={promo ? 'text-green-400 font-medium' : 'text-gray-600'}>
+                {promo ? `${promo.code} · −${promo.discountPercent} %` : '—'}
+              </span>
+            </div>
+            <p className="text-gray-600 text-[11px] mt-2">
+              Ceny jsou orientační "od" — finální nabídka vzniká na
+              konzultaci zdarma.
+            </p>
+          </aside>
+          </div>
         </Container>
+
+        {/* ===== MOBILNÍ LIŠTA S PŘEHLEDEM ===== */}
+        {services.length > 0 && (
+          <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 border-t border-white/10 bg-dark-100/95 backdrop-blur-xl px-4 py-3">
+            <div className="flex items-center justify-between gap-3 max-w-xl mx-auto">
+              <div className="min-w-0">
+                <p className="text-[11px] text-gray-500 truncate">
+                  {services.length}× služba
+                  {budget ? ` · ${budget}` : ''}
+                  {promo ? ` · −${promo.discountPercent} %` : ''}
+                </p>
+                <p className="text-sm font-semibold bg-gradient-to-r from-cyan-400 to-pink-500 bg-clip-text text-transparent">
+                  Konzultace zdarma · ceny "od"
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={submit}
+                className="shrink-0 px-4 py-2 rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-cyan-400 to-pink-500 hover:brightness-110 transition-all"
+              >
+                Poptat
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
